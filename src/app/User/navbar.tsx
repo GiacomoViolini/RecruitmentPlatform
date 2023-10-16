@@ -47,7 +47,7 @@ export default function Navbar() {
             </Link>
           </div>
           <div className=" font-bold w-30 h-max">
-            <Link href="/User/Challenges">
+            <Link href="/User/Challenge">
               <button
                 className={`2xl:text-3xl lg:text-2xl bold ${
                   selected2 ? "text-white underline decoration-" : "text-white"
