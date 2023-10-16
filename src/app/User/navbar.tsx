@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 
 export default function Navbar() {
@@ -8,34 +9,37 @@ export default function Navbar() {
   return (
     <div className="flex justify-between items-center bg-sky-400">
       <div className="flex justify-between items-center">
-        {selected ? (
-          <button className="text-xl ml-5 text-sky-200 " onClick={() => setSelected(true)}>
-            Home
-          </button>
-        ) : (
-          <button className="text-xl ml-5 text sky-100 " onClick={() => setSelected(true)}>
-            Home
-          </button>
-        )}
-        {selected2 ? (
-          <button className="text-xl ml-5 text-sky-200 " onClick={() => setSelected2(true)}>
-            Challenges
-          </button>
-        ) : (
-          <button className="text-xl ml-5 text sky-100 " onClick={() => setSelected2(true)}>
-            Challenges
-          </button>
-        )}
-        {selected3 ? (
-          <button className="text-xl ml-5 text-sky-200 " onClick={() => setSelected3(true)}>
-            Profile
-          </button>
-        ) : (
-          <button className="text-xl ml-5 text sky-100 " onClick={() => setSelected3(true)}>
-            Profile
-          </button>
-        )}
-        </div>
-    </div>      
+        <button
+          className={`text-xl ml-5 ${selected ? 'text-sky-200' : 'text-sky-100'}`}
+          onClick={() => {
+            setSelected(true);
+            setSelected2(false);
+            setSelected3(false);
+          }}
+        >
+          Home
+        </button>
+        <button
+          className={`text-xl ml-5 ${selected2 ? 'text-sky-200' : 'text-sky-100'}`}
+          onClick={() => {
+            setSelected(false);
+            setSelected2(true);
+            setSelected3(false);
+          }}
+        >
+          Challenges
+        </button>
+        <button
+          className={`text-xl ml-5 ${selected3 ? 'text-sky-200' : 'text-sky-100'}`}
+          onClick={() => {
+            setSelected(false);
+            setSelected2(false);
+            setSelected3(true);
+          }}
+        >
+          Profile
+        </button>
+      </div>
+    </div>
   );
 }
