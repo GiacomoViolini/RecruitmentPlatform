@@ -57,14 +57,14 @@ export default function Navbar() {
           </div>
           <div className=" font-bold w-30 h-max">
             <Link
-              href="/User/Profile"
+              href="/User/Positions"
               className={
-                pathname == "/User/Profile"
+                pathname == "/User/Positions"
                   ? "2xl:text-3xl lg:text-2xl bold text-white underline decoration-white divide-opacity-100"
                   : "2xl:text-3xl lg:text-2xl bold text-white"
               }
             >
-              Profile
+              Positions
             </Link>
           </div>
         </div>
@@ -95,57 +95,38 @@ export default function Navbar() {
               >
                 <div className="flex flex-col h-full justify-evenly start bg-opacity-50">
                   <div className=" font-bold w-30 h-max">
-                    <Link href="/User">
-                      <button
-                        className={`2xl:text-3xl lg:text-2xl bold ${
-                          selected
-                            ? "text-white underline decoration-"
-                            : "text-white"
-                        }`}
-                        onClick={() => {
-                          setSelected(true);
-                          setSelected2(false);
-                          setSelected3(false);
-                        }}
-                      >
-                        Home
-                      </button>
+                    <Link
+                      href="/User"
+                      className={
+                        pathname == "/User"
+                          ? "2xl:text-3xl lg:text-2xl bold text-white underline decoration-white divide-opacity-100"
+                          : "2xl:text-3xl lg:text-2xl bold text-white"
+                      }>
+                      Home
                     </Link>
                   </div>
                   <div className=" font-bold w-30 h-max">
-                    <Link href="/User/Challenge">
-                      <button
-                        className={`2xl:text-3xl lg:text-2xl bold ${
-                          selected2
-                            ? "text-white underline decoration-"
-                            : "text-white"
-                        }`}
-                        onClick={() => {
-                          setSelected(false);
-                          setSelected2(true);
-                          setSelected3(false);
-                        }}
-                      >
-                        Challenges
-                      </button>
+                    <Link
+                      href="/User/Challenge"
+                      className={
+                        pathname == "/User/Challenge"
+                          ? "2xl:text-3xl lg:text-2xl bold text-white underline decoration-white divide-opacity-100"
+                          : "2xl:text-3xl lg:text-2xl bold text-white"
+                      }
+                    >
+                      Challenges
                     </Link>
                   </div>
                   <div className=" font-bold w-30 h-max">
-                    <Link href="/User/Positions">
-                      <button
-                        className={`2xl:text-3xl lg:text-2xl bold ${
-                          selected2
-                            ? "text-white underline decoration-"
-                            : "text-white"
-                        }`}
-                        onClick={() => {
-                          setSelected(false);
-                          setSelected2(true);
-                          setSelected3(false);
-                        }}
-                      >
-                        Positions
-                      </button>
+                    <Link
+                      href="/User/Positions"
+                      className={
+                        pathname == "/User/Positions"
+                          ? "2xl:text-3xl lg:text-2xl bold text-white underline decoration-white divide-opacity-100"
+                          : "2xl:text-3xl lg:text-2xl bold text-white"
+                      }
+                    >
+                      Positions
                     </Link>
                   </div>
                 </div>
