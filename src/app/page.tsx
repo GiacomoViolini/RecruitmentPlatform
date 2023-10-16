@@ -18,7 +18,7 @@ export default function Home() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      router.push('/user');
+      router.push('/User');
   };
 
   return (

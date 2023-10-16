@@ -1,6 +1,6 @@
 import Navbar from "./navbar";
 
-export default function UserHome() {
+export default function user() {
     return (
         <>
         <Navbar/>
