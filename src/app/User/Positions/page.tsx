@@ -31,7 +31,7 @@ export default function Positions() {
               </span>
             </div>
           </div>
-          <div className="max-w-2xl rounded overflow-hidden shadow-lg px-6 py-4 justify-self-stretch">
+          <div className="max-w-2xl rounded overflow-hidden shadow px-6 py-4 justify-self-stretch">
             <Image src="/zucchetti.png" alt="photo" width={1000} height={1000} />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
@@ -52,7 +52,7 @@ export default function Positions() {
               </span>
             </div>
           </div>
-          <div className="max-w-2xl rounded overflow-hidden shadow-lg px-6 py-4 justify-self-stretch">
+          <div className="max-w-2xl rounded overflow-hidden shadow px-6 py-4 justify-self-stretch">
             <Image src="/zucchetti.png" alt="photo" width={1000} height={1000} />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
