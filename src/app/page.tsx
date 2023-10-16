@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -14,15 +16,29 @@ export default function Home() {
     setPassword(e.target.value);
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+      router.push('/user');
+  };
+
   return (
-    <div className="flex justify-center items-center h-screen"style={{ background: 'linear-gradient(to bottom, #87CEEB, #1E90FF)' }}>
-      <form className="w-96 p-4 rounded-sm text-center bg-white">
+    <div
+      className="flex justify-center items-center h-screen"
+      style={{ background: "linear-gradient(to bottom, #87CEEB, #1E90FF)" }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="w-96 p-4 rounded-sm text-center bg-white"
+      >
         <h1 className="text-4xl font-bold text-gray-800 py-4 border-b-2">
           Login Form
         </h1>
         <div className="p-3">
           <div className="mb-4">
-            <label className="text-2xl  font-semibold text-left block m-1 text-gray-700" htmlFor="email">
+            <label
+              className="text-2xl  font-semibold text-left block m-1 text-gray-700"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -36,7 +52,10 @@ export default function Home() {
             />
           </div>
           <div className="mb-4">
-            <label className="text-2xl  font-semibold text-left block m-1 text-gray-700" htmlFor="password">
+            <label
+              className="text-2xl  font-semibold text-left block m-1 text-gray-700"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -49,7 +68,10 @@ export default function Home() {
               onChange={handlePasswordChange}
             />
           </div>
-          <button className="bg-sky-400 text-lg font-semibold text-white py-2 px-4 w-80 rounded-md hover:bg-sky-500">
+          <button
+            type="submit"
+            className="bg-sky-400 text-lg font-semibold text-white py-2 px-4 w-80 rounded-md hover:bg-sky-500"
+          >
             Login
           </button>
         </div>
