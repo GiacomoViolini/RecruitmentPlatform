@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isWindow, setIsWindow] = useState<number>(window.innerWidth);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,7 +24,6 @@ export default function Navbar() {
   const [selected2, setSelected2] = useState(false);
   const [selected3, setSelected3] = useState(false);
   const [menu, setMenu] = useState(false);
-  const pathname = usePathname();
 
   return (
     <>
@@ -39,8 +39,7 @@ export default function Navbar() {
                 pathname == "/User"
                   ? "2xl:text-3xl lg:text-2xl bold text-white underline decoration-white divide-opacity-100"
                   : "2xl:text-3xl lg:text-2xl bold text-white"
-              }
-            >
+              }>
               Home
             </Link>
           </div>
