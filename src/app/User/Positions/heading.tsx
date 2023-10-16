@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <div className="flex flex-col justify-center items-center py-28 gap-4">
-      <h1 className="2xl:text-5xl lg:text-3xl extrabold text-sky-700">
+      <h1 className="2xl:text-5xl lg:text-3xl font-semibold text-sky-700">
         Our Free Positions
       </h1>
       <h1 className="2xl:text-xl lg:text-lg extrabold text-black-500 py-1">
