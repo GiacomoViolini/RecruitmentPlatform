@@ -8,7 +8,7 @@ export default function Header() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center py-28 gap-4">
+    <div className="flex flex-col justify-center items-center py-48 gap-4">
       <h1 className="2xl:text-5xl lg:text-3xl font-semibold text-sky-700">
         Our Free Positions
       </h1>

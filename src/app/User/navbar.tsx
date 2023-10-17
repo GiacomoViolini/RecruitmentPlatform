@@ -19,17 +19,13 @@ export default function Navbar() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const [selected, setSelected] = useState(true);
-  const [selected2, setSelected2] = useState(false);
-  const [selected3, setSelected3] = useState(false);
   const [menu, setMenu] = useState(false);
 
   return (
     <>
       {isWindow >= 800 ? (
         <div
-          className="flex w-full h-24 justify-evenly items-center"
+          className="flex w-full h-24 justify-evenly items-center fixed"
           style={{ background: "linear-gradient(to bottom, #1E90FF,#1a8cff)" }}
         >
           <div className=" font-bold w-30 h-max">
@@ -70,7 +66,7 @@ export default function Navbar() {
         </div>
       ) : (
         <div
-          className="flex w-full h-24 justify-between items-center"
+          className="flex w-full h-24 justify-between items-center fixed"
           style={{ background: "linear-gradient(to bottom, #1E90FF,#1a8cff)" }}
         >
           <h1 className="font-bold w-30 h-max pl-10 text-2xl text-white">
@@ -93,7 +89,7 @@ export default function Navbar() {
                   background: "linear-gradient(to bottom, #1E90FF,#1a8cff)",
                 }}
               >
-                <div className="flex flex-col h-full justify-evenly start bg-opacity-50">
+                <div className="flex flex-col h-full justify-evenly items-center start bg-opacity-50">
                   <div className=" font-bold w-30 h-max">
                     <Link
                       href="/User"
