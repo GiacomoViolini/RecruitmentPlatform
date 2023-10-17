@@ -31,7 +31,7 @@ export default async function ChallengesList() {
                   height={70}
                 />
                 <div className="mx-5 mt-5">
-                  <h2 className="text-2xl mb-3 font-bold text-sky-800">
+                  <h2 className="text-2xl mb-3 font-bold text-sky-800 ">
                     {c.title}
                   </h2>
                   <h3 className="text-lg text-gray-500">

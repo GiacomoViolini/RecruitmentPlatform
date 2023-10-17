@@ -18,7 +18,6 @@ async function getChallenge(id: string) {
   });
 
   return res.json();
-  
 }
 
 export default async function challenge({ params: { id } }: ChallengeProps) {
@@ -28,12 +27,12 @@ export default async function challenge({ params: { id } }: ChallengeProps) {
       <Navbar />
       <div
         key={challenge.title}
-        className="bg-white flex my-32 mx-auto h-96 w-10/12 rounded-xl overflow-hidden shadow border-transparent border-2"
+        className="bg-white flex my-32 mx-auto h-96 w-10/12 rounded-md overflow-hidden shadow"
       >
         <Image
           src={"/" + challenge.img}
           alt={id}
-          className="object-contain"
+          className="object-contain border-l-4 border-sky-600"
           width={500}
           height={96}
         />
