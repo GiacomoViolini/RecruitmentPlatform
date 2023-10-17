@@ -24,16 +24,16 @@ export default function Home() {
   return (
     <div
       className="flex justify-center items-center h-screen"
-      style={{ background: "linear-gradient(to bottom, #87CEEB, #1E90FF)" }}
+      style={{ background: "linear-gradient(to bottom, #87CEEB, #3399ff)" }}
     >
       <form
         onSubmit={handleSubmit}
-        className="w-96 p-4 rounded-sm text-center bg-white"
+        className=" w-96 py-12 rounded-lg text-center bg-white flex flex-col justify-center items-center"
       >
         <h1 className="text-4xl font-bold text-gray-800 py-4 border-b-2">
           Login Form
         </h1>
-        <div className="p-3">
+        <div className="py-4">
           <div className="mb-4">
             <label
               className="text-2xl  font-semibold text-left block m-1 text-gray-700"
@@ -51,7 +51,7 @@ export default function Home() {
               onChange={handleEmailChange}
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-10">
             <label
               className="text-2xl  font-semibold text-left block m-1 text-gray-700"
               htmlFor="password"

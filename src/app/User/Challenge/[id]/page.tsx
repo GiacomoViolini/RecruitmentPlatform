@@ -18,6 +18,7 @@ async function getChallenge(id: string) {
   });
 
   return res.json();
+  
 }
 
 export default async function challenge({ params: { id } }: ChallengeProps) {

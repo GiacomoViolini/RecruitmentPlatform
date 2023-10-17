@@ -19,7 +19,7 @@ export default async function ChallengesList() {
         (c: { title: string; desc: string; img: string; id: string }) => (
           <div
             key={c.title}
-            className="bg-white my-12 mx-auto h-48 w-9/12 rounded-xl overflow-hidden shadow border-transparent border-2 hover:shadow-xl hover:border-sky-800"
+            className="bg-white my-12 mx-auto h-60 w-9/12 rounded-lg overflow-hidden shadow border-transparent border-2 hover:shadow-xl hover:border-sky-800"
           >
             <Link href={`Challenge/${c.id}`}>
               <div className="flex">
@@ -30,12 +30,12 @@ export default async function ChallengesList() {
                   width={300}
                   height={70}
                 />
-                <div className="ml-5 mt-5">
+                <div className="mx-5 mt-5">
                   <h2 className="text-2xl mb-3 font-bold text-sky-800">
                     {c.title}
                   </h2>
                   <h3 className="text-lg text-gray-500">
-                    {c.desc.slice(0, 300)}...
+                    {c.desc.slice(0, 400)}...
                   </h3>
                 </div>
               </div>
