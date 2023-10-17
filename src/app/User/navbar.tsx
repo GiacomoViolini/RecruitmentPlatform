@@ -5,29 +5,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  const [isWindow, setIsWindow] = useState<number>(window.innerWidth);
+  const [isWindow, setIsWindow] = useState<number | undefined>();
   const pathname = usePathname();
 
   useEffect(() => {
     const handleResize = () => {
       setIsWindow(window.innerWidth);
     };
-
+    handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [selected, setSelected] = useState(true);
-  const [selected2, setSelected2] = useState(false);
-  const [selected3, setSelected3] = useState(false);
   const [menu, setMenu] = useState(false);
 
   return (
     <>
-      {isWindow >= 800 ? (
+      {isWindow && isWindow >= 800 ? (
         <div
           className="flex w-full h-24 justify-evenly items-center"
           style={{ background: "linear-gradient(to bottom, #1E90FF,#1a8cff)" }}
