@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import logo from "/public/logo.svg";
 import supabase from "../../../../utils/supabase";
+import logo from "/public/logo.svg";
 
 interface Position {
     id: number;
@@ -17,21 +17,18 @@ interface Position {
 
 export default function Positions() {
     const [positions, setPositions] = useState<Position[]>([]);
-
+    const [positionsIcon, setPositionsIcon] = useState("");
+  
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const { data } = await supabase.from("Positions").select("*");
-                console.log(data);
-                if (data) {
-                    setPositions(data);
-                }
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
+      async function fetchData() {
+        try {
+          const { data } = await supabase.from("Positions").select("*");
+        } catch (error) {
+          console.error("Error fetching data:", error);
         }
-
-        fetchData();
+      }
+  
+      fetchData();
     }, []);
     return (
         <div className="flex justify-evenly items-center shadow-sky-200">
@@ -56,20 +53,20 @@ export default function Positions() {
                             ))}
                         <div className="py-4 text-left">
                             <div className="px-6 py-4">
-                                <div className="text-bold text-mb mb-4">{position.descrption}</div>
+                                <div className="text-bold text-mb mb-4">{position.descrption.slice(0, 200)+"..." }</div>
                             </div>
                             <div className="px-6 pt-4 pb-2">
-                                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                    {position.ral}
+                                <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
+                                    {"💸 RAL "+position.ral}
                                 </span>
-                                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                    {position.position}
+                                <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
+                                    {"🌍"+position.position}
                                 </span>
-                                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                    {position.experience} years of experience
+                                <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
+                                    {"👨🏽‍💻 "+position.experience} years of experience
                                 </span>
-                                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                    {position.type}
+                                <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
+                                    {"🏠 🌍"+position.type}
                                 </span>
                             </div>
                         </div>
