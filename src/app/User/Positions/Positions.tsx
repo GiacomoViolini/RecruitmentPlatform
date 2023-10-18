@@ -8,7 +8,7 @@ import logo from "/public/logo.svg";
 interface Position {
     id: number;
     title: string;
-    descrption: string;
+    description: string;
     ral: string;
     position: string;
     images: string[];
@@ -18,7 +18,6 @@ interface Position {
 
 export default function Positions() {
     const [positions, setPositions] = useState<Position[]>([]);
-    const [positionsIcon, setPositionsIcon] = useState("");
 
     useEffect(() => {
       async function fetchData() {
@@ -32,11 +31,32 @@ export default function Positions() {
   
       fetchData();
     }, []);
+
+    const [isWindow, setIsWindow] = useState<number | undefined>();
+  
+    useEffect(() => {
+      const handleResize = () => {
+        setIsWindow(window.innerWidth);
+      };
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const [layout, setLayout] = useState("");
+    useEffect(() => {
+        if (isWindow && isWindow >= 800) {
+            setLayout("grid grid-cols-3 gap-28 ");
+        } else {
+            setLayout("grid grid-cols-1 gap-28 ");
+        }
+    }, [isWindow]);
+
     return (
         <div className="flex justify-evenly items-center shadow-sky-200 cursor:pointer">
-            <div className="grid grid-cols-3 gap-28 pb-8 px-8">
+            <div className={" pb-8 px-8" + layout}>
                 {positions.map((position) => (
-                    <Link href={`Positions/${position.title}`}>
+                    <Link href={`Positions/${position.id}`}>
                         <div
                             key={position.id}
                             className="max-w-2xl rounded overflow-hidden shadow px-6 py-4 bg-white justify-self-stretch"
@@ -56,7 +76,7 @@ export default function Positions() {
                                 ))}
                             <div className="py-4 text-left">
                                 <div className="px-6 py-4">
-                                    <div className="text-bold text-mb mb-4">{position.descrption.slice(0, 200)+"..." }</div>
+                                    <div className="text-bold text-mb mb-4">{position.description.slice(0, 200)+"..." }</div>
                                 </div>
                                 <div className="px-6 pt-4 pb-2">
                                     <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
