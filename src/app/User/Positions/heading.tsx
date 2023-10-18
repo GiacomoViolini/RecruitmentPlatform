@@ -17,7 +17,7 @@ export default function Header() {
       </h1>
       <div className="flex justify-center w-full pt-16 px-20">
         <input
-          className="rounded-md w-full h-10 p-2 border-2 border-sky-900 text-gray-700"
+          className="rounded-l-lg w-full h-10 px-2 border border-slate-300 hover:border-sky-500 focus:outline-sky-500 text-gray-700"
           type="text"
           name="job offer"
           id="job offer"
@@ -25,6 +25,9 @@ export default function Header() {
           value={search}
           onChange={handleSeachChange}
         />
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg">
+            Search
+          </button>
       </div>
     </div>
   );
