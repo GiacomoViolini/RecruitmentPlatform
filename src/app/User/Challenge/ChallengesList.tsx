@@ -1,22 +1,34 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import supabase from "../../../../utils/supabase";
 
-async function getChallenges() {
-  const res = await fetch("http://localhost:4000/challenges", {
-    next: {
-      revalidate: 120,
-    },
-  });
-  return res.json();
+interface Challenge {
+  title: string;
+  desc: string;
+  img: string;
+  id: number;
 }
 
-export default async function ChallengesList() {
-  const challenges = await getChallenges();
+export default function ChallengesList() {
+  const [challenges, setChallenges] = useState<Challenge[]>([]);
+
+  useEffect(() => {
+    async function fetchData(){
+      const { data } = await supabase.from("Challenges").select("*");
+      if (data) {
+        setChallenges(data);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <>
       {challenges.map(
-        (c: { title: string; desc: string; img: string; id: string }) => (
+        (c: { title: string; desc: string; img: string; id: number }) => (
           <div
             key={c.title}
             className="bg-white my-12 mx-auto h-60 w-9/12 rounded-lg overflow-hidden shadow border-transparent border-2 hover:shadow-xl hover:border-sky-800"
@@ -24,8 +36,8 @@ export default async function ChallengesList() {
             <Link href={`Challenge/${c.id}`}>
               <div className="flex">
                 <Image
-                  src={"/" + c.img}
-                  alt={c.id}
+                  src={c.img}
+                  alt={`${c.id}`}
                   className="object-fit"
                   width={300}
                   height={70}
