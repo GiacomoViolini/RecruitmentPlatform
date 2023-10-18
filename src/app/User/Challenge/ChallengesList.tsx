@@ -38,9 +38,9 @@ export default function ChallengesList() {
                 <Image
                   src={c.img}
                   alt={`${c.id}`}
-                  className="object-fit"
-                  width={300}
-                  height={70}
+                  className=" object-cover"
+                  width={430}
+                  height={80}
                 />
                 <div className="mx-5 mt-5">
                   <h2 className="text-2xl mb-3 font-bold text-sky-800 ">
