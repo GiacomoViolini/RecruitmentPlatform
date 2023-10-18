@@ -42,7 +42,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
       <Navbar />
       <div
         key={challenge?.title}
-        className="bg-white flex my-48 mx-auto h-96 w-10/12 rounded-md overflow-hidden shadow"
+        className="bg-white flex mt-48 mb-16 mx-auto h-96 w-10/12 rounded-md overflow-hidden shadow"
       >
         <Image
           src={challenge?.img || ""}

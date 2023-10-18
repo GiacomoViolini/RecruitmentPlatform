@@ -24,7 +24,7 @@ export default function Navbar() {
       {isWindow && isWindow >= 800 ? (
         <div
           className="flex w-full h-24 justify-evenly items-center fixed"
-          style={{ background: "linear-gradient(to bottom, #1E90FF,#1a8cff)" }}
+          style={{ background: "linear-gradient(#1E90FF,#00A3E1)" }}
         >
           <div className=" font-bold w-30 h-max">
             <Link
