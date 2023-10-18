@@ -38,27 +38,27 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
   }, []);
 
   return (
-    <div className="bg-light-bg h-full pb-3 flex flex-col items-center">
+    <div className="bg-gray-100 pb-24 flex flex-col">
       <Navbar />
       <div
         key={challenge?.title}
-        className="bg-white flex my-32 mx-auto h-96 w-10/12 rounded-md overflow-hidden shadow"
+        className="bg-white flex my-48 mx-auto h-96 w-10/12 rounded-md overflow-hidden shadow"
       >
         <Image
           src={challenge?.img || ""}
           alt={`${id}`}
-          className="object-contain border-l-4 border-sky-600"
-          width={500}
+          className="object-cover border-l-4 border-sky-600 mr-4"
+          width={550}
           height={96}
         />
-        <div className="ml-5 mt-5 flex flex-col items-center justify-between">
-          <div>
+        <div className="mx-5 flex flex-col items-center">
+          <div className="mt-5 mr-5">
             <h2 className="text-2xl mb-3 font-bold text-sky-800">
               {challenge?.title}
             </h2>
-            <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>
           </div>
-          <button className="bg-sky-500 px-8 py-2 mb-3 rounded-md text-white text-xl font-semibold hover:bg-sky-400">
+          <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>
+          <button className="bg-sky-500 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold hover:bg-sky-600">
             Unisciti!
           </button>
         </div>
