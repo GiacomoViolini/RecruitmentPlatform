@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { createClient } from "@supabase/supabase-js";
 import logo from "/public/logo.svg";
+import supabase from "../../../../utils/supabase";
 
 interface Position {
     id: number;
@@ -17,7 +17,6 @@ interface Position {
 
 export default function Positions() {
     const [positions, setPositions] = useState<Position[]>([]);
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
     useEffect(() => {
         async function fetchData() {
