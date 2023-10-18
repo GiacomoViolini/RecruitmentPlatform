@@ -7,12 +7,12 @@ import supabase from "../../../../utils/supabase";
 interface Position {
     id: number;
     title: string;
-    images: string[];
-    description: string;
+    descrption: string;
     ral: string;
     position: string;
-    yearsOfExperience: number;
-    typeOfPositions: string;
+    images: string[];
+    experience: number;
+    type: string;
 }
 
 export default function Positions() {
@@ -22,6 +22,7 @@ export default function Positions() {
         async function fetchData() {
             try {
                 const { data } = await supabase.from("Positions").select("*");
+                console.log(data);
                 if (data) {
                     setPositions(data);
                 }
@@ -33,8 +34,8 @@ export default function Positions() {
         fetchData();
     }, []);
     return (
-        <div className="flex justify-evenly items-center ">
-            <div className="grid grid-cols-3 gap-28 pb-8">
+        <div className="flex justify-evenly items-center shadow-sky-200">
+            <div className="grid grid-cols-3 gap-28 pb-8 px-2">
                 {positions.map((position) => (
                     <div
                         key={position.id}
@@ -55,7 +56,7 @@ export default function Positions() {
                             ))}
                         <div className="py-4 text-left">
                             <div className="px-6 py-4">
-                                <div className="text-bold text-mb mb-4">{position.description}</div>
+                                <div className="text-bold text-mb mb-4">{position.descrption}</div>
                             </div>
                             <div className="px-6 pt-4 pb-2">
                                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
@@ -65,10 +66,10 @@ export default function Positions() {
                                     {position.position}
                                 </span>
                                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                    {position.yearsOfExperience} years of experience
+                                    {position.experience} years of experience
                                 </span>
                                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                    {position.typeOfPositions}
+                                    {position.type}
                                 </span>
                             </div>
                         </div>
