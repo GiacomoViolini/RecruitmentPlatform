@@ -58,7 +58,7 @@ export default function user() {
       <div className="bg-white flex mt-20 ml-32 w-8/12 rounded-md overflow-hidden shadow">
         <div className="mx-5 flex flex-col items-center">
           <div className="mt-3 mr-5">
-            <h2 className="text-3xl mb-3 font-bold text-sky-800">
+            <h2 className="text-3xl mb-12 font-bold text-sky-800">
               My Applications
             </h2>
             {applications.map((c: Info) => (
@@ -77,6 +77,20 @@ export default function user() {
                 </div>
               </div>
             ))}
+            {applications.length === 0 && (
+              <h1 className="text-lg font-semibold text-gray-800 mb-4">
+                No applications yet
+              </h1>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="bg-white flex mt-20 ml-32 w-8/12 rounded-md overflow-hidden shadow">
+        <div className="mx-5 flex flex-col items-center">
+          <div className="mt-3 mr-5">
+            <h2 className="text-3xl mb-12 font-bold text-sky-800">
+              My Challenges
+            </h2>
             {applications.length === 0 && (
               <h1 className="text-lg font-semibold text-gray-800 mb-4">
                 No applications yet

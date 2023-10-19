@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<String>("");
+  const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,8 +18,12 @@ export default function Home() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      router.push('/User');
+      router.push({
+        pathname:'/User',
+        query: { email},
+      });
   };
+
 
   return (
     <div
