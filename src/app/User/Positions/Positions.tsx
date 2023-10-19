@@ -39,7 +39,7 @@ export default function Positions( search: PositionsProps ) {
       }
   
       fetchData();
-    }, []);
+    }, [search.searchPosition]);
 
     const [isWindow, setIsWindow] = useState<number | undefined>();
   

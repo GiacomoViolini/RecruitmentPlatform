@@ -18,7 +18,7 @@ export default function Navbar() {
   }, []);
 
   const [menu, setMenu] = useState(false);
-
+  const [visibility, setVisibility] = useState(false);
   return (
     <>
       {isWindow && isWindow >= 800 ? (
@@ -71,6 +71,7 @@ export default function Navbar() {
             ZUCCHETTI
           </h1>
           <div className="w-30 h-max pr-10">
+            {visibility && (
             <Image
               src="/drawer.svg"
               alt="drawer menù"
@@ -78,8 +79,11 @@ export default function Navbar() {
               height={30}
               onClick={() => {
                 setMenu(!menu);
+                setVisibility(false);
               }}
-            />
+              className={"cursor-pointer"}
+            />)}
+          </div>
             {menu && (
               <div
                 className="top-0 right-0 w-80 h-full bg-opacity-50"
@@ -127,7 +131,6 @@ export default function Navbar() {
               </div>
             )}
           </div>
-        </div>
       )}
     </>
   );
