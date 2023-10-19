@@ -1,5 +1,6 @@
 "use client";
 import { FormEvent, useState } from "react";
+import PositionsFromSupabase from "./Positions";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -29,6 +30,7 @@ export default function Header() {
             Search
           </button>
       </div>
+      <PositionsFromSupabase searchPosition={search}/>
     </div>
   );
 }

@@ -7,7 +7,6 @@ export default function Positions() {
     <div className="bg-slate-50 h-full">
       <Navbar />
       <Heading />
-      <PositionsFromSupabase/>
     </div>
   );
 }

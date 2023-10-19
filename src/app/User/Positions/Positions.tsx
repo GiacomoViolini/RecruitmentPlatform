@@ -16,14 +16,23 @@ interface Position {
     type: string;
 }
 
-export default function Positions() {
+interface PositionsProps {
+    searchPosition: string;
+}
+
+export default function Positions( search: PositionsProps ) {
     const [positions, setPositions] = useState<Position[]>([]);
 
     useEffect(() => {
       async function fetchData() {
         try {
-          const { data } = await supabase.from("Positions").select("*");
-            setPositions(data!);
+            if(search.searchPosition===""){
+            const { data } = await supabase.from("Positions").select("*");
+                setPositions(data!);
+            }else {
+                const { data } = await supabase.from("Positions").select("*").filter("title", "ilike", `%${search.searchPosition}%`);
+                setPositions(data!);
+            }
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -55,13 +64,9 @@ export default function Positions() {
         }
     }, [isWindow]);
 
-    let [counter, setCounter] = useState(0);
-
-    
-
 
     return (
-        <div className="flex justify-evenly items-center  cursor:pointer">
+        <div className="flex justify-evenly pt-32 items-center  cursor:pointer">
             <div className={"grid " + layout + " gap-28 pb-8 "}>
                 {positions.map((position) => (
                     <Link href={`Positions/${position.id}`}>
