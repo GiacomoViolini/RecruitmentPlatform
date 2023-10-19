@@ -22,6 +22,7 @@ interface ChallengeParams {
 export default function Challenge({ params: { id } }: ChallengeParams) {
   const [challenge, setChallenge] = useState<ChallengeProps>();
   const [user, setUser] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   console.log(id);
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
   }, []);
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
+    setLoading(true);
     const { data: existingData } = await supabase
       .from("Home_Challenges")
       .select("*")
@@ -56,13 +58,19 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
     if (existingData == null) {
       const { data } = await supabase
         .from("Home_Challenges")
-        .insert({ email: user, challenges: [{ steps : "1", title:  challenge?.title}] })
+        .insert({
+          email: user,
+          challenges: [{ steps: "1", title: challenge?.title, page_id: challenge?.id, }],
+        })
         .select();
     } else {
       const { data, error } = await supabase
         .from("Home_Challenges")
         .update({
-          challenges: [...existingData.challenges, {steps:"1", title :challenge?.title}],
+          challenges: [
+            ...existingData.challenges,
+            { steps: "1", title: challenge?.title, page_id: challenge?.id,},
+          ],
         })
         .eq("email", user);
     }
@@ -89,12 +97,23 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
             </h2>
           </div>
           <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>
-          <button
-            onClick={handleClick}
-            className="bg-sky-500 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold hover:bg-sky-600"
-          >
-            Unisciti!
-          </button>
+          { loading ?
+            <button
+              onClick={handleClick}
+              className="bg-emerald-600 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold"
+              disabled={loading}
+            >
+              Applied!
+            </button>
+            :
+            <button
+              onClick={handleClick}
+              className="bg-sky-500 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold hover:bg-sky-600"
+              disabled={loading}
+            >
+              Join!
+            </button>
+          }
         </div>
       </div>
     </div>
