@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../../navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
+import { MouseEvent } from "react";
 
 interface ChallengeProps {
   id: number;
@@ -20,6 +21,8 @@ interface ChallengeParams {
 
 export default function Challenge({ params: { id } }: ChallengeParams) {
   const [challenge, setChallenge] = useState<ChallengeProps>();
+  const [user, setUser] = useState<string>();
+
   console.log(id);
   useEffect(() => {
     async function fetchData() {
@@ -34,8 +37,36 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
       }
       setChallenge(data);
     }
+    async function fetchUser() {
+      const { data } = await supabase.auth.getSession();
+      if (data && data.session?.user) {
+        setUser(data.session.user.email);
+      }
+    }
     fetchData();
+    fetchUser();
   }, []);
+
+  const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
+    const { data: existingData } = await supabase
+      .from("Home_Challenges")
+      .select("*")
+      .eq("email", user)
+      .single();
+    if (existingData == null) {
+      const { data } = await supabase
+        .from("Home_Challenges")
+        .insert({ email: user, challenges: [{ steps : "1", title:  challenge?.title}] })
+        .select();
+    } else {
+      const { data, error } = await supabase
+        .from("Home_Challenges")
+        .update({
+          challenges: [...existingData.challenges, {steps:"1", title :challenge?.title}],
+        })
+        .eq("email", user);
+    }
+  };
 
   return (
     <div className="bg-gray-100 pb-24 flex flex-col">
@@ -58,7 +89,10 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
             </h2>
           </div>
           <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>
-          <button className="bg-sky-500 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold hover:bg-sky-600">
+          <button
+            onClick={handleClick}
+            className="bg-sky-500 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold hover:bg-sky-600"
+          >
             Unisciti!
           </button>
         </div>

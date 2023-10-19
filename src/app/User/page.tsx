@@ -54,7 +54,7 @@ export default function user() {
       .eq("email", user)
       .maybeSingle();
     if (data) {
-      setChallenges(data.challenges.challenges);
+      setChallenges(data.challenges);
     }
     if(error){
       console.log(error);
@@ -140,7 +140,7 @@ export default function user() {
                 </div>
               </div>
             ))}
-            {applications.length === 0 && (
+            {challenges.length === 0 && (
               <h1 className="text-lg font-semibold text-gray-800 mb-4">
                 No applications yet
               </h1>
