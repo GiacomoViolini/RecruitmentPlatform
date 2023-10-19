@@ -29,37 +29,58 @@ interface Info {
   steps: number;
 }
 
-interface App {
-  email: string;
-  obj: Info[];
-}
-
 export default function user() {
   const [applications, setApplications] = useState<Info[]>([]);
   const [challenges, setChallenges] = useState<Info[]>([]);
+  const [user, setUser] = useState<string>();
+
+  async function fetchPositions() {
+    const { data ,error} = await supabase
+      .from("Home_Positions")
+      .select("*")
+      .eq("email", user)
+      .maybeSingle();
+    if (data) {
+      setApplications(data.applications.applications);
+    }
+    if(error){
+      console.log(error);
+    }
+  }
+  async function fetchChallenges() {
+    const { data,error } = await supabase
+      .from("Home_Challenges")
+      .select("*")
+      .eq("email", user)
+      .maybeSingle();
+    if (data) {
+      setChallenges(data.challenges.challenges);
+    }
+    if(error){
+      console.log(error);
+    }
+  }
+  async function fetchUser() {
+    const { data } = await supabase.auth.getSession();
+    if (data && data.session?.user) {
+      setUser(data.session.user.email);
+    }
+  }
+  useEffect(() => {
+    async function fetchData() {
+      await fetchUser();
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    async function fetchPositions() {
-      const { data } = await supabase
-        .from("Home_Positions")
-        .select("*")
-        .single();
-      if (data) {
-        setApplications(data.applications.applications);
-      }
+    async function fetchCards() {
+      console.log(user); // This will log the updated 'user' when it changes
+      await fetchChallenges();
+      await fetchPositions();
     }
-    async function fetchChallenges() {
-      const { data } = await supabase
-        .from("Home_Challenges")
-        .select("*")
-        .single();
-      if (data) {
-        setChallenges(data.challenges.challenges);
-      }
-    }
-    fetchPositions();
-    fetchChallenges();
-  }, []);
+    fetchCards();
+  }, [user]);
 
   return (
     <div className="bg-slate-50 pb-20">

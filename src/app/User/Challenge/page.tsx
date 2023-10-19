@@ -1,11 +1,20 @@
 import Navbar from "../navbar";
 import ChallengesList from "./ChallengesList";
 
+const gradientText = {
+  background: "linear-gradient(45deg,  #6666ff, #4da6ff, #3366ff)",
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  display: "inline-block",
+};
+
+
 export default function challenge() {
   return (
-    <div className="bg-gray-100 h-full pb-3 flex flex-col items-center">
+    <div className="bg-slay-50 h-full pb-3 flex flex-col items-center">
       <Navbar />
-      <h1 className="2xl:text-5xl lg:text-3xl font-semibold text-sky-700 text-center pt-40 pb-14 border-b-4">
+      <h1 className="2xl:text-6xl lg:text-3xl font-bold text-center pt-40 pb-14 border-b-4" style={gradientText}>
         Join our Competitions!
       </h1>
       <ChallengesList />

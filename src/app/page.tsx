@@ -2,9 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import supabase from "../../utils/supabase";
 
 export default function Home() {
-  const [email, setEmail] = useState<String>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
@@ -18,8 +19,20 @@ export default function Home() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push('/User');
-  }
+    async function signInWithEmail() {
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+      if (data) {
+        router.push("/User");
+      }
+      if (error) {
+        console.log(error);
+      }
+    }
+    signInWithEmail();
+  };
 
   return (
     <div
@@ -43,11 +56,12 @@ export default function Home() {
             </label>
             <input
               className="rounded-sm w-80 h-8 p-2 border-2 border-sky-900 text-gray-700"
-              type="text"
+              type="email"
               name="email"
               id="email"
               placeholder="Email"
-                value={email.toString()}
+              required
+              value={email}
               onChange={handleEmailChange}
             />
           </div>
@@ -63,6 +77,7 @@ export default function Home() {
               type="password"
               name="password"
               id="password"
+              required
               placeholder="Password"
               value={password}
               onChange={handlePasswordChange}
