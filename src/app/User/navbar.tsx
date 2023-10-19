@@ -23,8 +23,8 @@ export default function Navbar() {
     <>
       {isWindow && isWindow >= 800 ? (
         <div
-          className="flex w-full h-24 justify-evenly items-center fixed"
-          style={{ background: "linear-gradient(#1E90FF,#00A3E1)" }}
+          className="fixed flex w-full h-24 justify-evenly items-center"
+          style={{ background: "linear-gradient(#1E90FF,#00A3E1)", zIndex: 1000 }}
         >
           <div className=" font-bold w-30 h-max">
             <Link
@@ -64,8 +64,8 @@ export default function Navbar() {
         </div>
       ) : (
         <div
-          className="flex w-full h-24 justify-between items-center fixed"
-          style={{ background: "linear-gradient(to bottom, #1E90FF,#00A3E1)" }}
+          className=" fixed flex w-full h-24 justify-between items-center fixed"
+          style={{ background: "linear-gradient(to bottom, #1E90FF,#00A3E1)" ,zIndex: 1000}}
         >
           <h1 className="font-bold w-30 h-max pl-10 text-2xl text-white">
             ZUCCHETTI
@@ -82,7 +82,7 @@ export default function Navbar() {
             />
             {menu && (
               <div
-                className="fixed top-0 right-0 w-80 h-full bg-opacity-50"
+                className="top-0 right-0 w-80 h-full bg-opacity-50"
                 style={{
                   background: "linear-gradient(to bottom, #1E90FF,#1a8cff)",
                 }}

@@ -45,21 +45,29 @@ export default function Positions() {
 
     const [layout, setLayout] = useState("");
     useEffect(() => {
-        if (isWindow && isWindow >= 800) {
-            setLayout("grid grid-cols-3 gap-28 ");
-        } else {
-            setLayout("grid grid-cols-1 gap-28 ");
+        if (isWindow && isWindow >= 1400) {
+            setLayout("grid grid-cols-3 gap-28 px-8");
+        } else if (isWindow && isWindow >= 900) {
+            setLayout("grid grid-cols-2 gap-20 px-8");
+        }
+        else {
+            setLayout("grid grid-cols-1 gap-28 px-8");
         }
     }, [isWindow]);
 
+    let [counter, setCounter] = useState(0);
+
+    
+
+
     return (
-        <div className="flex justify-evenly items-center shadow-sky-200 cursor:pointer">
-            <div className={" pb-8 px-8" + layout}>
+        <div className="flex justify-evenly items-center  cursor:pointer">
+            <div className={"grid " + layout + " gap-28 pb-8 "}>
                 {positions.map((position) => (
                     <Link href={`Positions/${position.id}`}>
                         <div
                             key={position.id}
-                            className="max-w-2xl rounded overflow-hidden shadow px-6 py-4 bg-white justify-self-stretch"
+                            className="max-w-lg rounded overflow-hidden shadow-xl shadow-sky-50 hover:shadow-sky-100 px-6 py-4 bg-white justify-self-stretch"
                         >
                             <div className="flex flex-row justify-between items-center pt-2">
                                 <div className="flex flex-row justify-start items-center gap-4 pt-1">
@@ -71,9 +79,6 @@ export default function Positions() {
                                 </button>
                             </div>
                             <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-25 dark:opacity-50" />
-                                {position.images && position.images.map((image) => (
-                                    <Image key={image} src={image} alt="photo" width={100} height={100} />
-                                ))}
                             <div className="py-4 text-left">
                                 <div className="px-6 py-4">
                                     <div className="text-bold text-mb mb-4">{position.description.slice(0, 200)+"..." }</div>
