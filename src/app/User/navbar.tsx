@@ -64,7 +64,7 @@ export default function Navbar() {
         </div>
       ) : (
         <div
-          className=" fixed flex w-full h-24 justify-between items-center fixed"
+          className="flex w-full h-24 justify-between items-center fixed"
           style={{ background: "linear-gradient(to bottom, #1E90FF,#00A3E1)" ,zIndex: 1000}}
         >
           <h1 className="font-bold w-30 h-max pl-10 text-2xl text-white">

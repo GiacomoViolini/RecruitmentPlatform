@@ -18,12 +18,8 @@ export default function Home() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      router.push({
-        pathname:'/User',
-        query: { email},
-      });
-  };
-
+    router.push('/User');
+  }
 
   return (
     <div
@@ -51,7 +47,7 @@ export default function Home() {
               name="email"
               id="email"
               placeholder="Email"
-              value={email}
+                value={email.toString()}
               onChange={handleEmailChange}
             />
           </div>
