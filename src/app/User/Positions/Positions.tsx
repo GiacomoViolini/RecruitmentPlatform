@@ -20,26 +20,25 @@ interface PositionsProps {
     searchPosition: string;
 }
 
-export default function Positions( search: PositionsProps ) {
+export default function Positions({ searchPosition }: PositionsProps) {
     const [positions, setPositions] = useState<Position[]>([]);
 
     useEffect(() => {
-      async function fetchData() {
-        try {
-            if(search.searchPosition===""){
-            const { data } = await supabase.from("Positions").select("*");
+        async function fetchData() {
+            try {
+                let { data } = await supabase.from("Positions").select("*");
+                if (searchPosition) {
+                    data = data!!.filter(position =>
+                        position.title.toLowerCase().includes(searchPosition.toLowerCase())
+                    );
+                }
                 setPositions(data!);
-            }else {
-                const { data } = await supabase.from("Positions").select("*").filter("title", "ilike", `%${search.searchPosition}%`);
-                setPositions(data!);
+            } catch (error) {
+                console.error("Error fetching data:", error);
             }
-        } catch (error) {
-          console.error("Error fetching data:", error);
         }
-      }
-  
-      fetchData();
-    }, [search.searchPosition]);
+        fetchData();
+    }, [searchPosition]);
 
     const [isWindow, setIsWindow] = useState<number | undefined>();
   
