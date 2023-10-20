@@ -5,6 +5,7 @@ import Navbar from "../../navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
 import logo from "/public/logo.svg";
+import Link from "next/link";
 
 interface PositionProps {
     id: number;
@@ -33,7 +34,6 @@ export default function Position({ params: { id } }: PositionParams) {
             .select("*")
             .eq("id", id)
             .single();
-            console.log(data);
         if (error) {
             console.error(error);
             return;
@@ -67,6 +67,16 @@ export default function Position({ params: { id } }: PositionParams) {
     const [logoLayout, setLogoLayout] = useState("");
     const [dimensions, setDimensions] = useState(0);
     const [layoutText, setLayoutText] = useState("");
+    const [ralRange, setRalRange] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+          if (Position?.ral.length!! > 8) {
+            setRalRange(true);
+          }
+        };
+        handleResize();
+      }, [Position?.ral]);
 
     useEffect(() => {
     if (isWindow && isWindow >= 1280) {
@@ -102,28 +112,35 @@ return (
                     </div>
                     <div className={"text-4xl font-bold text-center pt-8 px-8 text-white -translate-y-20 translate-x-32"+layoutText}>{Position?.title ?? ""}</div>
                 </div>
-                <div className="relative aspect-video rounded-2xl pb-8 ">
-                    <Image src={Position?.images[counter] ?? ""} alt="photo" layout="fill" className={"rounded-2xl"} objectFit="cover" />
-                </div>
-                <div className="p-8">
+                    <div className="relative aspect-video rounded-2xl w-full h-96 py-80 pl-4 pr-4 lg:-translate-y-20 ">
+                        <Image src={Position?.images[counter] ?? ""} alt="photo" layout={"fill"} className={"rounded-2xl"} objectFit={"cover"} />
+                    </div>
+                <div className="p-8 lg:-translate-y-10">
                     <h5 className="pb-2 text-2xl font-bold tracking-tight">{"📍"+Position?.position}</h5>
                     <p className="py-16 font-normal text-gray-700 ">{Position?.description}</p>
                     <p className="pb-8 text-2xl font-bold tracking-tight" >RAL</p>
-                    <span className="inline-block bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
-                        {"💸 RAL "+Position?.ral}
-                    </span>
+                    {ralRange ? (
+                        <span className="inline-block bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                            {"💸 RAL "+Position?.ral}
+                        </span>) : (
+                        <span className="inline-block bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                            {"💸 RAL "+Position?.ral}
+                        </span>)
+                    }
                     <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">Type of contract</p>
-                    <span className="inline-block bg-sky-200 flex justify-center items-center h-10 w-60 shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                    <span className="inline-block bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                         {"👨🏽‍💻 "+Position?.experience} years of experience
                     </span>
                     <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">Type of position</p>
-                    <span className="inline-block bg-sky-200 flex justify-center items-center h-10 w-96 shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                    <span className="inline-block bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                         {Position?.type.includes("hybrid"&&"Hybrid")?"🏠"+"🏬"+Position?.type:Position?.type==="Full remote"?"🏠"+Position?.type:"🏬"+Position?.type}
                     </span>
                     <div className="flex flex-row justify-start items-center gap-4 pt-16">
-                        <a className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md shadow-blue-100 font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Apply
-                        </a>
+                        <Link href={"/User/Positions/Application"}>
+                            <button className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md shadow-blue-100 font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Apply
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
