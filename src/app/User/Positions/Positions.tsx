@@ -65,7 +65,7 @@ export default function Positions({ searchPosition }: PositionsProps) {
 
 
     return (
-        <div className="flex justify-evenly pt-32 items-center  cursor:pointer">
+        <div className="flex justify-evenly lg:pt-32 pt-10 items-center  cursor:pointer">
             <div className={"grid " + layout + " gap-28 pb-8 "}>
                 {positions.map((position) => (
                     <Link href={`Positions/${position.id}`}>
@@ -85,7 +85,7 @@ export default function Positions({ searchPosition }: PositionsProps) {
                             <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-25 dark:opacity-50" />
                             <div className="py-4 text-left">
                                 <div className="px-6 py-4">
-                                    <div className="text-bold text-mb mb-4">{position.description.slice(0, 200)+"..." }</div>
+                                    <div className="text-bold text-lg mb-4">{position.description.slice(0, 200)+"..." }</div>
                                 </div>
                                 <div className="px-6 pt-4 pb-2">
                                     <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
