@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.4",
-    "@supabase/supabase-js": "^2.38.1",
+    "@supabase/auth-ui-react": "^0.4.6",
+    "@supabase/auth-ui-shared": "^0.1.8",
+    "@supabase/supabase-js": "^2.38.2",
     "json-server": "^0.17.4",
     "netlify-identity-widget": "^1.9.2",
     "next": "^13.5.5",

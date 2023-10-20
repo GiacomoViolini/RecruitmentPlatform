@@ -2,13 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import supabase from "../../utils/supabase";
 import Link from "next/link";
+import supabase from "../../../../utils/supabase";
 
 export default function Home() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<boolean>(false);
   const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,17 +21,16 @@ export default function Home() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     async function signInWithEmail() {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signUp({
         email: email,
         password: password,
       });
       if (data?.user != null) {
         console.log(data);
-        router.push("/User");
+        router.push("/");
       }
       if (error) {
         console.log(error);
-        setError(true);
       }
     }
     signInWithEmail();
@@ -48,7 +46,7 @@ export default function Home() {
         className=" w-96 py-12 rounded-lg text-center bg-white flex flex-col justify-center items-center"
       >
         <h1 className="text-4xl font-bold text-gray-800 py-4 border-b-2">
-          Login Form
+          Sign up Form
         </h1>
         <div className="py-4">
           <div className="mb-4">
@@ -81,6 +79,7 @@ export default function Home() {
               type="password"
               name="password"
               id="password"
+              minLength={6}
               required
               placeholder="Password"
               value={password}
@@ -91,19 +90,9 @@ export default function Home() {
             type="submit"
             className="bg-sky-400 text-lg font-semibold text-white py-2 px-4 w-80 rounded-md hover:bg-sky-500"
           >
-            Login
+            Sign Up
           </button>
-          <Link href="User/SignUp">
-            <h2 className="text-sky-600 mt-5 text-lg font-semibold hover:underline">
-              Sign Up
-            </h2>
-          </Link>
         </div>
-        {error && (
-              <h1 className="text-lg font-semibold text-red-600 mb-4">
-                Invalid email or password
-              </h1>
-            )}
       </form>
     </div>
   );

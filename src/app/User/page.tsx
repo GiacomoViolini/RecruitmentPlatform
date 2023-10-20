@@ -63,9 +63,12 @@ export default function user() {
     }
   }
   async function fetchUser() {
-    const { data } = await supabase.auth.getSession();
-    if (data && data.session?.user) {
+    const { data, error } = await supabase.auth.getSession();
+    if (data.session?.user) {
       setUser(data.session.user.email);
+    }
+    if (error) {
+      console.log(error);
     }
   }
   useEffect(() => {
@@ -91,7 +94,7 @@ export default function user() {
       <h1 className="pt-40 ml-32 text-6xl font-bold" style={gradientText}>
         Welcome!
       </h1>
-      <div className="bg-white flex mt-20 ml-32 w-8/12 rounded-md overflow-hidden shadow border-2 border-transparent hover:border-sky-600">
+      <div className="bg-white flex mt-20 ml-32 w-8/12 rounded-md overflow-hidden shadow border-2 border-transparent hover:border-sky-600 hover:shadow-2xl">
         <div className="mx-5 flex flex-col items-center">
           <div className="mt-3 mr-5">
             <h2 className="text-4xl mb-12 font-bold text-sky-800">
@@ -121,7 +124,7 @@ export default function user() {
           </div>
         </div>
       </div>
-      <div className="bg-white flex mt-20 ml-32 w-8/12 rounded-lg overflow-hidden shadow border-2 border-transparent hover:border-sky-600">
+      <div className="bg-white flex mt-20 ml-32 w-8/12 rounded-lg overflow-hidden shadow border-2 border-transparent hover:border-sky-600 hover:shadow-2xl">
         <div className="mx-5 flex flex-col items-center">
           <div className="mt-3 mr-5">
             <h2 className="text-4xl mb-12 font-bold text-sky-800">
@@ -130,7 +133,12 @@ export default function user() {
             {challenges.map((c: Info) => (
               <div className="grid grid-cols-4 items-center mb-3" key={c.title}>
                 <div className="text-4xl mb-3 font-bold text-sky-700">
-                  <Link href={`User/Challenge/${c.page_id}`} className= "underline decoration-sky-600 hover:decoration-sky-300">{c.title}</Link>
+                  <Link
+                    href={`User/Challenge/${c.page_id}`}
+                    className="underline decoration-sky-600 hover:decoration-sky-300"
+                  >
+                    {c.title}
+                  </Link>
                 </div>
                 <h2 className="text-2xl mr-8 mb-3 font-bold text-sky-700">
                   Steps Completed:
