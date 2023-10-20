@@ -95,7 +95,7 @@ export default function Position({ params: { id } }: PositionParams) {
                 .select();
             } else {
               const { data, error } = await supabase
-                .from("Home_Challenges")
+                .from("Home_Positions")
                 .update({
                   applications: [
                     ...existingData.applications,
