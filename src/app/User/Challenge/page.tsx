@@ -2,7 +2,7 @@ import Navbar from "../navbar";
 import ChallengesList from "./ChallengesList";
 
 const gradientText = {
-  background: "linear-gradient(45deg,  #6666ff, #4da6ff, #3366ff)",
+  background: "linear-gradient(45deg,  #0074E4, #00A3E1, #00C9FF)",
   WebkitBackgroundClip: "text",
   backgroundClip: "text",
   color: "transparent",

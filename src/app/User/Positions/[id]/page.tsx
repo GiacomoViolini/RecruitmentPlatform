@@ -120,24 +120,24 @@ return (
                     <p className="py-16 font-normal text-gray-700 ">{Position?.description}</p>
                     <p className="pb-8 text-2xl font-bold tracking-tight" >RAL</p>
                     {ralRange ? (
-                        <span className="inline-block bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                        <span className="inline-block bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md  rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                             {"💸 RAL "+Position?.ral}
                         </span>) : (
-                        <span className="inline-block bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                        <span className="inline-block bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                             {"💸 RAL "+Position?.ral}
                         </span>)
                     }
                     <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">Type of contract</p>
-                    <span className="inline-block bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                    <span className="inline-block bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                         {"👨🏽‍💻 "+Position?.experience} years of experience
                     </span>
                     <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">Type of position</p>
-                    <span className="inline-block bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md shadow-sky-100 rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                    <span className="inline-block bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                         {Position?.type.includes("hybrid"&&"Hybrid")?"🏠"+"🏬"+Position?.type:Position?.type==="Full remote"?"🏠"+Position?.type:"🏬"+Position?.type}
                     </span>
                     <div className="flex flex-row justify-start items-center gap-4 pt-16">
                         <Link href={"/User/Positions/Application"}>
-                            <button className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md shadow-blue-100 font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <button className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Apply
                             </button>
                         </Link>

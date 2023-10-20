@@ -2,6 +2,14 @@
 import { FormEvent, useState } from "react";
 import PositionsFromSupabase from "./Positions";
 
+const gradientText = {
+  background: "linear-gradient(45deg,  #0074E4, #00A3E1, #00C9FF)",
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  display: "inline-block",
+};
+
 export default function Header() {
   const [search, setSearch] = useState("");
   const handleSeachChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +18,7 @@ export default function Header() {
 
   return (
     <div className="flex flex-col justify-center items-center py-48 gap-4">
-      <h1 className="2xl:text-6xl lg:text-5xl md:text-4xl sm:text-4xl xs:text-2xl font-semibold text-sky-700">
+      <h1 className="2xl:text-6xl lg:text-5xl md:text-4xl sm:text-4xl xs:text-2xl font-bold" style={gradientText}>
         Our Free Positions
       </h1>
       <h1 className="2xl:text-xl lg:text-lg md:text-md sm:text-md xs:text-md extrabold text-black-500 py-1">
