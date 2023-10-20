@@ -18,13 +18,13 @@ export default function Header() {
 
   return (
     <div className="flex flex-col justify-center items-center py-48 gap-4">
-      <h1 className="2xl:text-6xl lg:text-5xl md:text-4xl sm:text-4xl xs:text-2xl font-bold" style={gradientText}>
+      <h1 className="2xl:text-6xl lg:text-5xl text-4xl  font-bold" style={gradientText}>
         Our Free Positions
       </h1>
-      <h1 className="2xl:text-xl lg:text-lg md:text-md sm:text-md xs:text-md extrabold text-black-500 py-1">
+      <h1 className="2xl:text-xl text-lg   extrabold text-black-500 py-1">
         Explore our career opportunities
       </h1>
-      <div className="flex justify-center w-full pt-16 px-20">
+      <div className="flex justify-center w-full pt-16 lg:px-20 px-5">
         <input
           className="rounded-l-lg w-full h-10 px-2 border border-slate-300 hover:border-sky-500 focus:outline-sky-500 text-gray-700"
           type="text"
