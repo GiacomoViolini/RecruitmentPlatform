@@ -1,14 +1,13 @@
-    import Navbar from "../../navbar";
+import Navbar from "../../navbar";
+import Fetch from "./fetch";
 
-    export default function Application(jobtitle: string) {
+    export default function Application() {
+     
+        
         return(
-        <div className="bg-slate-50 h-full">
+        <div className="bg-slate-100 h-full">
             <Navbar />
-            <div className="flex justify-center items-center">
-                <div className="flex flex-col justify-center items-center">
-                    
-                </div>
-            </div>
+            <Fetch />
         </div>
     );
     }

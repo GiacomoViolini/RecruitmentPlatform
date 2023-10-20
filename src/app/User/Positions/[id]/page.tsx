@@ -90,7 +90,6 @@ export default function Position({ params: { id } }: PositionParams) {
                 .insert({
                   email: user,
                   applications: [{ steps: "1", title: Position?.title, page_id: Position?.id, }],
-                  status: "pending",
                 })
                 .select();
             } else {
