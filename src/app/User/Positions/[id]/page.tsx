@@ -6,6 +6,8 @@ import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
 import logo from "/public/logo.svg";
 import Link from "next/link";
+import { MouseEvent } from "react";
+
 
 interface PositionProps {
     id: number;
@@ -16,6 +18,16 @@ interface PositionProps {
     images: string[];
     experience: number;
     type: string;
+}
+
+interface ApplicationProps {
+    email: string;
+    applications: {
+        steps: string;
+        title: string;
+        page_id: number;
+    }[];
+    status: string;
 }
 
 interface PositionParams {
@@ -54,6 +66,45 @@ export default function Position({ params: { id } }: PositionParams) {
     }, [Position?.images]);
 
     const [isWindow, setIsWindow] = useState<number | undefined>();
+    const [user, setUser] = useState<string | undefined>();
+
+    useEffect(() => {
+        async function fetchUser() {
+            const { data } = await supabase.auth.getSession();
+            if (data && data.session?.user) {
+              setUser(data.session.user.email);
+            }
+          }
+        fetchUser();
+    }, []);
+
+    const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+            const { data: existingData } = await supabase
+              .from("Home_Positions")
+              .select("*")
+              .eq("email", user)
+              .single();
+            if (existingData == null) {
+              const { data } = await supabase
+                .from("Home_Positions")
+                .insert({
+                  email: user,
+                  applications: [{ steps: "1", title: Position?.title, page_id: Position?.id, }],
+                  status: "pending",
+                })
+                .select();
+            } else {
+              const { data, error } = await supabase
+                .from("Home_Challenges")
+                .update({
+                  applications: [
+                    ...existingData.applications,
+                    { steps: "1", title: Position?.title, page_id: Position?.id,},
+                  ],
+                })
+                .eq("email", user);
+            }
+          };
 
     useEffect(() => {
       const handleResize = () => {
@@ -137,7 +188,7 @@ return (
                     </span>
                     <div className="flex flex-row justify-start items-center gap-4 pt-16">
                         <Link href={"/User/Positions/Application"}>
-                            <button className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <button onClick={handleClick} className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">
                                 Apply
                             </button>
                         </Link>
