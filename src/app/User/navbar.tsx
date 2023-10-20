@@ -30,8 +30,8 @@ export default function Navbar() {
               href="/User"
               className={
                 pathname == "/User"
-                  ? "2xl:text-3xl lg:text-2xl bold text-white underline decoration-white divide-opacity-100"
-                  : "2xl:text-3xl lg:text-2xl bold text-white"
+                  ? "2xl:text-3xl text-2xl bold text-white underline decoration-white divide-opacity-100"
+                  : "2xl:text-3xl text-2xl bold text-white"
               }>
               Home
             </Link>
@@ -41,8 +41,8 @@ export default function Navbar() {
               href="/User/Challenge"
               className={
                 pathname == "/User/Challenge"
-                  ? "2xl:text-3xl lg:text-2xl bold text-white underline decoration-white divide-opacity-100"
-                  : "2xl:text-3xl lg:text-2xl bold text-white"
+                  ? "2xl:text-3xl text-2xl bold text-white underline decoration-white divide-opacity-100"
+                  : "2xl:text-3xl text-2xl bold text-white"
               }
             >
               Challenges
@@ -53,8 +53,8 @@ export default function Navbar() {
               href="/User/Positions"
               className={
                 pathname == "/User/Positions"
-                  ? "2xl:text-3xl lg:text-2xl bold text-white underline decoration-white divide-opacity-100"
-                  : "2xl:text-3xl lg:text-2xl bold text-white"
+                  ? "2xl:text-3xl text-2xl bold text-white underline decoration-white divide-opacity-100"
+                  : "2xl:text-3xl text-2xl bold text-white"
               }
             >
               Positions
