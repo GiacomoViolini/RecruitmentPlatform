@@ -43,7 +43,7 @@ export default function user() {
       .eq("email", user)
       .maybeSingle();
     if (data) {
-      setApplications(data.applications.applications);
+      setApplications(data.applications);
     }
     if (error) {
       console.log(error);
