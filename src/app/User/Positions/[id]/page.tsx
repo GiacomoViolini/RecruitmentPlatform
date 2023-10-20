@@ -102,9 +102,9 @@ return (
     <>
     <div className="bg-slate-100 h-full z-0">
         <Navbar />
-        <div className="bg-slate-100 py-40 px-8 rounded-md z-0 ">
+        <div className="bg-slate-100 pt-28 pb-8 px-8 rounded-md z-0 ">
             <div className="p-4 bg-white border border-gray-200 rounded-lg ">
-            <div className=" h-80 rounded-lg bg-blue-500">
+            <div className=" h-48 rounded-lg bg-blue-500">
             </div>
                 <div className="flex flex-row z-0">
                     <div className={"flex items-center justify-center" + logoLayout}>
@@ -112,7 +112,7 @@ return (
                     </div>
                     <div className={"text-4xl font-bold text-center pt-8 px-8 text-white -translate-y-20 translate-x-32"+layoutText}>{Position?.title ?? ""}</div>
                 </div>
-                    <div className="relative aspect-video rounded-2xl w-full h-96 py-80 pl-4 pr-4 lg:-translate-y-20 ">
+                    <div className="relative aspect-video rounded-2xl w-full h-10 py-48  lg:-translate-y-20 ">
                         <Image src={Position?.images[counter] ?? ""} alt="photo" layout={"fill"} className={"rounded-2xl"} objectFit={"cover"} />
                     </div>
                 <div className="p-8 lg:-translate-y-10">
@@ -127,11 +127,11 @@ return (
                             {"💸 RAL "+Position?.ral}
                         </span>)
                     }
-                    <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">Type of contract</p>
+                    <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">Experience</p>
                     <span className="inline-block bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                         {"👨🏽‍💻 "+Position?.experience} years of experience
                     </span>
-                    <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">Type of position</p>
+                    <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">Type of contract</p>
                     <span className="inline-block bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                         {Position?.type.includes("hybrid"&&"Hybrid")?"🏠"+"🏬"+Position?.type:Position?.type==="Full remote"?"🏠"+Position?.type:"🏬"+Position?.type}
                     </span>
