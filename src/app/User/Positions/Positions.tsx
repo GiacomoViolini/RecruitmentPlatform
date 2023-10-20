@@ -76,16 +76,13 @@ export default function Positions({ searchPosition }: PositionsProps) {
                             <div className="flex flex-row justify-between items-center pt-2">
                                 <div className="flex flex-row justify-start items-center gap-4 pt-1">
                                     <Image src={logo} alt="logo" width={30} height={30} className="mb-2"/>
-                                    <div className="font-bold text-xl mb-2">{position.title}</div>
+                                    <div className="font-bold text-2xl mb-2">{position.title}</div>
                                 </div>
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                    Apply
-                                </button>
                             </div>
-                            <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-25 dark:opacity-50" />
-                            <div className="py-4 text-left">
-                                <div className="px-6 py-4">
-                                    <div className="text-bold text-lg mb-4">{position.description.slice(0, 200)+"..." }</div>
+                            <hr className="my-10 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-25 dark:opacity-50" />
+                            <div className=" text-left">
+                                <div className="px-6">
+                                    <div className="text-bold text-xl mb-4">{position.description.slice(0, 200)+"..." }</div>
                                 </div>
                                 <div className="px-6 pt-4 pb-2">
                                     <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">

@@ -91,7 +91,10 @@ export default function user() {
   return (
     <div className="bg-slate-50 pb-20">
       <Navbar />
-      <h1 className="pt-40 lg:ml-32 ml-10 lg:text-6xl text-4xl font-bold" style={gradientText}>
+      <h1
+        className="pt-40 lg:ml-32 ml-10 lg:text-6xl text-4xl font-bold"
+        style={gradientText}
+      >
         Welcome!
       </h1>
       <div className="bg-white flex mt-20 lg:ml-32 ml-10 lg:w-8/12 w-9/12 rounded-md overflow-hidden shadow border-2 border-transparent hover:border-sky-600 hover:shadow-2xl">
@@ -102,15 +105,20 @@ export default function user() {
             </h2>
             {applications.map((c: Info) => (
               <div className="grid grid-cols-4 items-center" key={c.title}>
-                <div className="text-4xl mb-3 font-bold text-sky-700">
-                  {c.title}
+                <div className="lg:text-4xl text-2xl mb-3 font-bold text-sky-700">
+                  <Link
+                    href={`User/Positions/${c.page_id}`}
+                    className="underline decoration-sky-600 hover:decoration-sky-300"
+                  >
+                    {c.title}
+                  </Link>
                 </div>
-                <h2 className="text-2xl mr-8 mb-3 font-bold text-sky-700">
+                <h2 className="lg:text-2xl lg:text-current text-transparent mr-8 mb-3 font-bold text-sky-700">
                   Steps Completed:
                 </h2>
                 <Stepper steps={c.steps} />
-                <div className=" ml-20">
-                  <h2 className="text-lg mb-3 font-bold text-sky-700 ml-32">
+                <div className="lg:ml-20 ml-5">
+                  <h2 className="text-lg mb-3 font-bold text-sky-700 lg:ml-32 ml-5">
                     {c.steps}/5
                   </h2>
                 </div>
