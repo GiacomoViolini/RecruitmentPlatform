@@ -63,7 +63,7 @@ export default function Position({ params: { id } }: PositionParams) {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [Position?.images]);
+  }, [Position]);
 
   const [isWindow, setIsWindow] = useState<number | undefined>();
   const [user, setUser] = useState<string | undefined>();

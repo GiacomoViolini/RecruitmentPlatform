@@ -46,7 +46,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
     }
     fetchData();
     fetchUser();
-  }, []);
+  }, [id]);
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
     setLoading(true);
