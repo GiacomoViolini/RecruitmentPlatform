@@ -46,7 +46,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
     }
     fetchData();
     fetchUser();
-  }, []);
+  }, [id]);
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
     setLoading(true);
@@ -92,6 +92,8 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
             className="object-cover border-l-4 border-sky-600 mr-4 h-full"
             width={550}
             height={96}
+            loading="lazy"
+            quality={80}
           />
         </div>
         <div className="flex flex-col items-center">
@@ -102,6 +104,8 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
               className="object-cover border-l-4 border-sky-600 w-full h-full "
               width={550}
               height={96}
+              loading="lazy"
+              quality={80}
             />
           </div>
           <div className="my-5 mx-5">
@@ -113,7 +117,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
           {loading ? (
             <button
               onClick={handleClick}
-              className="bg-emerald-600 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold"
+              className="bg-emerald-400 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold"
               disabled={loading}
             >
               Applied!

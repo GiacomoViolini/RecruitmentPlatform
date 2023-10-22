@@ -54,7 +54,7 @@ export default function Position({ params: { id } }: PositionParams) {
       setPosition(data);
     }
     fetchData();
-  }, []);
+  }, [id]);
 
   let [counter, setCounter] = useState(0);
 
@@ -65,7 +65,7 @@ export default function Position({ params: { id } }: PositionParams) {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [Position?.images]);
+  }, [Position]);
 
   const [isWindow, setIsWindow] = useState<number | undefined>();
   const [user, setUser] = useState<string | undefined>();
@@ -229,6 +229,8 @@ const handlecv = () => {
                   height={dimensions}
                   width={dimensions}
                   alt="Rounded logo"
+                  loading="lazy"
+                  quality={80}
                 />
               </div>
               <div
@@ -247,6 +249,8 @@ const handlecv = () => {
                 layout={"fill"}
                 className={"rounded-2xl"}
                 objectFit={"cover"}
+                loading="lazy"
+                quality={80}
               />
             </div>
             <div className="p-8 lg:-translate-y-10">

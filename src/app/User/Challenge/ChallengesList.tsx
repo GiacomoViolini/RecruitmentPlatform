@@ -53,6 +53,8 @@ export default function ChallengesList() {
                     className=" object-cover"
                     width={430}
                     height={80}
+                    loading="lazy"
+                    quality={80}
                   />
                   <div className="mx-5 mt-5">
                     <h2 className="text-2xl mb-3 font-bold text-sky-800 ">

@@ -31,61 +31,56 @@ interface Info {
   page_id: number;
 }
 
-export default function user() {
+export default function User() {
   const [applications, setApplications] = useState<Info[]>([]);
   const [challenges, setChallenges] = useState<Info[]>([]);
   const [user, setUser] = useState<string>();
 
-  async function fetchPositions() {
-    const { data, error } = await supabase
-      .from("Home_Positions")
-      .select("*")
-      .eq("email", user)
-      .maybeSingle();
-    if (data) {
-      setApplications(data.applications);
-    }
-    if (error) {
-      console.log(error);
-    }
-  }
-  async function fetchChallenges() {
-    const { data, error } = await supabase
-      .from("Home_Challenges")
-      .select("*")
-      .eq("email", user)
-      .maybeSingle();
-    if (data) {
-      setChallenges(data.challenges);
-    }
-    if (error) {
-      console.log(error);
-    }
-  }
-  async function fetchUser() {
-    const { data, error } = await supabase.auth.getSession();
-    if (data.session?.user) {
-      setUser(data.session.user.email);
-    }
-    if (error) {
-      console.log(error);
-    }
-  }
   useEffect(() => {
-    async function fetchData() {
-      await fetchUser();
+    async function fetchUser() {
+      const { data, error } = await supabase.auth.getSession();
+      if (data.session?.user) {
+        setUser(data.session.user.email);
+      }
+      if (error) {
+        console.log(error);
+      }
     }
-    fetchData();
+    fetchUser();
   }, []);
 
   useEffect(() => {
+    async function fetchPositions() {
+      const { data, error } = await supabase
+        .from("Home_Positions")
+        .select("*")
+        .eq("email", user)
+        .maybeSingle();
+      if (data) {
+        setApplications(data.applications);
+      }
+      if (error) {
+        console.log(error);
+      }
+    }
+    async function fetchChallenges() {
+      const { data, error } = await supabase
+        .from("Home_Challenges")
+        .select("*")
+        .eq("email", user)
+        .maybeSingle();
+      if (data) {
+        setChallenges(data.challenges);
+      }
+      if (error) {
+        console.log(error);
+      }
+    }
     async function fetchCards() {
-      console.log(user); // This will log the updated 'user' when it changes
       await fetchChallenges();
       await fetchPositions();
     }
     fetchCards();
-    console.log(challenges);
   }, [user]);
 
   return (
@@ -105,7 +100,7 @@ export default function user() {
             </h2>
             {applications.map((c: Info) => (
               <div className="grid grid-cols-4 items-center" key={c.title}>
-                <div className="lg:text-4xl text-2xl mb-3 mr-2 font-bold text-sky-700">
+                <div className="lg:text-4xl text-2xl mb-3 mr-5 font-bold text-sky-700">
                   <Link
                     href={`User/Positions/${c.page_id}`}
                     className="underline decoration-sky-600 hover:decoration-sky-300"
@@ -139,8 +134,8 @@ export default function user() {
               My Challenges
             </h2>
             {challenges.map((c: Info) => (
-              <div className="grid grid-cols-4 items-center mb-3" key={c.title}>
-                <div className="lg:text-4xl text-2xl mb-3 font-bold text-sky-700">
+              <div key={c.title} className="grid grid-cols-4 items-center mb-3">
+                <div className="lg:text-4xl text-2xl mb-3 mr-5 font-bold text-sky-700">
                   <Link
                     href={`User/Challenge/${c.page_id}`}
                     className="underline decoration-sky-600 hover:decoration-sky-300"
