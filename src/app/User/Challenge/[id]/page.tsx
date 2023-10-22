@@ -92,6 +92,8 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
             className="object-cover border-l-4 border-sky-600 mr-4 h-full"
             width={550}
             height={96}
+            loading="lazy"
+            quality={80}
           />
         </div>
         <div className="flex flex-col items-center">
@@ -102,6 +104,8 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
               className="object-cover border-l-4 border-sky-600 w-full h-full "
               width={550}
               height={96}
+              loading="lazy"
+              quality={80}
             />
           </div>
           <div className="my-5 mx-5">

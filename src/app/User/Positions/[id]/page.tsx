@@ -180,6 +180,8 @@ export default function Position({ params: { id } }: PositionParams) {
                   height={dimensions}
                   width={dimensions}
                   alt="Rounded logo"
+                  loading="lazy"
+                  quality={80}
                 />
               </div>
               <div
@@ -198,6 +200,8 @@ export default function Position({ params: { id } }: PositionParams) {
                 layout={"fill"}
                 className={"rounded-2xl"}
                 objectFit={"cover"}
+                loading="lazy"
+                quality={80}
               />
             </div>
             <div className="p-8 lg:-translate-y-10">
@@ -254,6 +258,8 @@ export default function Position({ params: { id } }: PositionParams) {
                           alt="linkedin"
                           width={20}
                           height={20}
+                          loading="lazy"
+                          quality={80}
                         />
                       </div>
                     </CldUploadButton>

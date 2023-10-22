@@ -77,6 +77,8 @@ export default function Positions({ searchPosition }: PositionsProps) {
                       width={30}
                       height={30}
                       className="mb-2"
+                      loading="lazy"
+                      quality={80}
                     />
                     <div className="font-bold text-2xl mb-2">
                       {position.title}
