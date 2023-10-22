@@ -186,7 +186,7 @@ return (
                         {Position?.type.includes("hybrid"&&"Hybrid")?"🏠"+"🏬"+Position?.type:Position?.type==="Full remote"?"🏠"+Position?.type:"🏬"+Position?.type}
                     </span>
                     <div className="flex flex-row justify-start items-center gap-4 pt-16">
-                        <Link href={"/User/Positions/Application"}>
+                        <Link href={`/User/Positions/Application?title=${Position?.title}`}>
                             <button onClick={handleClick} className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">
                                 Apply
                             </button>
