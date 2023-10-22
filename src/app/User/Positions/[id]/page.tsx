@@ -1,14 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import Navbar from "../../navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
 import logo from "/public/logo.svg";
 import Link from "next/link";
-import { ChangeEvent } from 'react';
+import { ChangeEvent } from "react";
 import React from "react";
-
+import {useRouter } from "next/navigation";
 
 interface PositionProps {
   id: number;
@@ -38,8 +38,20 @@ interface PositionParams {
 }
 
 export default function Position({ params: { id } }: PositionParams) {
+    
   const [Position, setPosition] = useState<PositionProps>();
-  console.log(id);
+  const router = useRouter();
+  const [counter, setCounter] = useState(0);
+  const [isWindow, setIsWindow] = useState<number | undefined>();
+  const [user, setUser] = useState<string | undefined>();
+  const [logoLayout, setLogoLayout] = useState("");
+  const [dimensions, setDimensions] = useState(0);
+  const [layoutText, setLayoutText] = useState("");
+  const [ralRange, setRalRange] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const [buttonSwitch, setButtonSwitch] = useState(true);
+
+
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase
@@ -56,8 +68,6 @@ export default function Position({ params: { id } }: PositionParams) {
     fetchData();
   }, [id]);
 
-  let [counter, setCounter] = useState(0);
-
   useEffect(() => {
     if (Position && Array.isArray(Position.images)) {
       const interval = setInterval(() => {
@@ -66,9 +76,6 @@ export default function Position({ params: { id } }: PositionParams) {
       return () => clearInterval(interval);
     }
   }, [Position]);
-
-  const [isWindow, setIsWindow] = useState<number | undefined>();
-  const [user, setUser] = useState<string | undefined>();
 
   useEffect(() => {
     async function fetchUser() {
@@ -110,6 +117,7 @@ export default function Position({ params: { id } }: PositionParams) {
         })
         .eq("email", user);
     }
+    router.push("/User");
   };
 
   useEffect(() => {
@@ -120,11 +128,6 @@ export default function Position({ params: { id } }: PositionParams) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const [logoLayout, setLogoLayout] = useState("");
-  const [dimensions, setDimensions] = useState(0);
-  const [layoutText, setLayoutText] = useState("");
-  const [ralRange, setRalRange] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -171,9 +174,6 @@ export default function Position({ params: { id } }: PositionParams) {
     }
   }, [isWindow]);
 
-  const [disabled, setDisabled] = useState(true);
-  const [buttonSwitch, setButtonSwitch] = useState(true);
-
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     let file: File | undefined;
     if (e.target.files) {
@@ -183,14 +183,14 @@ export default function Position({ params: { id } }: PositionParams) {
       try {
         const { data, error } = await supabase.storage
           .from("cv")
-          .upload(`cv/${file.name}`, file, {
+          .upload(cv/${file.name}, file, {
             cacheControl: "3600",
             upsert: false,
           });
         if (data) {
           console.log(data);
         }
-        if(data) {
+        if (data) {
           setDisabled(false);
         }
         if (error) {
@@ -200,20 +200,15 @@ export default function Position({ params: { id } }: PositionParams) {
         console.log(error);
       }
     }
-    
   };
 
-const handleClick1 = async () => {
-  alert ("Please upload your CV in order to apply for this position")
-}
+  const ref = React.createRef<HTMLInputElement>();
 
-const ref = React.createRef<HTMLInputElement>();
-
-const handlecv = () => {
+  const handlecv = () => {
     if (ref.current) {
-        ref.current.click();
+      ref.current.click();
     }
-}
+  };
 
   return (
     <>
@@ -288,43 +283,41 @@ const handlecv = () => {
               </span>
               <div className="flex flex-row justify-start items-center sm:gap-8 gap-2 pt-16">
                 <div className="flex flex-row justify-start items-center gap-8 ">
-                  {buttonSwitch ? (
-                    disabled ? (
-                    <button
-                      onClick={handleClick1}
-                      className=" cursor-pointer inline-flex items-center px-1 sm:px-3 py-2 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 opacity-50 rounded-lg hover:bg-blue-800"
-                    >
-                      Apply
-                    </button>
-                    ) : (
-                    <button
-                      onClick={handleClick}
-                      className=" cursor-pointer inline-flex items-center px-1 sm:px-3 py-2 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
-                    >
-                      Apply
-                    </button>
-                    )) : (
-                    <button
-                      onClick={handleClick}
-                      className=" cursor-pointer inline-flex items-center px-1 sm:px-3 py-2 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
-                    >
-                      Applied
-                    </button>
-                  )}
+                  <button
+                    onClick={handleClick}
+                    className={`
+                        ${
+                          disabled
+                            ? "opacity-50 cursor-not-allowed"
+                            : "opacity-100 cursor-pointer"
+                        }
+                         bg-blue-700 hover:bg-blue-800 inline-flex items-center px-1 sm:px-3 py-2 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white rounded-lg `}
+                    disabled={disabled}
+                  >
+                    Apply
+                  </button>
                 </div>
-                <div className="cursor-pointer sm:pt-0 pt-10 flex flex-col sm:flex-row items-center gap-2">
-                  <div className="cursor-pointer">
-                      <div onClick={handlecv} className="cursor-pointer inline-flex items-center px-3 py-2 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800">
-                            <Image
-                            src="/cv.svg"
-                            alt="linkedin"
-                            width={20}
-                            height={20}
-                            />
-                            <input type="file" className="hidden" ref={ref} onChange={(e) => handleUpload(e)}/>
-                        </div>
+                <div className="sm:pt-0 pt-10 flex flex-col sm:flex-row items-center gap-2">
+                  <div className="">
+                    <div
+                      onClick={handlecv}
+                      className="cursor-pointer inline-flex items-center px-3 py-2 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                    >
+                      <Image
+                        src="/cv.svg"
+                        alt="linkedin"
+                        width={20}
+                        height={20}
+                      />
+                      <input
+                        type="file"
+                        className="hidden"
+                        ref={ref}
+                        onChange={(e) => handleUpload(e)}
+                      />
+                    </div>
                   </div>
-                  <h3 className="cursor-pointer text-xs sm:text-xl text-center sm:text-start font-bold tracking-tight text-blue-600">
+                  <h3 className="text-xs sm:text-xl text-center sm:text-start font-bold tracking-tight text-blue-600">
                     Upload your CV
                   </h3>
                 </div>
