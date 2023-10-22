@@ -259,7 +259,7 @@ export default function Position({ params: { id } }: PositionParams) {
                           width={20}
                           height={20}
                           loading="lazy"
-                          quality={80}
+                          quality={100}
                         />
                       </div>
                     </CldUploadButton>
