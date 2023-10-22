@@ -186,12 +186,10 @@ export default function Position({ params: { id } }: PositionParams) {
           .from("cv")
           .upload(`cv/${file.name}`, file, {
             cacheControl: "3600",
-            upsert: false,
+
           });
         if (data) {
           console.log(data);
-        }
-        if (data) {
           setDisabled(false);
         }
         if (error) {
