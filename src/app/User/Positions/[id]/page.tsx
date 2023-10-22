@@ -7,6 +7,7 @@ import supabase from "../../../../../utils/supabase";
 import logo from "/public/logo.svg";
 import Link from "next/link";
 import { MouseEvent } from "react";
+import { CldUploadButton } from 'next-cloudinary';
 
 
 interface PositionProps {
@@ -54,6 +55,7 @@ export default function Position({ params: { id } }: PositionParams) {
         }
         fetchData();
     }, []);
+
     let [counter, setCounter] = useState(0);
 
     useEffect(() => {
@@ -185,12 +187,29 @@ return (
                     <span className="inline-block bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                         {Position?.type.includes("hybrid"&&"Hybrid")?"🏠"+"🏬"+Position?.type:Position?.type==="Full remote"?"🏠"+Position?.type:"🏬"+Position?.type}
                     </span>
-                    <div className="flex flex-row justify-start items-center gap-4 pt-16">
-                        <Link href={"/User/Positions/Application"}>
-                            <button onClick={handleClick} className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">
-                                Apply
-                            </button>
-                        </Link>
+                    <div className="flex flex-row justify-start items-center gap-8 pt-16">
+                        <div className="flex flex-row justify-start items-center gap-8 ">
+                            <Link href={"/User/Positions/Application"}>
+                                <button onClick={handleClick} className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">
+                                    Apply
+                                </button>
+                            </Link>
+                        </div>
+                        <div className="cursor-pointer flex flex-col sm:flex-row items-center gap-2">
+                            <div className="cursor-pointer">
+                                <CldUploadButton uploadPreset="unsigned" className="cursor-pointer">
+                                    <div className="cursor-pointer inline-flex items-center px-3 py-2 text-xl w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800">
+                                        <Image
+                                        src="/cv.svg"
+                                        alt="linkedin"
+                                        width={20}
+                                        height={20}
+                                        />
+                                    </div>
+                                </CldUploadButton>
+                            </div>
+                            <h3 className="cursor-pointer text-md sm:text-xl text-center sm:text-start font-bold tracking-tight text-blue-600">Upload your CV</h3>
+                        </div>
                     </div>
                 </div>
             </div>

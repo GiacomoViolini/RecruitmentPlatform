@@ -89,7 +89,7 @@ export default function user() {
   }, [user]);
 
   return (
-    <div className="bg-slate-50 pb-20">
+    <div className="bg-slate-100 pb-20">
       <Navbar />
       <h1
         className="pt-40 lg:ml-32 ml-10 lg:text-6xl text-4xl font-bold"
