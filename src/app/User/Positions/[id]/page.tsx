@@ -17,6 +17,7 @@ interface PositionProps {
   ral: string;
   position: string;
   images: string[];
+  livingcost: string;
   experience: number;
   type: string;
 }
@@ -38,7 +39,7 @@ interface PositionParams {
 }
 
 export default function Position({ params: { id } }: PositionParams) {
-    
+
   const [Position, setPosition] = useState<PositionProps>();
   const router = useRouter();
   const [counter, setCounter] = useState(0);
@@ -280,6 +281,12 @@ export default function Position({ params: { id } }: PositionParams) {
                   : Position?.type === "Full remote"
                   ? "🏠" + Position?.type
                   : "🏬" + Position?.type}
+              </span>
+              <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">
+                Average living cost per person
+              </p>
+              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                {"💸 " + Position?.livingcost} 
               </span>
               <div className="flex flex-row justify-start items-center sm:gap-8 gap-2 pt-16">
                 <div className="flex flex-row justify-start items-center gap-8 ">
