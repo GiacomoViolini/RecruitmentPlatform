@@ -105,7 +105,7 @@ export default function user() {
             </h2>
             {applications.map((c: Info) => (
               <div className="grid grid-cols-4 items-center" key={c.title}>
-                <div className="lg:text-4xl text-2xl mb-3 mr-2 font-bold text-sky-700">
+                <div className="lg:text-4xl text-2xl mb-3 mr-5 font-bold text-sky-700">
                   <Link
                     href={`User/Positions/${c.page_id}`}
                     className="underline decoration-sky-600 hover:decoration-sky-300"
@@ -140,7 +140,7 @@ export default function user() {
             </h2>
             {challenges.map((c: Info) => (
               <div className="grid grid-cols-4 items-center mb-3" key={c.title}>
-                <div className="lg:text-4xl text-2xl mb-3 font-bold text-sky-700">
+                <div className="lg:text-4xl text-2xl mb-3 mr-5 font-bold text-sky-700">
                   <Link
                     href={`User/Challenge/${c.page_id}`}
                     className="underline decoration-sky-600 hover:decoration-sky-300"
