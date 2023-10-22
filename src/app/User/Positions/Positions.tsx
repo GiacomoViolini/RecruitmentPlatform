@@ -70,7 +70,7 @@ export default function Positions({ searchPosition }: PositionsProps) {
                 {positions.map((position) => (
                     <Link href={`Positions/${position.id}`}>
                         <div
-                            key={position.id}
+                            key={position.title}
                             className=" w-12/12 max-h- rounded-lg overflow-hidden shadow-xl  hover:shadow-2xl border-2 hover:border-sky-700 px-6 py-4 bg-white justify-self-stretch"
                         >
                             <div className="flex flex-row justify-between items-center pt-2">

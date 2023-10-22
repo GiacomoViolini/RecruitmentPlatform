@@ -52,7 +52,7 @@ export default function Position({ params: { id } }: PositionParams) {
       setPosition(data);
     }
     fetchData();
-  }, []);
+  }, [id]);
 
   let [counter, setCounter] = useState(0);
 

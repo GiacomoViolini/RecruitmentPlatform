@@ -31,7 +31,7 @@ interface Info {
   page_id: number;
 }
 
-export default function user() {
+export default function User() {
   const [applications, setApplications] = useState<Info[]>([]);
   const [challenges, setChallenges] = useState<Info[]>([]);
   const [user, setUser] = useState<string>();
