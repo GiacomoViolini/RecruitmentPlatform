@@ -9,6 +9,7 @@ export default function Home() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,6 +22,7 @@ export default function Home() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsDisabled(true);
     async function signInWithEmail() {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
@@ -36,6 +38,7 @@ export default function Home() {
       }
     }
     signInWithEmail();
+    setIsDisabled(false);
   };
 
   return (
@@ -87,12 +90,22 @@ export default function Home() {
               onChange={handlePasswordChange}
             />
           </div>
-          <button
-            type="submit"
-            className="bg-sky-400 text-lg font-semibold text-white py-2 px-4 w-80 rounded-md hover:bg-sky-500"
-          >
-            Login
-          </button>
+          {!isDisabled ? (
+            <button
+              type="submit"
+              className="bg-sky-400 text-lg font-semibold text-white py-2 px-4 w-80 rounded-md hover:bg-sky-500 "
+              disabled={!email || !password}
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              className="bg-sky-400 opacity-40 text-lg font-semibold text-white py-2 px-4 w-80 rounded-md hover:bg-sky-500 "
+              disabled={true}
+            >
+              Logging in...
+            </button>
+          )}
           <Link href="User/SignUp">
             <h2 className="text-sky-600 mt-5 text-lg font-semibold hover:underline">
               Sign Up
@@ -100,10 +113,10 @@ export default function Home() {
           </Link>
         </div>
         {error && (
-              <h1 className="text-lg font-semibold text-red-600 mb-4">
-                Invalid email or password
-              </h1>
-            )}
+          <h1 className="text-lg font-semibold text-red-600 mb-4">
+            Invalid email or password
+          </h1>
+        )}
       </form>
     </div>
   );

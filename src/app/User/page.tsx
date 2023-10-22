@@ -89,7 +89,7 @@ export default function user() {
   }, [user]);
 
   return (
-    <div className="bg-slate-50 pb-20">
+    <div className="bg-slate-100 pb-20">
       <Navbar />
       <h1
         className="pt-40 lg:ml-32 ml-10 lg:text-6xl text-4xl font-bold"
@@ -105,7 +105,7 @@ export default function user() {
             </h2>
             {applications.map((c: Info) => (
               <div className="grid grid-cols-4 items-center" key={c.title}>
-                <div className="lg:text-4xl text-2xl mb-3 font-bold text-sky-700">
+                <div className="lg:text-4xl text-2xl mb-3 mr-2 font-bold text-sky-700">
                   <Link
                     href={`User/Positions/${c.page_id}`}
                     className="underline decoration-sky-600 hover:decoration-sky-300"
