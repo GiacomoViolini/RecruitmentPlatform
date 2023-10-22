@@ -4,4 +4,4 @@ const nextConfig = {
         domains: ['iomnamjdrrofldfdnwfc.supabase.co'], // Add your Supabase hostname here
       },
 };
-module.exports = nextConfig
+export default nextConfig
