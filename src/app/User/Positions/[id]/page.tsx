@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Navbar from "../../navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
 import logo from "/public/logo.svg";
 import Link from "next/link";
-import { CldUploadButton } from "next-cloudinary";
+import { ChangeEvent } from 'react';
+import React from "react";
+
 
 interface PositionProps {
   id: number;
@@ -94,6 +96,9 @@ export default function Position({ params: { id } }: PositionParams) {
           ],
         })
         .select();
+      if (data) {
+        setButtonSwitch(false);
+      }
     } else {
       const { data, error } = await supabase
         .from("Home_Positions")
@@ -149,22 +154,66 @@ export default function Position({ params: { id } }: PositionParams) {
       );
     } else if (isWindow && isWindow >= 600) {
       setLogoLayout(
-        "items-center w-24 h-24  rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
+        "items-center w-24 h-24 pb-4 sm:pb-2 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
       );
-      setDimensions(40);
+      setDimensions(30);
       setLayoutText(
         "text-md font-bold text-left pt-4 px-8 text-white -translate-y-32 translate-x-4"
       );
     } else {
       setLogoLayout(
-        "items-center w-24 h-24  rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
+        "items-center w-24 pb-2 sm:pb-4 h-24 pb-2 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
       );
-      setDimensions(40);
+      setDimensions(30);
       setLayoutText(
         "text-sm font-bold text-left pt-4 px-8 text-white -translate-y-40 translate-x-1"
       );
     }
   }, [isWindow]);
+
+  const [disabled, setDisabled] = useState(true);
+  const [buttonSwitch, setButtonSwitch] = useState(true);
+
+  const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    let file: File | undefined;
+    if (e.target.files) {
+      file = e.target.files[0];
+    }
+    if (file) {
+      try {
+        const { data, error } = await supabase.storage
+          .from("cv")
+          .upload(`cv/${file.name}`, file, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+        if (data) {
+          console.log(data);
+        }
+        if(data) {
+          setDisabled(false);
+        }
+        if (error) {
+          console.log(error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+  };
+
+const handleClick1 = async () => {
+  alert ("Please upload your CV in order to apply for this position")
+}
+
+const ref = React.createRef<HTMLInputElement>();
+
+const handlecv = () => {
+    if (ref.current) {
+        ref.current.click();
+    }
+}
 
   return (
     <>
@@ -233,32 +282,45 @@ export default function Position({ params: { id } }: PositionParams) {
                   ? "🏠" + Position?.type
                   : "🏬" + Position?.type}
               </span>
-              <div className="flex flex-row justify-start items-center gap-8 pt-16">
+              <div className="flex flex-row justify-start items-center sm:gap-8 gap-2 pt-16">
                 <div className="flex flex-row justify-start items-center gap-8 ">
-                  <button
-                    onClick={handleClick}
-                    className=" cursor-pointer inline-flex items-center px-3 py-2 text-xl w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
-                  >
-                    Apply
-                  </button>
-                </div>
-                <div className="cursor-pointer flex flex-col sm:flex-row items-center gap-2">
-                  <div className="cursor-pointer">
-                    <CldUploadButton
-                      uploadPreset="unsigned"
-                      className="cursor-pointer"
+                  {buttonSwitch ? (
+                    disabled ? (
+                    <button
+                      onClick={handleClick1}
+                      className=" cursor-pointer inline-flex items-center px-1 sm:px-3 py-2 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 opacity-50 rounded-lg hover:bg-blue-800"
                     >
-                      <div className="cursor-pointer inline-flex items-center px-3 py-2 text-xl w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800">
-                        <Image
-                          src="/cv.svg"
-                          alt="linkedin"
-                          width={20}
-                          height={20}
-                        />
-                      </div>
-                    </CldUploadButton>
+                      Apply
+                    </button>
+                    ) : (
+                    <button
+                      onClick={handleClick}
+                      className=" cursor-pointer inline-flex items-center px-1 sm:px-3 py-2 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
+                    >
+                      Apply
+                    </button>
+                    )) : (
+                    <button
+                      onClick={handleClick}
+                      className=" cursor-pointer inline-flex items-center px-1 sm:px-3 py-2 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
+                    >
+                      Applied
+                    </button>
+                  )}
+                </div>
+                <div className="cursor-pointer sm:pt-0 pt-10 flex flex-col sm:flex-row items-center gap-2">
+                  <div className="cursor-pointer">
+                      <div onClick={handlecv} className="cursor-pointer inline-flex items-center px-3 py-2 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800">
+                            <Image
+                            src="/cv.svg"
+                            alt="linkedin"
+                            width={20}
+                            height={20}
+                            />
+                            <input type="file" className="hidden" ref={ref} onChange={(e) => handleUpload(e)}/>
+                        </div>
                   </div>
-                  <h3 className="cursor-pointer text-md sm:text-xl text-center sm:text-start font-bold tracking-tight text-blue-600">
+                  <h3 className="cursor-pointer text-xs sm:text-xl text-center sm:text-start font-bold tracking-tight text-blue-600">
                     Upload your CV
                   </h3>
                 </div>
