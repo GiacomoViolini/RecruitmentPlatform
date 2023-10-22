@@ -38,8 +38,20 @@ interface PositionParams {
 }
 
 export default function Position({ params: { id } }: PositionParams) {
+    
   const [Position, setPosition] = useState<PositionProps>();
   const router = useRouter();
+  const [counter, setCounter] = useState(0);
+  const [isWindow, setIsWindow] = useState<number | undefined>();
+  const [user, setUser] = useState<string | undefined>();
+  const [logoLayout, setLogoLayout] = useState("");
+  const [dimensions, setDimensions] = useState(0);
+  const [layoutText, setLayoutText] = useState("");
+  const [ralRange, setRalRange] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const [buttonSwitch, setButtonSwitch] = useState(true);
+
+
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase
@@ -56,8 +68,6 @@ export default function Position({ params: { id } }: PositionParams) {
     fetchData();
   }, [id]);
 
-  let [counter, setCounter] = useState(0);
-
   useEffect(() => {
     if (Position && Array.isArray(Position.images)) {
       const interval = setInterval(() => {
@@ -66,9 +76,6 @@ export default function Position({ params: { id } }: PositionParams) {
       return () => clearInterval(interval);
     }
   }, [Position]);
-
-  const [isWindow, setIsWindow] = useState<number | undefined>();
-  const [user, setUser] = useState<string | undefined>();
 
   useEffect(() => {
     async function fetchUser() {
@@ -122,11 +129,6 @@ export default function Position({ params: { id } }: PositionParams) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [logoLayout, setLogoLayout] = useState("");
-  const [dimensions, setDimensions] = useState(0);
-  const [layoutText, setLayoutText] = useState("");
-  const [ralRange, setRalRange] = useState(false);
-
   useEffect(() => {
     const handleResize = () => {
       if (Position?.ral.length!! > 8) {
@@ -171,9 +173,6 @@ export default function Position({ params: { id } }: PositionParams) {
       );
     }
   }, [isWindow]);
-
-  const [disabled, setDisabled] = useState(true);
-  const [buttonSwitch, setButtonSwitch] = useState(true);
 
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     let file: File | undefined;
