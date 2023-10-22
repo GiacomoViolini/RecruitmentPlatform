@@ -117,7 +117,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
           {loading ? (
             <button
               onClick={handleClick}
-              className="bg-emerald-600 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold"
+              className="bg-emerald-400 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold"
               disabled={loading}
             >
               Applied!
