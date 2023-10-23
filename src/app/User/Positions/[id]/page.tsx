@@ -257,11 +257,11 @@ export default function Position({ params: { id } }: PositionParams) {
               <p className="pb-8 text-2xl font-bold tracking-tight">RAL</p>
               {ralRange ? (
                 <span className="bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md  rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
-                  {"💸 RAL " + Position?.ral}
+                  {"💸 " + Position?.ral}
                 </span>
               ) : (
                 <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
-                  {"💸 RAL " + Position?.ral}
+                  {"💸 " + Position?.ral}
                 </span>
               )}
               <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">
