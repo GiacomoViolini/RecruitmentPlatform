@@ -48,7 +48,7 @@ export default function Home() {
     >
       <form
         onSubmit={handleSubmit}
-        className=" w-96 py-12 rounded-lg text-center bg-white flex flex-col justify-center items-center"
+        className="lg:w-96 w-80 lg:py-12 py-6 rounded-lg text-center bg-white flex flex-col justify-center items-center"
       >
         <h1 className="text-4xl font-bold text-gray-800 py-4 border-b-2">
           Login Form
