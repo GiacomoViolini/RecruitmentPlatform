@@ -48,7 +48,7 @@ export default function Home() {
     >
       <form
         onSubmit={handleSubmit}
-        className=" w-96 py-12 rounded-lg text-center bg-white flex flex-col justify-center items-center"
+        className="lg:w-96 lg:py-12 py-4 px-4 rounded-lg text-center bg-white flex flex-col justify-center items-center"
       >
         <h1 className="text-4xl font-bold text-gray-800 py-4 border-b-2">
           Login Form
@@ -62,7 +62,7 @@ export default function Home() {
               Email
             </label>
             <input
-              className="rounded-sm w-80 h-8 p-2 border-2 border-sky-900 text-gray-700"
+              className="rounded-sm lg:w-80  w-60 h-8 p-2 border-2 border-sky-900 text-gray-700"
               type="email"
               name="email"
               id="email"
@@ -74,13 +74,13 @@ export default function Home() {
           </div>
           <div className="mb-10">
             <label
-              className="text-2xl  font-semibold text-left block m-1 text-gray-700"
+              className="text-2xl font-semibold text-left block m-1 text-gray-700"
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className="rounded-sm w-80 h-8 p-2 border-2 border-sky-900 text-gray-700"
+              className="rounded-sm lg:w-80 w-60 h-8 p-2 border-2 border-sky-900 text-gray-700"
               type="password"
               name="password"
               id="password"
@@ -93,7 +93,7 @@ export default function Home() {
           {!isDisabled ? (
             <button
               type="submit"
-              className="bg-sky-400 text-lg font-semibold text-white py-2 px-4 w-80 rounded-md hover:bg-sky-500 "
+              className="bg-sky-400 text-lg font-semibold text-white py-2 px-4 lg:w-80  w-60 rounded-md hover:bg-sky-500 "
               disabled={!email || !password}
             >
               Login
