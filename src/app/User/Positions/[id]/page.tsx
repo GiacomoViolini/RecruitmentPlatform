@@ -21,16 +21,6 @@ interface PositionProps {
   type: string;
 }
 
-interface ApplicationProps {
-  email: string;
-  applications: {
-    steps: string;
-    title: string;
-    page_id: number;
-  }[];
-  status: string;
-}
-
 interface PositionParams {
   params: {
     id: string;
