@@ -94,7 +94,7 @@ export default function Positions({ searchPosition }: PositionsProps) {
                   </div>
                   <div className="px-6 pt-4 pb-2">
                     <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
-                      {"💸 RAL " + position.ral}
+                      {"💸 BS " + position.ral}
                     </span>
                     <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
                       {"📍" + position.position}

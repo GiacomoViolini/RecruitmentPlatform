@@ -244,7 +244,7 @@ export default function Position({ params: { id } }: PositionParams) {
               <p className="py-16 font-normal text-gray-700 ">
                 {Position?.description}
               </p>
-              <p className="pb-8 text-2xl font-bold tracking-tight">RAL</p>
+              <p className="pb-8 text-2xl font-bold tracking-tight">BS</p>
               {ralRange ? (
                 <span className="bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md  rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                   {"💸 " + Position?.ral}
