@@ -118,6 +118,13 @@ export default function User() {
                     {c.steps}/5
                   </h2>
                 </div>
+                <Link href={`User/${c.title}`}>
+                  <div className="">
+                    <h2 className="text-lg mb-3 font-bold text-sky-700 lg:ml-32 ml-5">
+                      View Feedback
+                    </h2>
+                  </div>
+                </Link>
               </div>
             ))}
             {applications.length === 0 && (
