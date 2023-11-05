@@ -25,6 +25,7 @@ interface Applications {
   type: string;
   steps: number;
 }
+
 interface Info {
   title: string;
   steps: number;
