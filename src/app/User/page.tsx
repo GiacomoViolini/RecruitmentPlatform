@@ -93,15 +93,15 @@ export default function User() {
       >
         Welcome!
       </h1>
-      <div className="bg-white flex mt-20 lg:ml-32 ml-10 lg:w-8/12 w-9/12 rounded-md overflow-hidden shadow border-2 border-transparent hover:border-sky-600 hover:shadow-2xl">
+      <div className="bg-white flex mt-20 lg:ml-32 ml-10 lg:w-9/15 w-9/12 rounded-md overflow-hidden shadow border-2 border-transparent hover:border-sky-600 hover:shadow-2xl">
         <div className="mx-5 flex flex-col items-center">
           <div className="mt-3 mr-5">
             <h2 className="lg:text-4xl text-2xl mb-12 font-bold text-sky-800">
               My Applications
             </h2>
             {applications.map((c: Info) => (
-              <div className="grid grid-cols-4 items-center" key={c.title}>
-                <div className="lg:text-4xl text-2xl mb-3 mr-5 font-bold text-sky-700">
+              <div className="grid grid-cols-5 items-center gap mb-3" key={c.title}>
+                <div className="lg:text-4xl text-2xl mb-3 pr-8 font-bold text-sky-700">
                   <Link
                     href={`User/Positions/${c.page_id}`}
                     className="underline decoration-sky-600 hover:decoration-sky-300"
@@ -118,13 +118,13 @@ export default function User() {
                     {c.steps}/5
                   </h2>
                 </div>
-                <Link href={`User/${c.title}`}>
-                  <div className="">
-                    <h2 className="text-lg mb-3 font-bold text-sky-700 lg:ml-32 ml-5">
-                      View Feedback
-                    </h2>
+                <div className="lg:ml-2 ml-5 mb-1">
+                    <Link href={`User/${c.title}`}>
+                        <h2 className="lg:text-lg text-xs mb-3 font-bold text-sky-700 lg:ml-32 ml-5">
+                          View Feedback
+                        </h2>
+                    </Link>
                   </div>
-                </Link>
               </div>
             ))}
             {applications.length === 0 && (
@@ -142,25 +142,32 @@ export default function User() {
               My Challenges
             </h2>
             {challenges.map((c: Info) => (
-              <div key={c.title} className="grid grid-cols-4 items-center mb-3">
-                <div className="lg:text-4xl text-2xl mb-3 mr-5 font-bold text-sky-700">
-                  <Link
-                    href={`User/Challenge/${c.page_id}`}
-                    className="underline decoration-sky-600 hover:decoration-sky-300"
-                  >
-                    {c.title}
-                  </Link>
+                  <div key={c.title} className="grid grid-cols-5 items-center mb-3">
+                    <div className="lg:text-4xl text-2xl mb-3 mr-5 font-bold text-sky-700">
+                      <Link
+                        href={`User/Challenge/${c.page_id}`}
+                        className="underline decoration-sky-600 hover:decoration-sky-300"
+                      >
+                        {c.title}
+                      </Link>
+                    </div>
+                    <h2 className="lg:text-2xl lg:text-current text-transparent mr-8 mb-3 font-bold text-sky-700">
+                      Steps Completed:
+                    </h2>
+                    <Stepper steps={c.steps} />
+                    <div className="lg:ml-20 ml-5">
+                      <h2 className="text-lg mb-3 font-bold text-sky-700 lg:ml-32 ml-5">
+                        {c.steps}/3
+                      </h2>
+                    </div>
+                  <div className="lg:ml-2 ml-5 mb-1">
+                    <Link href={`User/${c.title}`}>
+                        <h2 className="text-lg mb-3 font-bold text-sky-700 lg:ml-32 ml-5">
+                          View Feedback
+                        </h2>
+                    </Link>
+                  </div>
                 </div>
-                <h2 className="lg:text-2xl lg:text-current text-transparent mr-8 mb-3 font-bold text-sky-700">
-                  Steps Completed:
-                </h2>
-                <Stepper steps={c.steps} />
-                <div className="lg:ml-20 ml-5">
-                  <h2 className="text-lg mb-3 font-bold text-sky-700 lg:ml-32 ml-5">
-                    {c.steps}/3
-                  </h2>
-                </div>
-              </div>
             ))}
             {challenges.length === 0 && (
               <h1 className="text-lg font-semibold text-gray-800 mb-4">
