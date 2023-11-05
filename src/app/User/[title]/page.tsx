@@ -1,7 +1,13 @@
 import Navbar from "../navbar";
 
+interface PositionParams {
+  params: {
+    title: string;
+  };
+}
 
-export default function Positions() {
+
+export default function Feedback({ params: { title } }: PositionParams) {
   return (
     <div className="bg-slate-50 h-full">
       <Navbar />
