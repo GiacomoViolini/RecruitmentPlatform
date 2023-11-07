@@ -18,11 +18,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: transparent;
     border-radius: 50%; /* Make it circular */
-    margin-left: 10px;
-    margin-bottom: 10px;
-    position: relative;
+    margin-top: 0.4rem;
   }
   .step.active {
     background-color: #0074E4;
