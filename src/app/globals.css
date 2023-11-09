@@ -20,15 +20,18 @@
     justify-content: center;
     background-color: transparent;
     border-radius: 50%; /* Make it circular */
+    border:#9aa6b33c 2px solid;
     margin-top: 0.4rem;
   }
   .step.active {
     background-color: #0074E4;
+    border:#0074E4 2px solid;
     color: white;
   }
   
   .step.completed {
     background-color: #00C9FF;
+    border:#00C9FF 2px solid;
     color: white;
   }
 

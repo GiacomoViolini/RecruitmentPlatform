@@ -95,13 +95,13 @@ export default function User() {
       <Navbar />
       <div className="flex flex-col justify-center sm:items-start items-center pt-8 lg:px-12 px-5 py-8">
         <h1
-          className="pt-40 lg:ml-32 sm:ml-10 lg:text-6xl text-4xl font-bold"
+          className="pt-40 2xl:ml-60 lg:ml-32 sm:ml-10 lg:text-6xl text-4xl font-bold"
           style={gradientText}
         >
           Welcome!
         </h1>
       </div>
-      <div className="flex flex-col justify-center sm:items-start items-center pt-8 lg:px-12 px-1 py-8">
+      <div className="flex flex-col justify-center sm:justify-start sm:items-start items-center pt-8 lg:px-12 px-1 py-8">
         <div className="bg-white flex mt-20 lg:ml-32 sm:ml-10 justify-center lg:w-8/12 w-10/12 pb-2 rounded-md shadow">
           <div className="flex flex-col justify-center sm:items-start items-center pt-8 lg:px-12 px-5 py-8">
             <h2 className="lg:text-4xl text-2xl pb-12 font-bold text-sky-800">
@@ -145,7 +145,7 @@ export default function User() {
             )}
             {isWindow!! >= 1500 ? (
             applications.map((c: Info) => (
-              <div key={c.title} className="grid grid-cols-4 w-full bg-white items-center">
+              <div key={c.title} className="grid grid-cols-4 w-full hover:bg-sky-50 bg-white items-center">
                 {applications.indexOf(c) === applicationsNumber-1 ? (
                   <div className="lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-8 flex justify-start font-bold text-sky-700">
                     <Link href={`/User/Positions/${c.page_id}`}>
@@ -166,13 +166,13 @@ export default function User() {
                   {c.steps}/5
                 </div>
                 {applications.indexOf(c) === applicationsNumber-1 ? (
-                  <div className=" lg:text-xl rounded-br-md font-bold border-b border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
+                  <div className=" lg:text-xl rounded-br-md font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
                     <Link href={`/User/${c.title}`}>
                       View Feedback
                     </Link>
                   </div>
                 ) : (
-                  <div className=" lg:text-xl font-bold border-b border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
+                  <div className=" lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
                     <Link href={`/User/${c.title}`}>
                       View Feedback
                     </Link>
@@ -181,7 +181,7 @@ export default function User() {
               </div>
             ))):(
               applications.map((c: Info) => (
-                <div key={c.title} className="grid grid-cols-3 w-full bg-white items-center">
+                <div key={c.title} className="grid grid-cols-3 w-full hover:bg-sky-50 bg-white items-center">
                   {applications.indexOf(c) === applicationsNumber-1 ? (
                     <div className="lg:text-xl underline decoration-sky-600 hover:decoration-sky-300 text-sm items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-16 px-4 flex justify-start font-bold text-sky-700">
                       <Link href={`/User/Positions/${c.page_id}`}>
@@ -199,13 +199,13 @@ export default function User() {
                     {c.steps}/5
                   </div>
                   {applications.indexOf(c) === applicationsNumber-1 ? (
-                    <div className=" lg:text-xl rounded-br-md font-bold border-b border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
+                    <div className=" lg:text-xl rounded-br-md font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
                       <Link href={`/User/${c.title}`}>
                         View Feedback
                       </Link>
                     </div>
                   ) : (
-                    <div className=" lg:text-xl font-bold border-b border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
+                    <div className=" lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
                       <Link href={`/User/${c.title}`}>
                         View Feedback
                       </Link>
@@ -261,7 +261,7 @@ export default function User() {
             )}
             {isWindow!! >= 1500 ? (
             challenges.map((c: Info) => (
-              <div key={c.title} className="grid grid-cols-4 w-full bg-white items-center">
+              <div key={c.title} className="grid grid-cols-4 w-full hover:bg-sky-50 bg-white items-center">
                 {challenges.indexOf(c) === challengesNumber-1 ? (
                   <div className="lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-8 flex justify-start font-bold text-sky-700">
                     <Link href={`/User/Challenge/${c.page_id}`}>
@@ -282,13 +282,13 @@ export default function User() {
                   {c.steps}/3
                 </div>
                 {challenges.indexOf(c) === challengesNumber-1 ? (
-                  <div className=" lg:text-xl rounded-br-md font-bold border-b border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
+                  <div className=" lg:text-xl rounded-br-md font-bold hover:text-sky-400 border-b border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
                     <Link href={`/User/${c.title}`}>
                       View Feedback
                     </Link>
                   </div>
                 ) : (
-                  <div className="  lg:text-xl font-bold border-b border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
+                  <div className="  lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
                     <Link href={`/User/${c.title}`}>
                       View Feedback
                     </Link>
@@ -297,7 +297,7 @@ export default function User() {
               </div>
             ))):(
               challenges.map((c: Info) => (
-                <div key={c.title} className="grid grid-cols-3 w-full bg-white items-center">
+                <div key={c.title} className="grid grid-cols-3 w-full hover:bg-sky-50 bg-white items-center">
                   {challenges.indexOf(c) === challengesNumber-1 ? (
                     <div className="lg:text-xl underline decoration-sky-600 hover:decoration-sky-300 text-sm items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-16 px-4 flex justify-start font-bold text-sky-700">
                       <Link href={`/User/Challenge/${c.page_id}`}>
@@ -315,13 +315,13 @@ export default function User() {
                     {c.steps}/3
                   </div>
                   {challenges.indexOf(c) === challengesNumber-1 ? (
-                    <div className=" lg:text-xl rounded-br-md font-bold border-b border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
+                    <div className=" lg:text-xl rounded-br-md font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
                       <Link href={`/User/${c.title}`}>
                         View Feedback
                       </Link>
                     </div>
                   ) : (
-                    <div className="  lg:text-xl font-bold border-b border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
+                    <div className="  lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
                       <Link href={`/User/${c.title}`}>
                         View Feedback
                       </Link>

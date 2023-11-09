@@ -15,6 +15,7 @@
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.38.4",
     "@types/canvasjs": "^1.9.11",
+    "chart.js": "^4.4.0",
     "json-server": "^0.17.4",
     "netlify-identity-widget": "^1.9.2",
     "next": "^13.5.5",

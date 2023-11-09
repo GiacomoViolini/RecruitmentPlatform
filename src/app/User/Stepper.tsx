@@ -22,7 +22,6 @@ function Stepper(step: StepperProps) {
                     : ""
             }`}
             >
-
       </div>
         ))}
     </div>
