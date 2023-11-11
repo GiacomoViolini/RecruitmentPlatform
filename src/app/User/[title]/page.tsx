@@ -3,11 +3,8 @@ import Navbar from "../navbar";
 import supabase from "../../../../utils/supabase";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import feedback from "../../../../public/feedback.svg";
 import Header from "./header";
-import { each } from "chart.js/helpers";
-import App from "next/app";
-import { Step } from "@material-tailwind/react";
+import feedback from "../../../../public/feedback.svg";
 
 interface PositionParams {
   params: {
@@ -21,7 +18,7 @@ interface Info {
   page_id: number;
 }
 
-export default function Feedback({ params: { title } }: PositionParams) {
+export default function FeedbackPage({ params: { title } }: PositionParams) {
   const [steps, setSteps] = useState<number>();
   const [isWindow, setIsWindow] = useState<number>();
   const [logoLayout, setLogoLayout] = useState<string>();
@@ -29,6 +26,7 @@ export default function Feedback({ params: { title } }: PositionParams) {
   const [layoutText, setLayoutText] = useState<string>();
   const [user, setUser] = useState<string>();
   const [applications, setApplications] = useState<Info[]>([]);
+  const DataArray: number[] = Array(5).fill(0);
 
   useEffect(() => {
     async function fetchUser() {
@@ -63,7 +61,7 @@ export default function Feedback({ params: { title } }: PositionParams) {
         const deleteSpace = stringa.replace("%20", " ");
         console.log(deleteSpace);
         for (let i = 0; i < 5; i++) {
-          if (applications[i].title!! == deleteSpace) {
+          if (applications[i] && applications[i].title === deleteSpace) {
             console.log(applications[i].steps);
             setSteps(applications[i].steps);
             console.log(applications[i].title);
@@ -121,20 +119,27 @@ export default function Feedback({ params: { title } }: PositionParams) {
   var str = title;
   var replacedTitle = str.replace("%20", " ");
 
+  const stepProcess: {[key: number]: string} = {
+    1: "Technical Assessment",
+    2: "Technical Interview",
+    3: "Behavioral Interview",
+    4: "Team Work Session Simulation"
+  }
+
   return (
     <>
       <div className="bg-slate-100 h-full z-0">
         <Navbar />
-        <div className="bg-slate-100 pt-28 pb-8 px-4 rounded-md z-0 ">
-          <div className="p-4 bg-white h-screen border border-gray-200 rounded-lg ">
+        <div className="bg-slate-100 h-full pt-28 pb-8 px-4 rounded-md z-0 ">
+          <div className="p-4 bg-white h-full border border-gray-200 rounded-lg ">
             <div className=" h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
               <div className={"flex items-center justify-center" + logoLayout}>
                 <Image
                   src={feedback}
+                  alt="Rounded logo"
                   height={dimensions}
                   width={dimensions}
-                  alt="Rounded logo"
                   loading="lazy"
                   quality={80}
                 />
@@ -148,20 +153,17 @@ export default function Feedback({ params: { title } }: PositionParams) {
                 {replacedTitle ?? ""}
               </div>
             </div>
-            <div className="flex flex-row -translate-y-10 justify-between">
-              <div className="flex flex-col justify-start">
-                <div className="text-2xl font-bold text-center pt-2 px-8 text-blue-500">
-                  Feedback review
+              <div className="flex flex-col justify-center md:justify-start w-full">
+                <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 -translate-y-10 text-blue-500">
+                  Feedback review on your {stepProcess[steps ?? 0]}
                 </div>
-                <div className="text-md font-bold text-center pt-2 px-8 text-gray-500">
-                  
+                <Header steps={steps ?? 0}/>
+                <div className="flex flex-row h-80 justify-center items-center gap-4">
                 </div>
               </div>
-              <Header steps={steps ?? 0} />
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 }
