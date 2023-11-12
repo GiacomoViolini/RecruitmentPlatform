@@ -91,7 +91,7 @@ export default function Position({ params: { id } }: PositionParams) {
         .insert({
           email: user,
           applications: [
-            { steps: "1", title: Position?.title, page_id: Position?.id },
+            { steps: "1", title: Position?.title, page_id: Position?.id, points: Math.round(Math.random() * 100) },
           ],
         })
         .select();
@@ -104,7 +104,7 @@ export default function Position({ params: { id } }: PositionParams) {
         .update({
           applications: [
             ...existingData.applications,
-            { steps: "1", title: Position?.title, page_id: Position?.id },
+            { steps: "1", title: Position?.title, page_id: Position?.id, points: Math.round(Math.random() * 100) },
           ],
         })
         .eq("email", user);
