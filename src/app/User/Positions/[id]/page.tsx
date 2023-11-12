@@ -180,7 +180,6 @@ export default function Position({ params: { id } }: PositionParams) {
           });
         if (data) {
           console.log(data);
-          setDisabled(false);
         }
         if (error) {
           console.log(error);
@@ -189,6 +188,7 @@ export default function Position({ params: { id } }: PositionParams) {
         console.log(error);
       }
     }
+    setDisabled(false);
   };
 
   const ref = React.createRef<HTMLInputElement>();

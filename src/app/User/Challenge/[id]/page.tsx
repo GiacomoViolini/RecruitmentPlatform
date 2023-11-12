@@ -111,6 +111,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
               className="object-fill border-l-4 border-sky-600 w-full h-full "
               width={550}
               height={96}
+              quality={100}
               loading="lazy"
             />
           </div>
