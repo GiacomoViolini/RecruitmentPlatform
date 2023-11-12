@@ -27,7 +27,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
   const [layoutText, setLayoutText] = useState<string>();
   const [user, setUser] = useState<string>();
   const [applications, setApplications] = useState<Info2[]>([]);
-  const DataArray: number[] = Array(5).fill(0);
+  const [points, setPoints] = useState<number>();
 
   useEffect(() => {
     async function fetchUser() {
@@ -65,12 +65,13 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
           if (applications[i] && applications[i].title === deleteSpace) {
             console.log(applications[i].steps);
             setSteps(applications[i].steps);
+            setPoints(applications[i].points);
             console.log(applications[i].title);
           }
         }
       }
       fetchSteps();
-
+      console.log(points);
     }, [applications]);
 
   useEffect(() => {
@@ -159,7 +160,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
                 <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 -translate-y-10 text-blue-500">
                   Feedback review on your {stepProcess[steps ?? 0]}
                 </div>
-                <Header steps={steps ?? 0}/>
+                <Header steps={steps ?? 0} points={points ?? 0}/>
                 <div className="flex flex-row h-80 justify-center items-center gap-4">
                 </div>
               </div>
