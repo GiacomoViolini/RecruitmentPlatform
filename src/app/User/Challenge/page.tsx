@@ -12,7 +12,7 @@ const gradientText = {
 
 export default function challenge() {
   return (
-    <div className="bg-slay-50 h-full pb-3 flex flex-col items-center">
+    <div className="bg-gray-100 h-full pb-3 flex flex-col items-center">
       <Navbar />
       <h1 className="2xl:text-6xl text-3xl  font-bold text-center pt-40 pb-14 border-b-4" style={gradientText}>
         Join our Competitions!

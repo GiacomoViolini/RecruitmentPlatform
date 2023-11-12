@@ -11,6 +11,7 @@ interface ChallengeProps {
   title: string;
   img: string;
   desc: string;
+  prize: string;
 }
 
 interface ChallengeParams {
@@ -22,7 +23,8 @@ interface ChallengeParams {
 export default function Challenge({ params: { id } }: ChallengeParams) {
   const [challenge, setChallenge] = useState<ChallengeProps>();
   const [user, setUser] = useState<string>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [applied, setApplied] = useState<boolean>(false);
+  const [alreadyApplied, setAlreadyApplied] = useState<boolean>(false);
 
   console.log(id);
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
   }, [id]);
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
-    setLoading(true);
+    setApplied(true);
     const { data: existingData } = await supabase
       .from("Home_Challenges")
       .select("*")
@@ -66,6 +68,12 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         })
         .select();
     } else {
+      for(let i = 0; i < existingData.challenges.length; i++) {
+        if(existingData.challenges[i].title === challenge?.title) {
+          setAlreadyApplied(true);
+          return;
+        }
+      }
       const { data, error } = await supabase
         .from("Home_Challenges")
         .update({
@@ -83,50 +91,48 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
       <Navbar />
       <div
         key={challenge?.title}
-        className="bg-white flex lg:mt-48 mt-28 mb-16  mx-auto h-10/12 w-10/12 rounded-md overflow-hidden shadow"
+        className="bg-white flex lg:mt-56 mt-28 mb-16  mx-auto h-10/12 w-10/12 rounded-md overflow-hidden shadow"
       >
         <div className="hidden w-full h-full sm:block">
-          <Image
+          <img
             src={challenge?.img || ""}
             alt={`${id}`}
-            className="object-cover border-l-4 border-sky-600 mr-4 h-full"
+            className="object-cover border-l-4 border-sky-600 mr-4 h-full w-full"
             width={550}
             height={96}
             loading="lazy"
-            quality={80}
           />
         </div>
         <div className="flex flex-col items-center">
           <div className="sm:hidden w-full">
-            <Image
+            <img
               src={challenge?.img || ""}
               alt={`${id}`}
-              className="object-cover border-l-4 border-sky-600 w-full h-full "
+              className="object-fill border-l-4 border-sky-600 w-full h-full "
               width={550}
               height={96}
               loading="lazy"
-              quality={80}
             />
           </div>
-          <div className="my-5 mx-5">
-            <h2 className="text-2xl mb-3 font-bold text-sky-800">
+          <div className="my-8 mx-5">
+            <h2 className="text-4xl mb-7 font-bold text-sky-800 text-center">
               {challenge?.title}
             </h2>
             <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>
+            <h3 className="text-2xl font-semibold text-center text-sky-700 mt-8"> Prize: {challenge?.prize}</h3>
           </div>
-          {loading ? (
+          {applied ? (
             <button
-              onClick={handleClick}
               className="bg-emerald-400 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold"
-              disabled={loading}
+              disabled={applied}
             >
-              Applied!
+              {alreadyApplied ? "Already Applied!" : "Applied!"}
             </button>
           ) : (
             <button
               onClick={handleClick}
-              className="bg-sky-500 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold hover:bg-sky-600"
-              disabled={loading}
+              className="bg-sky-500 px-8 py-2 mt-auto mb-5 rounded-md text-white text-xl font-semibold hover:bg-white hover:text-sky-500 hover:border-sky-500 border-2 border-sky-500"
+              disabled={applied}
             >
               Join!
             </button>

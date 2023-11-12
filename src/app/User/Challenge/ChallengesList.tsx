@@ -46,7 +46,7 @@ export default function ChallengesList() {
               className="bg-white my-12 mx-auto h-60 w-9/12 rounded-lg overflow-hidden shadow border-transparent border-2 hover:shadow-xl hover:border-sky-600" 
             >
               <Link href={`Challenge/${c.id}`}>
-                <div className="flex">
+                <div className="flex bg-white">
                   <Image
                     src={c.img}
                     alt={`${c.id}`}
