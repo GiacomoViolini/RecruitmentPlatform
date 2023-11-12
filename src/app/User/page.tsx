@@ -135,13 +135,13 @@ export default function User() {
                 </div>
               ) : (
                 <div className="grid grid-cols-3 w-full rounded-t-md bg-sky-500 divide-white items-center">
-                  <div className="items-center px-16 flex justify-center h-20 text-sm font-semibold text-white">
+                  <div className="items-center sm:px-16 flex justify-center rounded-tl-md h-20 lg:text-2xl text-sm font-bold text-white">
                     Positions
                   </div>
-                  <div className="items-center px-16 flex justify-center h-20 text-sm font-semibold text-white">
+                  <div className="items-center sm:px-16 flex justify-center h-20 lg:text-2xl text-sm font-bold text-white">
                     Progress
                   </div>
-                  <div className="items-center px-16 flex justify-center h-20 text-sm font-semibold text-white">
+                  <div className="items-center sm:px-16 flex justify-center rounded-tr-md h-20 lg:text-2xl text-sm font-bold text-white">
                     Feedback
                   </div>
                 </div>
