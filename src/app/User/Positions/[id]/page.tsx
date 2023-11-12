@@ -276,7 +276,7 @@ export default function Position({ params: { id } }: PositionParams) {
               <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
                 {"💸 " + Position?.livingcost} 
               </span>
-              <div className="flex flex-row justify-start items-center sm:gap-8 gap-2 pt-16">
+              <div className="flex flex-row justify-start items-center sm:gap-8 gap-2 pt-32">
                 <div className="flex flex-row justify-start items-center gap-8 ">
                   <button
                     onClick={handleClick}
@@ -292,7 +292,7 @@ export default function Position({ params: { id } }: PositionParams) {
                     Apply
                   </button>
                 </div>
-                <div className="sm:pt-0 pt-10 flex flex-col sm:flex-row items-center gap-2">
+                <div className="sm:pt-0 pt-6 flex flex-col sm:flex-row items-center gap-2">
                   <div className="">
                     <div
                       onClick={handlecv}

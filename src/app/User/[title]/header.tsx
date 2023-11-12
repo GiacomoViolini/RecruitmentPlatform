@@ -9,25 +9,57 @@ interface HeaderProps {
 
 export default function Header({ steps }: HeaderProps) {
   const chartRef = useRef<Chart>();
+  const chartRef2 = useRef<Chart>();
   const [DataArray, setDataArray] = useState<number[]>(Array(5).fill(0));
+  const [Positioning, setPositioning] = useState<number[]>(Array(5).fill(0));
 
   useEffect(() => {
     async function fetchDataforGraph() {
-      for (let i = 0; i < steps!!; i++) {
-        DataArray[i] = Math.random() * 100;
-        DataArray[i] = Math.round(DataArray[i]);
-        if(DataArray[i] < 50) {
-          while(DataArray[i] < 50) {
-            DataArray[i] = Math.random() * 100;
-            DataArray[i] = Math.round(DataArray[i]);
-          }
+        for (let i = 0; i < steps!!; i++) {
+            DataArray[i] = Math.round(Math.random() * 100);
+            let aux = DataArray[i];
+            if (aux >= 50 && aux <= 65) {
+                while(Positioning[i]<40 || Positioning[i]>50)
+                    Positioning[i]= Math.round(Math.random() * 100);
+            } else if (aux >= 65 && aux <= 80) {
+                while(Positioning[i]<55 || Positioning[i]>75)
+                    Positioning[i]= Math.round(Math.random() * 100);
+            } else if (aux >= 80 && aux <= 90) {
+                while(Positioning[i]<75 || Positioning[i]>85)
+                    Positioning[i]= Math.round(Math.random() * 100);
+            } else if (aux >= 90 && aux <= 100) {
+                while(Positioning[i]<85 || Positioning[i]>100)
+                    Positioning[i]= Math.round(Math.random() * 100);
+            } else {
+                Positioning[i] = 0;
+            }
+            if(DataArray[i] < 50) {
+                while(DataArray[i] < 50) {
+                    DataArray[i] = Math.round(Math.random() * 100);
+                    aux = DataArray[i];
+                    if (aux >= 50 && aux <= 65) {
+                        while(Positioning[i]<40 || Positioning[i]>50)
+                            Positioning[i]= Math.round(Math.random() * 100);
+                    } else if (aux >= 65 && aux <= 80) {
+                        while(Positioning[i]<55 || Positioning[i]>75)
+                            Positioning[i]= Math.round(Math.random() * 100);
+                    } else if (aux >= 80 && aux <= 90) {
+                        while(Positioning[i]<75 || Positioning[i]>85)
+                            Positioning[i]= Math.round(Math.random() * 100);
+                    } else if (aux >= 90 && aux <= 100) {
+                        while(Positioning[i]<85 || Positioning[i]>100)
+                            Positioning[i]= Math.round(Math.random() * 100);
+                    } else {
+                        Positioning[i] = 0;
+                    }
+                }
+            }
         }
-      }
     }
     fetchDataforGraph();
-  }, [steps]);
+}, [steps]);
 
-  const [feedback, setFeedback] = useState<string>("nothing");
+const [feedback, setFeedback] = useState<string>("nothing");
 
 useEffect(() => {
   const feedbackMessages: {[key: number]: {[key: number]: string}} = {
@@ -120,7 +152,62 @@ useEffect(() => {
     });
   }, [steps]);
 
-  
+  useEffect(() => {
+    const canvas = document.getElementById("PositioningChart") as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    if (chartRef2.current) {
+        chartRef2.current.destroy();
+    }
+
+    chartRef2.current = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: [
+                "Technical Assesment",
+                "Technical Interview",
+                "Behavioral Interview",
+                "Team Work Session Simulation",
+            ],
+            datasets: [
+                {
+                    indexAxis: "y",
+                    label: "Percentage of candidates beated",
+                    data: Positioning,
+                    backgroundColor: [
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 100,
+                },
+            },
+          maintainAspectRatio: false,
+        },
+    });
+}, [steps]);
 
   return (
     <div className="flex flex-col w-full pt-8">
@@ -132,7 +219,19 @@ useEffect(() => {
           <canvas id="myChart"></canvas>
         </div>
       </div>
-      <Positioning steps={steps} points={DataArray} />
+      <div className="flex md:flex-row flex-col -translate-y-10 justify-between">
+        <div className="flex flex-col w-full pt-8">
+            <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 -translate-y-10 text-blue-500">
+                Your positioning relative to the other candidates
+            </div>
+            <div className="container w-full md:w-6/12 md:h-80 pt-12 md:pt-8 lg:pt-0 md:px-8 pr-16 rounded-md py-2">
+                <canvas id="PositioningChart"></canvas>
+            </div>
+        </div>
+        <svg className="hidden md:block" width="1" height="100%" viewBox="0 0 1 100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0V100H1V0H0Z" fill="#E5E7EB"/>
+        </svg>
+      </div>
     </div>
   );
 }

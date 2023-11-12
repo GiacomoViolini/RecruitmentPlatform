@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./navbar";
 import supabase from "../../../utils/supabase";
 import Stepper from "./Stepper";
+import Stepper2 from "./Stepper2";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -95,7 +96,7 @@ export default function User() {
       <Navbar />
       <div className="flex flex-col justify-center sm:items-start items-center pt-8 lg:px-12 px-5 py-8">
         <h1
-          className="pt-40 2xl:ml-60 lg:ml-32 sm:ml-10 lg:text-6xl text-4xl font-bold"
+          className="pt-40 xl:ml-44 lg:ml-32 sm:ml-10 lg:text-6xl text-4xl font-bold"
           style={gradientText}
         >
           Welcome!
@@ -276,7 +277,7 @@ export default function User() {
                   </div>
                 )}
                 <div className="px-12 flex justify-center h-20 border-b  border-sky-500">
-                  <Stepper steps={c.steps} />
+                  <Stepper2 steps={c.steps} />
                 </div>
                 <div className="lg:text-xl text-xs font-bold h-20 border-b border-sky-500 text-sky-700 text-md items-center sm:px-12 flex justify-center">
                   {c.steps}/3
