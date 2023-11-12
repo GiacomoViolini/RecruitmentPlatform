@@ -277,7 +277,7 @@ export default function Position({ params: { id } }: PositionParams) {
                 {"💸 " + Position?.livingcost}
               </span>
               <p className="py-4 text-2xl font-bold tracking-tight">
-                Technologies
+                Tools
               </p>
               <div className="flex justify-start items-center gap-2 flex-wrap">
                 {Position?.technologies?.map((tech) => (
