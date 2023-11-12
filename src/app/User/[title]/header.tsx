@@ -228,19 +228,18 @@ useEffect(() => {
                   <canvas id="PositioningChart"></canvas>
               </div>
               <div className="h-full pt-8 pr-16">
-                <div className="relative z-0">
-                  <svg width={350} height={250} className="pt-16 md:pt-8 lg:pt-0 z-1">
+                <div className="relative z-0 h-full">
+                  <svg width={350} height={250} className="pt-16 md:pt-8 pr-2 lg:pt-0 z-1">
                     <defs>
                       <linearGradient id="progressive-bg" x1="0.5" y1="1" x2="0.5" y2="0">
-                        <stop offset="0%" stopOpacity="1" stopColor="rgba(0, 0, 255, 1)" />
-                        <stop offset="40%" stopOpacity="1" stopColor="rgba(0, 0, 255, 1)" />
+                        <stop offset="0%" stopOpacity="1" stopColor="rgba(54, 162, 235, 0.2)" />
+                        <stop offset="40%" stopOpacity="1" stopColor="rgba(54, 162, 235, 0.2)" />
                         <stop offset="40%" stopOpacity="0" stopColor="rgba(0, 0, 255, 1)" />
                         <stop offset="100%" stopOpacity="0" stopColor="rgba(0, 0, 255, 1)" />
                       </linearGradient>
                     </defs>
-                    <rect width={450} height={350} fill="url(#progressive-bg)" />
-                    <image href="/Subtract.svg" width={350} height={250} />
-                    <image href="/employee.svg" width={350} height={250} />
+                    <rect width={350} height={250} fill="url(#progressive-bg)" />
+                    <image href="/Subtract.svg" width={400} height={320} />
                   </svg>
                 </div>
               </div>

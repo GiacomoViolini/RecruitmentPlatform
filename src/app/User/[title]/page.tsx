@@ -69,6 +69,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
         }
       }
       fetchSteps();
+      
     }, [applications]);
 
   useEffect(() => {

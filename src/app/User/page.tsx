@@ -22,8 +22,15 @@ interface Info {
   page_id: number;
 }
 
+interface Info2 {
+  title: string;
+  steps: number;
+  page_id: number;
+  points: number;
+}
+
 export default function User() {
-  const [applications, setApplications] = useState<Info[]>([]);
+  const [applications, setApplications] = useState<Info2[]>([]);
   const [challenges, setChallenges] = useState<Info[]>([]);
   const [user, setUser] = useState<string>();
   const [isWindow, setIsWindow] = useState<number | undefined>();
