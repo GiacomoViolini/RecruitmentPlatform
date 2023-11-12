@@ -94,34 +94,32 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         className="bg-white flex lg:mt-56 mt-28 mb-16  mx-auto h-10/12 w-10/12 rounded-md overflow-hidden shadow"
       >
         <div className="hidden w-full h-full sm:block">
-          <Image
+          <img
             src={challenge?.img || ""}
             alt={`${id}`}
-            className="object-cover border-l-4 border-sky-600 mr-4 h-full"
+            className="object-cover border-l-4 border-sky-600 mr-4 h-full w-full"
             width={550}
             height={96}
             loading="lazy"
-            quality={80}
           />
         </div>
         <div className="flex flex-col items-center">
           <div className="sm:hidden w-full">
-            <Image
+            <img
               src={challenge?.img || ""}
               alt={`${id}`}
-              className="object-cover border-l-4 border-sky-600 w-full h-full "
+              className="object-fill border-l-4 border-sky-600 w-full h-full "
               width={550}
               height={96}
               loading="lazy"
-              quality={80}
             />
           </div>
           <div className="my-8 mx-5">
-            <h2 className="text-3xl mb-3 font-bold text-sky-800 text-center">
+            <h2 className="text-4xl mb-7 font-bold text-sky-800 text-center">
               {challenge?.title}
             </h2>
             <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>
-            <h3 className="text-2xl font-semibold text-center text-sky-700 my-2 mb-5"> Prize: {challenge?.prize}</h3>
+            <h3 className="text-2xl font-semibold text-center text-sky-700 mt-8"> Prize: {challenge?.prize}</h3>
           </div>
           {applied ? (
             <button
