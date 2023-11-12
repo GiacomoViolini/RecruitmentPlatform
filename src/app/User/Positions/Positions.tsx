@@ -58,17 +58,17 @@ export default function Positions({ searchPosition }: PositionsProps) {
     } else if (isWindow && isWindow >= 900) {
       setLayout("grid grid-cols-2 gap-20 px-8");
     } else {
-      setLayout("grid grid-cols-1 gap-28 px-8");
+      setLayout("grid grid-cols-1 gap-10 px-8");
     }
   }, [isWindow]);
 
   return (
-    <div className="flex justify-evenly lg:pt-32 pt-10 items-center  cursor:pointer">
-      <div className={"grid " + layout + " gap-28 pb-8 "}>
+    <div className="flex justify-between lg:pt-32 pt-10  lg:mx-5 mx-3 items-center  cursor:pointer">
+      <div className={"grid " + layout + "pb-8"}>
         {positions.map((position) => (
-          <div key={position.title}>
+          <div key={position.id}>
             <Link href={`Positions/${position.id}`}>
-              <div className=" w-12/12 max-h- rounded-lg overflow-hidden shadow-xl  hover:shadow-2xl border-2 hover:border-sky-700 px-6 py-4 bg-white justify-self-stretch">
+              <div className=" w-12/12 rounded-lg overflow-hidden shadow-xl  hover:shadow-2xl border-2 hover:border-sky-700 lg:px-6 px-4 py-4 bg-white justify-self-stretch">
                 <div className="flex flex-row justify-between items-center pt-2">
                   <div className="flex flex-row justify-start items-center gap-4 pt-1">
                     <Image
@@ -85,16 +85,16 @@ export default function Positions({ searchPosition }: PositionsProps) {
                     </div>
                   </div>
                 </div>
-                <hr className="my-10 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-25 dark:opacity-50" />
+                <hr className="my-3 lg:my-10 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-25 dark:opacity-50" />
                 <div className=" text-left">
                   <div className="px-6">
                     <div className="text-bold text-xl mb-4">
                       {position.description.slice(0, 200) + "..."}
                     </div>
                   </div>
-                  <div className="px-6 pt-4 pb-2">
+                  <div className="px-6  pt-2 lg:pt-4 pb-2">
                     <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
-                      {"💸 BS " + position.ral}
+                      {"💸 " + position.ral}
                     </span>
                     <span className="inline-block bg-sky-200 rounded-md px-3 py-1 text-sm font-semibold text-sky-700 mr-2 mb-2">
                       {"📍" + position.position}

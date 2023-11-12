@@ -8,7 +8,7 @@ import logo from "/public/logo.svg";
 import Link from "next/link";
 import { ChangeEvent } from "react";
 import React from "react";
-import {useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface PositionProps {
   id: number;
@@ -21,6 +21,8 @@ interface PositionProps {
   experience: number;
   type: string;
   technologies: string[];
+  benefits: string[];
+  events: string[];
 }
 
 interface PositionParams {
@@ -30,7 +32,6 @@ interface PositionParams {
 }
 
 export default function Position({ params: { id } }: PositionParams) {
-
   const [Position, setPosition] = useState<PositionProps>();
   const router = useRouter();
   const [counter, setCounter] = useState(0);
@@ -42,7 +43,6 @@ export default function Position({ params: { id } }: PositionParams) {
   const [ralRange, setRalRange] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [buttonSwitch, setButtonSwitch] = useState(true);
-
 
   useEffect(() => {
     async function fetchData() {
@@ -91,7 +91,7 @@ export default function Position({ params: { id } }: PositionParams) {
         .insert({
           email: user,
           applications: [
-            { steps: "1", title: Position?.title, page_id: Position?.id },
+            { steps: "1", title: Position?.title, page_id: Position?.id, points: Math.round(Math.random() * 100) },
           ],
         })
         .select();
@@ -104,7 +104,7 @@ export default function Position({ params: { id } }: PositionParams) {
         .update({
           applications: [
             ...existingData.applications,
-            { steps: "1", title: Position?.title, page_id: Position?.id },
+            { steps: "1", title: Position?.title, page_id: Position?.id, points: Math.round(Math.random() * 100) },
           ],
         })
         .eq("email", user);
@@ -177,7 +177,6 @@ export default function Position({ params: { id } }: PositionParams) {
           .from("cv")
           .upload(`cv/${file.name}`, file, {
             cacheControl: "3600",
-
           });
         if (data) {
           console.log(data);
@@ -204,7 +203,7 @@ export default function Position({ params: { id } }: PositionParams) {
     <>
       <div className="bg-slate-100 h-full z-0">
         <Navbar />
-        <div className="bg-slate-100 pt-28 pb-8 px-8 rounded-md z-0 ">
+        <div className="bg-slate-100 pt-28 pb-8 px-2 lg:px-8 rounded-md z-0 ">
           <div className="p-4 bg-white border border-gray-200 rounded-lg ">
             <div className=" h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
@@ -215,7 +214,7 @@ export default function Position({ params: { id } }: PositionParams) {
                   width={dimensions}
                   alt="Rounded logo"
                   loading="lazy"
-                  quality={80}
+                  quality={100}
                 />
               </div>
               <div
@@ -272,18 +271,34 @@ export default function Position({ params: { id } }: PositionParams) {
                   : "🏬" + Position?.type}
               </span>
               <p className="py-4 text-2xl font-bold tracking-tight">
-                Average living cost per person
+                Average living cost per person for this location
               </p>
               <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
-                {"💸 " + Position?.livingcost} 
+                {"💸 " + Position?.livingcost}
               </span>
               <p className="py-4 text-2xl font-bold tracking-tight">
-                Technologies
+                Tools
               </p>
-              <div className="flex flex-row justify-start items-center gap-2">
+              <div className="flex justify-start items-center gap-2 flex-wrap">
                 {Position?.technologies?.map((tech) => (
-                  <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                  <span className="bg-sky-200 h-10 w-40 justify-center items-center flex shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                     {tech}
+                  </span>
+                ))}
+              </div>
+              <p className="py-4 text-2xl font-bold tracking-tight">Benefits</p>
+              <div className="flex justify-start items-center gap-2 flex-wrap">
+                {Position?.benefits?.map((benefit) => (
+                  <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                    {benefit}
+                  </span>
+                ))}
+              </div>
+              <p className="py-4 text-2xl font-bold tracking-tight">Events</p>
+              <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
+                {Position?.events?.map((event) => (
+                  <span className="bg-sky-200 h-16 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                    {event}
                   </span>
                 ))}
               </div>

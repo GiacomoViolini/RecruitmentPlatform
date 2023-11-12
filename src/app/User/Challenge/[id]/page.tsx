@@ -87,11 +87,11 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex flex-col">
+    <div className="bg-gray-100 flex flex-col h-screen">
       <Navbar />
       <div
         key={challenge?.title}
-        className="bg-white flex lg:mt-56 mt-28 mb-16  mx-auto h-10/12 w-10/12 rounded-md overflow-hidden shadow"
+        className="bg-white flex lg:mt-56 mt-28 lg:mb-28  mx-auto w-11/12 rounded-md overflow-hidden shadow"
       >
         <div className="hidden w-full h-full sm:block">
           <img
@@ -114,8 +114,8 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
               loading="lazy"
             />
           </div>
-          <div className="my-8 mx-5">
-            <h2 className="text-4xl mb-7 font-bold text-sky-800 text-center">
+          <div className="lg:my-8 my-3 mx-5">
+            <h2 className="text-4xl mb-5 font-bold text-sky-800 text-center">
               {challenge?.title}
             </h2>
             <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>
