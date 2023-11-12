@@ -107,7 +107,7 @@ export default function User() {
       >
         Welcome!
       </h1>
-      <div className="bg-white flex mt-20 lg:ml-32 ml-10 lg:w-8/12 w-10/12 rounded-lg shadow-xl">
+      <div className="bg-white flex mt-20 lg:ml-32 ml-10 w-10/12 rounded-xl shadow-xl">
         <div className="flex flex-col sm:items-start lg:p-7 p-4">
           <h2 className="lg:text-4xl text-2xl mb-10 font-bold text-sky-800">
             My Applications
@@ -119,29 +119,29 @@ export default function User() {
           ) : (
             <>
               {isWindow!! >= 1500 ? (
-                <div className="grid grid-cols-4 w-full rounded-tl-md rounded-tr-md bg-sky-500 divide-white items-center">
-                  <div className="items-center px-12 flex justify-center rounded-tl-md h-20 lg:text-2xl text-xl  font-bold text-white">
+                <div className="grid grid-cols-4 w-full rounded-t-md bg-sky-500 divide-white items-center">
+                  <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
                     Positions
                   </div>
-                  <div className="items-center px-8 flex justify-center lg:text-2xl h-20 text-xl font-bold text-white">
+                  <div className="items-center justify-center px-8 flex text-3xl h-20 font-semibold text-white">
                     Steps Completed
                   </div>
-                  <div className="items-center px-12 flex justify-center lg:text-2xl h-20 text-xl font-bold text-white">
+                  <div className="items-center justify-center px-8 flex text-3xl h-20 font-semibold text-white">
                     Progress
                   </div>
-                  <div className="items-center px-12 flex justify-center rounded-tr-md h-20 lg:text-2xl text-xl font-bold text-white">
+                  <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
                     Feedback
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-3 w-full rounded-tl-md rounded-tr-md bg-sky-500 divide-white items-center">
-                  <div className="items-center sm:px-16 flex justify-center rounded-tl-md h-20 lg:text-2xl text-sm font-bold text-white">
+                <div className="grid grid-cols-3 w-full rounded-t-md bg-sky-500 divide-white items-center">
+                  <div className="items-center px-16 flex justify-center h-20 text-sm font-semibold text-white">
                     Positions
                   </div>
-                  <div className="items-center sm:px-16 flex justify-center lg:text-2xl text-sm font-bold text-white">
+                  <div className="items-center px-16 flex justify-center h-20 text-sm font-semibold text-white">
                     Progress
                   </div>
-                  <div className="items-center sm:px-16 flex justify-center lg:text-2xl rounded-tr-md h-20 text-sm font-bold text-white">
+                  <div className="items-center px-16 flex justify-center h-20 text-sm font-semibold text-white">
                     Feedback
                   </div>
                 </div>
@@ -218,7 +218,7 @@ export default function User() {
               ))}
         </div>
       </div>
-        <div className="bg-white flex mt-20 lg:ml-32 ml-10 lg:w-8/12 w-10/12 rounded-lg shadow-xl">
+        <div className="bg-white flex mt-20 lg:ml-32 ml-10 w-10/12 rounded-xl shadow-xl">
           <div className="flex flex-col sm:items-start lg:p-7 p-4">
             <h2 className="lg:text-4xl text-2xl mb-10 font-bold text-sky-800">
               My Challenges
@@ -230,17 +230,17 @@ export default function User() {
             ) : (
               <>
                 {isWindow!! >= 1500 ? (
-                  <div className="grid grid-cols-4 w-full rounded-tl-md rounded-tr-md bg-sky-500 divide-white items-center">
-                    <div className="items-center px-12 flex justify-center rounded-tl-md h-20 lg:text-2xl text-xl  font-bold text-white">
+                  <div className="grid grid-cols-4 w-full rounded-t-md bg-sky-500 divide-white items-center">
+                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
                       Challenges
                     </div>
-                    <div className="items-center px-8 flex justify-center lg:text-2xl h-20 text-xl font-bold text-white">
+                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
                       Steps Completed
                     </div>
-                    <div className="items-center px-12 flex justify-center lg:text-2xl h-20 text-xl font-bold text-white">
+                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
                       Progress
                     </div>
-                    <div className="items-center px-12 flex justify-center rounded-tr-md h-20 lg:text-2xl text-xl font-bold text-white">
+                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
                       Feedback
                     </div>
                   </div>

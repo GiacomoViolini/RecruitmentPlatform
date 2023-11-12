@@ -63,8 +63,8 @@ export default function Positions({ searchPosition }: PositionsProps) {
   }, [isWindow]);
 
   return (
-    <div className="flex justify-evenly lg:pt-32 pt-10 items-center  cursor:pointer">
-      <div className={"grid " + layout + " gap-28 pb-8 "}>
+    <div className="flex justify-between lg:pt-32 pt-10  mx-5 items-center  cursor:pointer">
+      <div className={"grid " + layout + " gap-16 pb-8 "}>
         {positions.map((position) => (
           <div key={position.title}>
             <Link href={`Positions/${position.id}`}>
