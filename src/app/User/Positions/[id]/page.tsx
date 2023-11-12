@@ -21,6 +21,8 @@ interface PositionProps {
   experience: number;
   type: string;
   technologies: string[];
+  benefits: string[];
+  events: string[];
 }
 
 interface PositionParams {
@@ -212,7 +214,7 @@ export default function Position({ params: { id } }: PositionParams) {
                   width={dimensions}
                   alt="Rounded logo"
                   loading="lazy"
-                  quality={80}
+                  quality={100}
                 />
               </div>
               <div
@@ -269,7 +271,7 @@ export default function Position({ params: { id } }: PositionParams) {
                   : "🏬" + Position?.type}
               </span>
               <p className="py-4 text-2xl font-bold tracking-tight">
-                Average living cost per person
+                Average living cost per person for this location
               </p>
               <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                 {"💸 " + Position?.livingcost}
@@ -281,6 +283,22 @@ export default function Position({ params: { id } }: PositionParams) {
                 {Position?.technologies?.map((tech) => (
                   <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                     {tech}
+                  </span>
+                ))}
+              </div>
+              <p className="py-4 text-2xl font-bold tracking-tight">Benefits</p>
+              <div className="flex flex-row justify-start items-center gap-2">
+                {Position?.benefits?.map((benefit) => (
+                  <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                    {benefit}
+                  </span>
+                ))}
+              </div>
+              <p className="py-4 text-2xl font-bold tracking-tight">Events</p>
+              <div className="flex flex-row justify-start items-center gap-2">
+                {Position?.events?.map((event) => (
+                  <span className="bg-sky-200 h-10 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                    {event}
                   </span>
                 ))}
               </div>
