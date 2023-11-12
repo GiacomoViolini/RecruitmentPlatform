@@ -20,6 +20,7 @@ interface PositionProps {
   livingcost: string;
   experience: number;
   type: string;
+  technologies: string[];
 }
 
 interface PositionParams {
@@ -234,48 +235,58 @@ export default function Position({ params: { id } }: PositionParams) {
                 className={"rounded-2xl"}
                 objectFit={"cover"}
                 loading="lazy"
-                quality={80}
+                quality={100}
               />
             </div>
             <div className="p-8 lg:-translate-y-10">
-              <h5 className="pb-2 text-2xl font-bold tracking-tight">
+              <h5 className="text-2xl font-bold tracking-tight">
                 {"📍" + Position?.position}
               </h5>
-              <p className="py-16 font-normal text-gray-700 ">
+              <p className="py-4 text-lg text-gray-700 ">
                 {Position?.description}
               </p>
-              <p className="pb-8 text-2xl font-bold tracking-tight">BS</p>
+              <p className="py-4 text-2xl font-bold tracking-tight">BS</p>
               {ralRange ? (
-                <span className="bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md  rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                <span className="bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                   {"💸 " + Position?.ral}
                 </span>
               ) : (
-                <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+                <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                   {"💸 " + Position?.ral}
                 </span>
               )}
-              <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">
+              <p className="py-4 text-2xl font-bold tracking-tight">
                 Experience
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                 {"👨🏽‍💻 " + Position?.experience} years of experience
               </span>
-              <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">
+              <p className="py-4 text-2xl font-bold tracking-tight">
                 Type of contract
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+              <span className=" bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                 {Position?.type.includes("hybrid" && "Hybrid")
                   ? "🏠" + "🏬" + Position?.type
                   : Position?.type === "Full remote"
                   ? "🏠" + Position?.type
                   : "🏬" + Position?.type}
               </span>
-              <p className="pt-8 pb-8 text-2xl font-bold tracking-tight">
+              <p className="py-4 text-2xl font-bold tracking-tight">
                 Average living cost per person
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-4 text-md font-semibold text-sky-700 mr-2 mb-2">
+              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                 {"💸 " + Position?.livingcost} 
               </span>
+              <p className="py-4 text-2xl font-bold tracking-tight">
+                Technologies
+              </p>
+              <div className="flex flex-row justify-start items-center gap-2">
+                {Position?.technologies?.map((tech) => (
+                  <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                    {tech}
+                  </span>
+                ))}
+              </div>
               <div className="flex flex-row justify-start items-center sm:gap-8 gap-2 pt-16">
                 <div className="flex flex-row justify-start items-center gap-8 ">
                   <button
@@ -286,7 +297,7 @@ export default function Position({ params: { id } }: PositionParams) {
                             ? "opacity-50 cursor-not-allowed"
                             : "opacity-100 cursor-pointer"
                         }
-                         bg-blue-700 hover:bg-blue-800 inline-flex items-center px-1 sm:px-3 py-2 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white rounded-lg `}
+                         bg-blue-700 hover:bg-blue-800 inline-flex items-center px-1 sm:px-3 py-1 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white rounded-lg `}
                     disabled={disabled}
                   >
                     Apply
@@ -296,7 +307,7 @@ export default function Position({ params: { id } }: PositionParams) {
                   <div className="">
                     <div
                       onClick={handlecv}
-                      className="cursor-pointer inline-flex items-center px-3 py-2 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                      className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
                     >
                       <Image
                         src="/cv.svg"
