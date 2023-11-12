@@ -12,10 +12,11 @@ interface PositionParams {
   };
 }
 
-interface Info {
+interface Info2 {
   title: string;
   steps: number;
   page_id: number;
+  points: number;
 }
 
 export default function FeedbackPage({ params: { title } }: PositionParams) {
@@ -25,7 +26,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
   const [dimensions, setDimensions] = useState<number>();
   const [layoutText, setLayoutText] = useState<string>();
   const [user, setUser] = useState<string>();
-  const [applications, setApplications] = useState<Info[]>([]);
+  const [applications, setApplications] = useState<Info2[]>([]);
   const DataArray: number[] = Array(5).fill(0);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
         }
       }
       fetchSteps();
-      
+
     }, [applications]);
 
   useEffect(() => {

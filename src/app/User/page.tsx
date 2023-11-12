@@ -152,7 +152,7 @@ export default function User() {
               </>
             )}
             {isWindow!! >= 1500 ? (
-            applications.map((c: Info) => (
+            applications.map((c: Info2) => (
               <div key={c.title} className="grid grid-cols-4 w-full hover:bg-sky-50 bg-white items-center">
                 {applications.indexOf(c) === applicationsNumber-1 ? (
                   <div className="lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-8 flex justify-start font-bold text-sky-700">
@@ -188,7 +188,7 @@ export default function User() {
                 )}
               </div>
             ))):(
-              applications.map((c: Info) => (
+              applications.map((c: Info2) => (
                 <div key={c.title} className="grid grid-cols-3 w-full hover:bg-sky-50 bg-white items-center">
                   {applications.indexOf(c) === applicationsNumber-1 ? (
                     <div className="lg:text-xl underline decoration-sky-600 hover:decoration-sky-300 text-sm items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-16 px-4 flex justify-start font-bold text-sky-700">
