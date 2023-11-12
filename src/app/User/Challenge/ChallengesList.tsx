@@ -42,7 +42,7 @@ export default function ChallengesList() {
         challenges.map(
           (c: { title: string; desc: string; img: string; id: number }) => (
             <div
-              key={c.title}
+              key={c.id}
               className="bg-white my-12 mx-auto h-60 w-9/12 rounded-lg overflow-hidden shadow border-transparent border-2 hover:shadow-xl hover:border-sky-600" 
             >
               <Link href={`Challenge/${c.id}`}>
@@ -73,7 +73,7 @@ export default function ChallengesList() {
           (c: { title: string; desc: string; img: string; id: number }) => (
             <div
               key={c.title}
-              className="bg-white my-12 pb-5 mx-auto h-full w-9/12 rounded-lg overflow-hidden shadow border-transparent border-2 hover:shadow-xl hover:border-sky-600" 
+              className="bg-white my-12 pb-5 mx-auto h-full w-11/12 rounded-lg overflow-hidden shadow border-transparent border-2 hover:shadow-xl hover:border-sky-600" 
             >
               <Link href={`Challenge/${c.id}`}>
                 <div className="flex flex-col">
