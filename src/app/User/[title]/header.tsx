@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
-import Positioning from "./positioning";
+import Image from "next/image";
 
 interface HeaderProps {
   steps: number;
@@ -219,19 +219,33 @@ useEffect(() => {
           <canvas id="myChart"></canvas>
         </div>
       </div>
-      <div className="flex md:flex-row flex-col -translate-y-10 justify-between">
-        <div className="flex flex-col w-full pt-8">
+        <div className="flex flex-col w-full pt-16">
             <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 -translate-y-10 text-blue-500">
                 Your positioning relative to the other candidates
             </div>
-            <div className="container w-full md:w-6/12 md:h-80 pt-12 md:pt-8 lg:pt-0 md:px-8 pr-16 rounded-md py-2">
-                <canvas id="PositioningChart"></canvas>
+            <div className="flex md:flex-row flex-col -translate-y-10 pt-16 justify-between pr-32">
+              <div className="container w-full md:w-6/12 md:h-80 pt-12 md:pt-8 lg:pt-0 md:px-8 pr-16 rounded-md py-2">
+                  <canvas id="PositioningChart"></canvas>
+              </div>
+              <div className="h-full pt-8 pr-16">
+                <div className="relative z-0">
+                  <svg width={350} height={250} className="pt-16 md:pt-8 lg:pt-0 z-1">
+                    <defs>
+                      <linearGradient id="progressive-bg" x1="0.5" y1="1" x2="0.5" y2="0">
+                        <stop offset="0%" stopOpacity="1" stopColor="rgba(0, 0, 255, 1)" />
+                        <stop offset="40%" stopOpacity="1" stopColor="rgba(0, 0, 255, 1)" />
+                        <stop offset="40%" stopOpacity="0" stopColor="rgba(0, 0, 255, 1)" />
+                        <stop offset="100%" stopOpacity="0" stopColor="rgba(0, 0, 255, 1)" />
+                      </linearGradient>
+                    </defs>
+                    <rect width={450} height={350} fill="url(#progressive-bg)" />
+                    <image href="/Subtract.svg" width={350} height={250} />
+                    <image href="/employee.svg" width={350} height={250} />
+                  </svg>
+                </div>
+              </div>
             </div>
         </div>
-        <svg className="hidden md:block" width="1" height="100%" viewBox="0 0 1 100%" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0V100H1V0H0Z" fill="#E5E7EB"/>
-        </svg>
-      </div>
     </div>
   );
 }
