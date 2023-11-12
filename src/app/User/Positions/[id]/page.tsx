@@ -280,24 +280,24 @@ export default function Position({ params: { id } }: PositionParams) {
                 Tools
               </p>
               <div className="flex justify-start items-center gap-2 flex-wrap">
-                {Position?.technologies?.map((tech) => (
-                  <span className="bg-sky-200 h-10 w-40 justify-center items-center flex shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                {Position?.technologies?.map((tech , key) => (
+                  <span key={key} className="bg-sky-200 h-10 w-40 justify-center items-center flex shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                     {tech}
                   </span>
                 ))}
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Benefits</p>
               <div className="flex justify-start items-center gap-2 flex-wrap">
-                {Position?.benefits?.map((benefit) => (
-                  <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                {Position?.benefits?.map((benefit, key) => (
+                  <span key={key} className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                     {benefit}
                   </span>
                 ))}
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Events</p>
               <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
-                {Position?.events?.map((event) => (
-                  <span className="bg-sky-200 h-16 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                {Position?.events?.map((event, key) => (
+                  <span key={key} className="bg-sky-200 h-16 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                     {event}
                   </span>
                 ))}

@@ -105,7 +105,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         </div>
         <div className="flex flex-col items-center">
           <div className="sm:hidden w-full">
-            <img
+            <Image
               src={challenge?.img || ""}
               alt={`${id}`}
               className="object-fill border-l-4 border-sky-600 w-full h-full "

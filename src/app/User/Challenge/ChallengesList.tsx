@@ -47,7 +47,7 @@ export default function ChallengesList() {
             >
               <Link href={`Challenge/${c.id}`}>
                 <div className="flex bg-white">
-                  <img
+                  <Image
                     src={c.img}
                     alt={`${c.id}`}
                     className=" object-cover"
