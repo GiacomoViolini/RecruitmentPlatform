@@ -250,15 +250,15 @@ useEffect(() => {
           <canvas id="myChart"></canvas>
         </div>
       </div>
-        <div className="flex flex-col w-full sm:pt-16 pt-24">
-            <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 -translate-y-10 text-blue-500">
+        <div className="flex flex-col w-full pt-2 md:pt-24 -translate-y-32 md:-translate-y-0">
+            <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 translate-y-40 md:-translate-y-10 text-blue-500">
                 Your positioning relative to the other candidates
             </div>
-            <div className="flex w-full lg:flex-row flex-col lg:items-start items-center -translate-y-10 sm:pt-16 justify-between">
-              <div className="container w-full lg:w-6/12 md:visible invisible md:h-80 pt-12 md:pt-8 lg:pt-0 px-8  rounded-md py-2">
+            <div className="flex w-full lg:flex-row flex-col items-center -translate-y-10 sm:pt-16 justify-between">
+              <div className="container w-full lg:w-6/12 md:visible invisible md:h-80 pt-12 md:pt-8 lg:pt-0 px-8 rounded-md py-2">
                   <canvas id="PositioningChart"></canvas>
               </div>
-              <div className="h-full md:pt-8 flex flex-col justify-center px-8 md:visible invisible md:-translate-y-10 lg:pr-12 xl:pr-32 pr-0 ">
+              <div className="h-full md:pt-8 flex flex-col justify-center px-8 md:visible invisible md:-translate-y-10 lg:pr-24 xl:pr-32 pr-0 ">
                 <div className="relative z-0 h-full">
                   <svg width={450} height={250} className="pt-2 pr-2 lg:pt-0 z-1">
                     <defs>
@@ -277,9 +277,9 @@ useEffect(() => {
                     You beated the {Positioning[steps-1]}% of the candidates
                   </div>
               </div>
-              <div className=" visible md:invisible container w-full md:w-6/12 h-96 lg:pt-0 md:px-8 pr-8 -translate-y-96 rounded-md ">
-                  <canvas id="PositioningChart2"></canvas>
-              </div>
+            </div>
+            <div className=" visible md:invisible container w-full md:w-6/12 h-96 md:px-8 pr-8 pt-4 -translate-y-80 rounded-md ">
+              <canvas id="PositioningChart2"></canvas>
             </div>
         </div>
     </div>
