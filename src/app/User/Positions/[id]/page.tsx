@@ -5,7 +5,6 @@ import Navbar from "../../navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
 import logo from "/public/logo.svg";
-import Link from "next/link";
 import { ChangeEvent } from "react";
 import React from "react";
 import { useRouter } from "next/navigation";
@@ -190,8 +189,35 @@ export default function Position({ params: { id } }: PositionParams) {
       }
     }
   };
+  const handleUpload2 = async (e1: ChangeEvent<HTMLInputElement>) => {
+    let file: File | undefined;
+    if (e1.target.files) {
+      file = e1.target.files[0];
+    }
+    if (file) {
+      try {
+        const { data, error } = await supabase.storage
+          .from("coverletter")
+          .upload(`coverletter/${file.name}`, file, {
+            cacheControl: "3600",
+          });
+        if (data) {
+          console.log(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
+  const ref1 = React.createRef<HTMLInputElement>();
   const ref = React.createRef<HTMLInputElement>();
+
+  const handlecoverletter = () => {
+    if (ref1.current) {
+      ref1.current.click();
+    }
+  };
 
   const handlecv = () => {
     if (ref.current) {
@@ -297,50 +323,78 @@ export default function Position({ params: { id } }: PositionParams) {
               <p className="py-4 text-2xl font-bold tracking-tight">Events</p>
               <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
                 {Position?.events?.map((event) => (
-                  <span className="bg-sky-200 h-16 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                  <span className="bg-sky-200 h-10 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                     {event}
                   </span>
                 ))}
               </div>
-              <div className="flex flex-row justify-start items-center sm:gap-8 gap-2 pt-16">
-                <div className="flex flex-row justify-start items-center gap-8 ">
-                  <button
-                    onClick={handleClick}
-                    className={`
-                        ${
-                          disabled
-                            ? "opacity-50 cursor-not-allowed"
-                            : "opacity-100 cursor-pointer"
-                        }
-                         bg-blue-700 hover:bg-blue-800 inline-flex items-center px-1 sm:px-3 py-1 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white rounded-lg `}
-                    disabled={disabled}
-                  >
-                    Apply
-                  </button>
-                </div>
-                <div className="sm:pt-0 pt-10 flex flex-col sm:flex-row items-center gap-2">
-                  <div className="">
-                    <div
-                      onClick={handlecv}
-                      className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+              <div className="flex flex-row justify-start items-center pt-16 ">
+                <div className="flex flex-row justify-start items-center">
+                  <div className="flex flex-row justify-start items-center gap-8 pb-2 sm:pb-0 ">
+                    <button
+                      onClick={handleClick}
+                      className={`
+                          ${
+                            disabled
+                              ? "opacity-50 cursor-not-allowed"
+                              : "opacity-100 cursor-pointer"
+                          }
+                          bg-blue-700 hover:bg-blue-800 inline-flex items-center px-1 sm:px-3 py-1 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white rounded-lg `}
+                      disabled={disabled}
                     >
-                      <Image
-                        src="/cv.svg"
-                        alt="linkedin"
-                        width={20}
-                        height={20}
-                      />
-                      <input
-                        type="file"
-                        className="hidden"
-                        ref={ref}
-                        onChange={(e) => handleUpload(e)}
-                      />
-                    </div>
+                      Apply
+                    </button>
                   </div>
-                  <h3 className="text-xs sm:text-xl text-center sm:text-start font-bold tracking-tight text-blue-600">
-                    Upload your CV
-                  </h3>
+                  <div className="flex flex-row justify-evenly items-center pl-8 sm:pt-0 pb-2 sm:pb-0">
+                  <div className="flex flex-col sm:flex-row items-center gap-2">
+                    <div className="">
+                      <div
+                        onClick={handlecv}
+                        className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                      >
+                        <Image
+                          src="/cv.svg"
+                          alt="cv"
+                          width={20}
+                          height={20}
+                        />
+                        <input
+                          type="file"
+                          className="hidden"
+                          ref={ref}
+                          onChange={(e) => handleUpload(e)}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-xs sm:text-xl hidden lg:visible text-center sm:text-start font-bold tracking-tight text-blue-600">
+                      Upload your CV
+                    </h3>
+                  </div>
+                  <div className=" flex flex-col sm:flex-row items-center pl-4 gap-2">
+                    <div className="">
+                      <div
+                        onClick={handlecoverletter}
+                        className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                      >
+                        <Image
+                          src="/letter.svg"
+                          alt="coverletter"
+                          width={20}
+                          height={20}
+                        />
+                        <input
+                          type="file"
+                          className="hidden"
+                          ref={ref1}
+                          onChange={(e1) => handleUpload2(e1)}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-xs sm:text-xl hidden lg:visible text-center sm:text-start font-bold tracking-tight text-blue-600">
+                      Upload your Cover Letter
+                    </h3>
+                  </div>
+                </div>
                 </div>
               </div>
             </div>

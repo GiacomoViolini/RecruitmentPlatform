@@ -11,8 +11,10 @@ interface HeaderProps {
 export default function Header({ steps, points }: HeaderProps) {
   const chartRef = useRef<Chart>();
   const chartRef2 = useRef<Chart>();
+  const chartRef3 = useRef<Chart>();
   const [DataArray, setDataArray] = useState<number[]>(Array(5).fill(0));
   const [Positioning, setPositioning] = useState<number[]>(Array(5).fill(0));
+  const percentage = Math.round((points / 140) * 100).toString() + "%";
 
   useEffect(() => {
     async function fetchDataforGraph(points: number) {
@@ -21,7 +23,10 @@ export default function Header({ steps, points }: HeaderProps) {
         }
         setDataArray(DataArray);
         for(let j = 0; j < steps!!; j++) {
-            Positioning[j] = 100 - points;
+          if(points==100){
+            Positioning[j] = 100;
+          } 
+          else Positioning[j] = Math.round((points / 105) * 100);
         }
     }
     fetchDataforGraph(points);
@@ -184,32 +189,83 @@ useEffect(() => {
     });
 }, [steps]);
 
+useEffect(() => {
+  const canvas = document.getElementById("PositioningChart2") as HTMLCanvasElement;
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  if (chartRef3.current) {
+    chartRef3.current.destroy();
+  }
+
+  chartRef3.current = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Technical Assesment", "Technical Interview", "Behavioral Interview", "Team Work Session Simulation"],
+      datasets: [
+        {
+          label: "Ranking",
+          data: Positioning,
+          backgroundColor: [
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+          ],
+          borderColor: [
+            "rgba(54, 162, 235, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(54, 162, 235, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: 0,
+          max: 100,
+        },
+      },
+      maintainAspectRatio: false,
+    },
+  });
+}, [steps]);
+
+
   return (
     <div className="flex flex-col w-full pt-8">
       <div className="flex md:flex-row flex-col -translate-y-10 justify-between">
         <div className="2xl:text-lg text-md font-bold text-center md:text-start pt-8 px-8 text-gray-500">
           {feedback}
         </div>
-        <div className="container w-full md:w-6/12 md:h-80 pt-12 md:pt-4 lg:pt-0 md:px-8 pr-8 rounded-md py-2">
+        <div className="container w-full md:w-6/12 md:h-80 h-96 pt-12 md:pt-4 lg:pt-0 md:px-8 pr-8 rounded-md py-2">
           <canvas id="myChart"></canvas>
         </div>
       </div>
-        <div className="flex flex-col w-full pt-16">
+        <div className="flex flex-col w-full sm:pt-16 pt-24">
             <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 -translate-y-10 text-blue-500">
                 Your positioning relative to the other candidates
             </div>
-            <div className="flex md:flex-row flex-col -translate-y-10 pt-16 justify-between pr-32">
-              <div className="container w-full md:w-6/12 md:h-80 pt-12 md:pt-8 lg:pt-0 md:px-8 pr-16 rounded-md py-2">
+            <div className="flex w-full lg:flex-row flex-col lg:items-start items-center -translate-y-10 sm:pt-16 justify-between">
+              <div className="container w-full lg:w-6/12 md:visible invisible md:h-80 pt-12 md:pt-8 lg:pt-0 px-8  rounded-md py-2">
                   <canvas id="PositioningChart"></canvas>
               </div>
-              <div className="h-full pt-8 pr-16">
+              <div className="h-full md:pt-8 flex flex-col justify-center px-8 md:visible invisible md:-translate-y-10 lg:pr-12 xl:pr-32 pr-0 ">
                 <div className="relative z-0 h-full">
-                  <svg width={350} height={250} className="pt-16 md:pt-8 pr-2 lg:pt-0 z-1">
+                  <svg width={450} height={250} className="pt-2 pr-2 lg:pt-0 z-1">
                     <defs>
                       <linearGradient id="progressive-bg" x1="0.5" y1="1" x2="0.5" y2="0">
                         <stop offset="0%" stopOpacity="1" stopColor="rgba(54, 162, 235, 0.2)" />
-                        <stop offset="40%" stopOpacity="1" stopColor="rgba(54, 162, 235, 0.2)" />
-                        <stop offset="40%" stopOpacity="0" stopColor="rgba(0, 0, 255, 1)" />
+                        <stop offset={percentage} stopOpacity="1" stopColor="rgba(54, 162, 235, 0.2)" />
+                        <stop offset={percentage} stopOpacity="0" stopColor="rgba(0, 0, 255, 1)" />
                         <stop offset="100%" stopOpacity="0" stopColor="rgba(0, 0, 255, 1)" />
                       </linearGradient>
                     </defs>
@@ -217,6 +273,12 @@ useEffect(() => {
                     <image href="/Subtract.svg" width={400} height={320} />
                   </svg>
                 </div>
+                  <div className="sm:text-lg text-md font-bold text-start pt-8 px-8 text-gray-500">
+                    You beated the {Positioning[steps-1]}% of the candidates
+                  </div>
+              </div>
+              <div className=" visible md:invisible container w-full md:w-6/12 h-96 lg:pt-0 md:px-8 pr-8 -translate-y-96 rounded-md ">
+                  <canvas id="PositioningChart2"></canvas>
               </div>
             </div>
         </div>
