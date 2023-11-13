@@ -66,7 +66,7 @@ export default function Positions({ searchPosition }: PositionsProps) {
     <div className="flex justify-between lg:pt-32 pt-10  lg:mx-5 mx-3 items-center  cursor:pointer">
       <div className={"grid " + layout + "pb-8"}>
         {positions.map((position) => (
-          <div key={position.title}>
+          <div key={position.id}>
             <Link href={`Positions/${position.id}`}>
               <div className=" w-12/12 rounded-lg overflow-hidden shadow-xl  hover:shadow-2xl border-2 hover:border-sky-700 lg:px-6 px-4 py-4 bg-white justify-self-stretch">
                 <div className="flex flex-row justify-between items-center pt-2">

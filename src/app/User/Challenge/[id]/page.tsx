@@ -114,8 +114,8 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
               loading="lazy"
             />
           </div>
-          <div className="my-8 mx-5">
-            <h2 className="text-4xl mb-7 font-bold text-sky-800 text-center">
+          <div className="lg:my-8 my-3 mx-5">
+            <h2 className="text-4xl mb-5 font-bold text-sky-800 text-center">
               {challenge?.title}
             </h2>
             <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>

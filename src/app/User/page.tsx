@@ -107,7 +107,7 @@ export default function User() {
       >
         Welcome!
       </h1>
-      <div className="bg-white flex mt-20 lg:ml-32 ml-10 w-10/12 rounded-xl shadow-xl">
+      <div className="bg-white flex justify-center mt-20 lg:ml-32 ml-10 w-10/12 rounded-xl shadow-xl">
         <div className="flex flex-col sm:items-start lg:p-7 p-4">
           <h2 className="lg:text-4xl text-2xl mb-10 font-bold text-sky-800">
             My Applications
@@ -218,7 +218,7 @@ export default function User() {
               ))}
         </div>
       </div>
-        <div className="bg-white flex mt-20 lg:ml-32 ml-10 w-10/12 rounded-xl shadow-xl">
+        <div className="bg-white justify-center flex mt-20 lg:ml-32 ml-10 w-10/12 rounded-xl shadow-xl">
           <div className="flex flex-col sm:items-start lg:p-7 p-4">
             <h2 className="lg:text-4xl text-2xl mb-10 font-bold text-sky-800">
               My Challenges
