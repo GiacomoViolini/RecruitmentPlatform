@@ -4,7 +4,7 @@ import { use, useCallback, useEffect, useState } from "react";
 import Navbar from "../../navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
-import logo from "/public/logo.svg";
+import logo from "/public/logo.png";
 import { ChangeEvent } from "react";
 import React from "react";
 import { useRouter } from "next/navigation";
@@ -245,7 +245,7 @@ export default function Position({ params: { id } }: PositionParams) {
           <div className="p-4 bg-white border border-gray-200 rounded-lg ">
             <div className=" h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
-              <div className={"flex items-center justify-center" + logoLayout}>
+              <div className={"flex items-center justify-center border-t-8 border-sky-800 shadow  " + logoLayout}>
                 <Image
                   src={logo}
                   height={dimensions}
@@ -264,7 +264,7 @@ export default function Position({ params: { id } }: PositionParams) {
                 {Position?.title ?? ""}
               </div>
             </div>
-            <div className="relative aspect-video rounded-2xl w-full h-10 py-48  lg:-translate-y-20 ">
+            <div className="relative aspect-video rounded-2xl w-full h-10 py-48 lg:-translate-y-20 ">
               <Image
                 src={Position?.images[counter] ?? ""}
                 alt="photo"
@@ -318,16 +318,17 @@ export default function Position({ params: { id } }: PositionParams) {
                 Tools/Skill required
               </p>
               <div className="flex justify-start items-center gap-2 flex-wrap">
-                {Position?.technologies?.map((tech) => (
-                  <span className="bg-sky-200 h-12 w-40 justify-center text-center items-center flex shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
+                {Position?.technologies?.map((tech,i) => (
+                  <span key={i} className="bg-sky-200 h-12 w-40 justify-center text-center items-center flex shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                     {["java", "python", "r", "javascript", "html", "css", "swift", "kotlin", "typescript", "node.js", "ruby", "sql"].some(lang => tech.toLowerCase().includes(lang)) ? "👨‍💻 " + tech : "🔧 " + tech}
                   </span>
                 ))}
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Benefits</p>
               <div className="flex justify-start w-full items-center gap-2 flex-wrap">
-              {Position?.benefits?.map((benefit) => (
+              {Position?.benefits?.map((benefit, i) => (
                   <span
+                    key={i}
                     className={`${
                       benefits
                         ? "bg-sky-200 h-12 text-center w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
@@ -340,8 +341,8 @@ export default function Position({ params: { id } }: PositionParams) {
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Events</p>
               <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
-                {Position?.events?.map((event) => (
-                  <span className="bg-sky-200 h-12 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
+                {Position?.events?.map((event,i) => (
+                  <span key={i} className="bg-sky-200 h-12 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                     {"🎉 "+ event}
                   </span>
                 ))}

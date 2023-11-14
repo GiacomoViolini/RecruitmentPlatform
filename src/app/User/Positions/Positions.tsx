@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import supabase from "../../../../utils/supabase";
-import logo from "/public/logo.svg";
+import logo from "/public/logo.png";
 
 interface Position {
   id: number;
@@ -77,7 +77,6 @@ export default function Positions({ searchPosition }: PositionsProps) {
                       width={30}
                       height={30}
                       className="mb-2"
-                      loading="lazy"
                       priority
                     />
                     <div className="font-bold text-2xl mb-2">
