@@ -21,6 +21,7 @@ export default function Header({ steps, points, title }: HeaderProps) {
   const [Positioning, setPositioning] = useState<number[]>(Array(5).fill(0));
   const [questions, setQuestions] = useState<questionsObject[]>();
   const percentage = Math.round((points / 140) * 100).toString() + "%";
+  const [isWindow, setIsWindow] = useState<number>();
 
   useEffect(() => {
     async function fetchQuestions(title: string) {
@@ -37,6 +38,15 @@ export default function Header({ steps, points, title }: HeaderProps) {
       setQuestions(data.questions);
     }
     fetchQuestions(title);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWindow(window.innerWidth);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -276,24 +286,24 @@ export default function Header({ steps, points, title }: HeaderProps) {
   }, [steps]);
 
   return (
-    <div className="flex flex-col w-full pt-8">
-      <div className="flex md:flex-row flex-col -translate-y-10 justify-between">
+    <div className="flex flex-col w-full pb-4">
+      <div className="flex md:flex-row flex-col justify-between">
         <div className="2xl:text-lg text-md font-bold text-center md:text-start pt-8 px-8 text-gray-500">
           {feedback}
         </div>
-        <div className="container w-full md:w-6/12 md:h-80 h-96 pt-12 md:pt-4 lg:pt-0 md:px-8 pr-8 rounded-md py-2">
+        <div className="container w-full md:w-6/12 md:h-80 h-96 md:pt-4 lg:pt-0 md:px-8 pr-8 rounded-md my-10">
           <canvas id="myChart"></canvas>
         </div>
       </div>
-      <div className="flex flex-col w-full pt-0 md:pt-24 -translate-y-32 md:-translate-y-0">
-        <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 translate-y-44 md:-translate-y-10 text-blue-500">
+      <div className="flex flex-col w-full md:pt-24 ">
+        <div className="text-3xl font-bold text-center md:text-start px-8  text-blue-500">
           Your positioning relative to the other candidates
         </div>
-        <div className="flex w-full lg:flex-row flex-col items-center -translate-y-30 sm:pt-16 justify-between">
-          <div className="container w-full lg:w-6/12 md:visible invisible md:h-80 pt-12 md:pt-8 lg:pt-0 px-8 rounded-md py-2">
+        { isWindow && isWindow > 1000 && <div className="flex w-full lg:flex-row flex-col items-center sm:pt-16 justify-between">
+          <div className="container w-full lg:w-6/12 md:visible invisible md:h-80 pt-12 md:pt-8 lg:pt-0 px-8 rounded-md">
             <canvas id="PositioningChart"></canvas>
           </div>
-          <div className="h-full md:pt-8 flex flex-col justify-center px-8 md:visible invisible md:-translate-y-10 lg:pr-24 xl:pr-32 pr-0 ">
+          <div className="h-full md:pt-8 flex flex-col justify-center px-8 md:visible invisible  lg:pr-24 xl:pr-32 pr-0 ">
             <div className="relative z-0 h-full">
               <svg width={450} height={250} className="pt-2 pr-2 lg:pt-0 z-1">
                 <defs>
@@ -330,25 +340,25 @@ export default function Header({ steps, points, title }: HeaderProps) {
                 <image href="/Subtract.svg" width={400} height={320} />
               </svg>
             </div>
-            <div className="sm:text-lg text-md font-bold text-start pt-8 px-8 text-gray-500">
+            <div className="sm:text-lg text-md font-bold text-start pt-4 px-8 text-gray-500">
               You beated the {Positioning[steps - 1]}% of the candidates
             </div>
           </div>
-        </div>
-        <div className=" visible md:invisible container w-full md:w-6/12 h-96 md:px-8 pr-8 -translate-y-80 rounded-md ">
+        </div>}
+        {isWindow && isWindow <= 1000 && <div className="visible container w-full md:w-6/12 h-96 md:px-8 my-4 flex justify-center rounded-md ">
           <canvas id="PositioningChart2"></canvas>
-        </div>
+        </div>}
       </div>
-      <div className="flex flex-col w-full pt-0 md:pt-24 -translate-y-80">
-        <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 translate-y-44 md:-translate-y-10 text-blue-500">
+      <div className="flex flex-col w-full pt-0 md:pt-24 ">
+        <div className="text-3xl font-bold text-center md:text-start mb-14 px-8  text-blue-500">
           Possible questions on the next interview
         </div>
-        <div className="grid grid-cols-2 justify-start items-start gap-14">
+        <div className="grid grid-cols-2 justify-start items-start gap-4 lg:gap-14">
           {questions?.map((q, i) => (
             <div className="flex flex-col gap-6 flex-wrap items-center" key={i}>
-              <h2 className="bg-sky-100 h-24 w-1/2 flex justify-center items-center shadow-xl rounded-3xl px-3 py-1 text-2xl font-bold text-sky-800 mb-5">{"Step: " + (i+1)}</h2>
+              <h2 className="bg-sky-100 h-24 w-full lg:w-1/2 flex justify-center items-center shadow-xl rounded-3xl px-3 py-2 text-2xl font-bold text-sky-800 mb-5">{"Step: " + (i+1)}</h2>
               {q.questions.map((question,j) => (
-                <span className="bg-sky-200 h-20 w-full flex justify-center items-center shadow-md rounded-md px-5 py-1 text-base font-semibold text-sky-700" key={j}>
+                <span className="bg-sky-200  h-60 lg:h-20 w-full flex justify-center items-center shadow-md rounded-md  px-2 lg:px-5 py-2 text-base font-semibold text-sky-700" key={j}>
                   {"❓ " + question} 
                 </span>
               ))}
