@@ -361,7 +361,9 @@ export default function Header({ steps, points, title }: HeaderProps) {
           {questions?.map((q, i) => (
             <div className="flex flex-col gap-6 flex-wrap items-center" key={i}>
               <h2 className="bg-sky-100 h-24 w-full lg:w-1/2 flex justify-center items-center shadow-xl rounded-3xl px-3 py-2 text-2xl font-bold text-sky-800 mb-5">
-                {"Step: " + (i + 1)}
+                <h2 className="text-3xl font-bold text-center md:text-start mb-14 px-8  text-blue-500">
+                  {i === 0 ? "Technical Assessment" : i === 1 ? "Technical Interview" : i === 2 ? "Behavioral Interview" : "Team Work Session Simulation"}
+                </h2>
               </h2>
               {q.questions.map((question, j) => (
                 <span
