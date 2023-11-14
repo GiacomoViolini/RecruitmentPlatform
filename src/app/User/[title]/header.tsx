@@ -295,59 +295,63 @@ export default function Header({ steps, points, title }: HeaderProps) {
           <canvas id="myChart"></canvas>
         </div>
       </div>
-      <div className="flex flex-col w-full md:pt-24 ">
+      <div className="flex flex-col w-full md:pt-24">
         <div className="text-3xl font-bold text-center md:text-start px-8  text-blue-500">
           Your positioning relative to the other candidates
         </div>
-        { isWindow && isWindow > 1000 && <div className="flex w-full lg:flex-row flex-col items-center sm:pt-16 justify-between">
-          <div className="container w-full lg:w-6/12 md:visible invisible md:h-80 pt-12 md:pt-8 lg:pt-0 px-8 rounded-md">
-            <canvas id="PositioningChart"></canvas>
-          </div>
-          <div className="h-full md:pt-8 flex flex-col justify-center px-8 md:visible invisible  lg:pr-24 xl:pr-32 pr-0 ">
-            <div className="relative z-0 h-full">
-              <svg width={450} height={250} className="pt-2 pr-2 lg:pt-0 z-1">
-                <defs>
-                  <linearGradient
-                    id="progressive-bg"
-                    x1="0.5"
-                    y1="1"
-                    x2="0.5"
-                    y2="0"
-                  >
-                    <stop
-                      offset="0%"
-                      stopOpacity="1"
-                      stopColor="rgba(54, 162, 235, 0.2)"
-                    />
-                    <stop
-                      offset={percentage}
-                      stopOpacity="1"
-                      stopColor="rgba(54, 162, 235, 0.2)"
-                    />
-                    <stop
-                      offset={percentage}
-                      stopOpacity="0"
-                      stopColor="rgba(0, 0, 255, 1)"
-                    />
-                    <stop
-                      offset="100%"
-                      stopOpacity="0"
-                      stopColor="rgba(0, 0, 255, 1)"
-                    />
-                  </linearGradient>
-                </defs>
-                <rect width={350} height={250} fill="url(#progressive-bg)" />
-                <image href="/Subtract.svg" width={400} height={320} />
-              </svg>
+        {isWindow && isWindow > 1000 && (
+          <div className="flex w-full lg:flex-row flex-col items-center sm:pt-16 justify-between">
+            <div className="container w-full lg:w-6/12 md:visible invisible md:h-80 pt-12 md:pt-8 lg:pt-0 px-8 rounded-md">
+              <canvas id="PositioningChart"></canvas>
             </div>
-            <div className="sm:text-lg text-md font-bold text-start pt-4 px-8 text-gray-500">
-              You beated the {Positioning[steps - 1]}% of the candidates
+            <div className="h-full md:pt-8 flex flex-col justify-center px-8 md:visible invisible  lg:pr-24 xl:pr-32 pr-0 ">
+              <div className="relative z-0 h-full">
+                <svg width={450} height={250} className="pt-2 pr-2 lg:pt-0 z-1">
+                  <defs>
+                    <linearGradient
+                      id="progressive-bg"
+                      x1="0.5"
+                      y1="1"
+                      x2="0.5"
+                      y2="0"
+                    >
+                      <stop
+                        offset="0%"
+                        stopOpacity="1"
+                        stopColor="rgba(54, 162, 235, 0.2)"
+                      />
+                      <stop
+                        offset={percentage}
+                        stopOpacity="1"
+                        stopColor="rgba(54, 162, 235, 0.2)"
+                      />
+                      <stop
+                        offset={percentage}
+                        stopOpacity="0"
+                        stopColor="rgba(0, 0, 255, 1)"
+                      />
+                      <stop
+                        offset="100%"
+                        stopOpacity="0"
+                        stopColor="rgba(0, 0, 255, 1)"
+                      />
+                    </linearGradient>
+                  </defs>
+                  <rect width={350} height={250} fill="url(#progressive-bg)" />
+                  <image href="/Subtract.svg" width={400} height={320} />
+                </svg>
+              </div>
+              <div className="sm:text-lg text-md font-bold text-start pt-4 px-8 text-gray-500">
+                You beated the {Positioning[steps - 1]}% of the candidates
+              </div>
             </div>
           </div>
-        </div>}
-        {isWindow && isWindow <= 1000 && <div className="container w-full md:w-6/12 h-96 md:px-8 my-4 flex justify-center rounded-md ">
-          <canvas id="PositioningChart2"></canvas>
-      </div>}
+        )}
+        {isWindow && isWindow <= 1000 && (
+          <div className="container w-full md:w-6/12 h-96 md:px-8 my-4 rounded-md ">
+            <canvas id="PositioningChart2"></canvas>
+          </div>
+        )}
       </div>
       <div className="flex flex-col w-full pt-0 md:pt-24 ">
         <div className="text-3xl font-bold text-center md:text-start mb-14 px-8  text-blue-500">
@@ -356,10 +360,15 @@ export default function Header({ steps, points, title }: HeaderProps) {
         <div className="grid grid-cols-2 justify-start items-start gap-4 lg:gap-14">
           {questions?.map((q, i) => (
             <div className="flex flex-col gap-6 flex-wrap items-center" key={i}>
-              <h2 className="bg-sky-100 h-24 w-full lg:w-1/2 flex justify-center items-center shadow-xl rounded-3xl px-3 py-2 text-2xl font-bold text-sky-800 mb-5">{"Step: " + (i+1)}</h2>
-              {q.questions.map((question,j) => (
-                <span className="bg-sky-200  h-60 lg:h-20 w-full flex justify-center items-center shadow-md rounded-md  px-2 lg:px-5 py-2 text-base font-semibold text-sky-700" key={j}>
-                  {"❓ " + question} 
+              <h2 className="bg-sky-100 h-24 w-full lg:w-1/2 flex justify-center items-center shadow-xl rounded-3xl px-3 py-2 text-2xl font-bold text-sky-800 mb-5">
+                {"Step: " + (i + 1)}
+              </h2>
+              {q.questions.map((question, j) => (
+                <span
+                  className="bg-sky-200  h-60 lg:h-20 w-full flex justify-center items-center shadow-md rounded-md  px-2 lg:px-5 py-2 text-base font-semibold text-sky-700"
+                  key={j}
+                >
+                  {"❓ " + question}
                 </span>
               ))}
             </div>

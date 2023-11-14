@@ -86,7 +86,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
   useEffect(() => {
     if (isWindow && isWindow > 1000) {
       setLogoLayout(
-        "items-center w-44 h-44 rounded-full justify-center -translate-y-24 translate-x-16 bg-slate-50"
+        "items-center w-44 h-44 rounded-full justify-center -translate-y-24 translate-x-16 "
       );
       setDimensions(90);
       setLayoutText(
@@ -94,7 +94,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
       );
     } else if (isWindow && isWindow <= 1000) {
       setLogoLayout(
-        "w-24 h-24 rounded-full -translate-y-16 translate-x-8 bg-slate-50 mr-10"
+        "w-24 h-24 rounded-full -translate-y-16 translate-x-8 mr-10"
       );
       setDimensions(70);
       setLayoutText(
@@ -121,7 +121,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
           <div className="p-4 bg-white h-full border border-gray-200 rounded-lg ">
             <div className="h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
-              <div className={`flex items-center justify-center text-4xl ${logoLayout}`}>
+              <div className={`flex items-center justify-center text-4xl bg-white border-t-8 shadow border-sky-800 ${logoLayout}`}>
                 <Image
                   src={feedback}
                   alt="Rounded logo"
