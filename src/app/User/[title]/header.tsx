@@ -167,7 +167,7 @@ export default function Header({ steps, points, title }: HeaderProps) {
         maintainAspectRatio: false,
       },
     });
-  }, [steps]);
+  }, [steps, isWindow]);
 
   useEffect(() => {
     const canvas = document.getElementById(
@@ -226,7 +226,7 @@ export default function Header({ steps, points, title }: HeaderProps) {
         maintainAspectRatio: false,
       },
     });
-  }, [steps]);
+  }, [steps, isWindow]);
 
   useEffect(() => {
     const canvas = document.getElementById(
@@ -283,7 +283,7 @@ export default function Header({ steps, points, title }: HeaderProps) {
         maintainAspectRatio: false,
       },
     });
-  }, [steps]);
+  }, [steps, isWindow]);
 
   return (
     <div className="flex flex-col w-full pb-4">
