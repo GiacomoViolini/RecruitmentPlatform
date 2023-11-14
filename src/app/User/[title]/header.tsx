@@ -1,20 +1,46 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
-import Image from "next/image";
+import supabase from "../../../../utils/supabase";
 
 interface HeaderProps {
   steps: number;
   points: number;
+  title: string;
 }
 
-export default function Header({ steps, points }: HeaderProps) {
+interface Questions{
+  questions1: string[];
+  questions2: string[];
+  questions3: string[];
+  questions4: string[];
+}
+
+export default function Header({ steps, points, title }: HeaderProps) {
   const chartRef = useRef<Chart>();
   const chartRef2 = useRef<Chart>();
   const chartRef3 = useRef<Chart>();
   const [DataArray, setDataArray] = useState<number[]>(Array(5).fill(0));
   const [Positioning, setPositioning] = useState<number[]>(Array(5).fill(0));
+  const [questions, setQuestions] = useState<Questions>();
   const percentage = Math.round((points / 140) * 100).toString() + "%";
+
+  useEffect(() => {
+    async function fetchQuestions(title: string) {
+      const { data, error } = await supabase
+        .from("PossibleQuestions")
+        .select("*")
+        .eq("title", title)
+        .maybeSingle();
+      if (error) {
+        console.error(error);
+      }
+      console.log(data);
+      setQuestions(data);
+    }
+    fetchQuestions(title);
+  }, [title]);  
+
 
   useEffect(() => {
     async function fetchDataforGraph(points: number) {
@@ -206,21 +232,21 @@ useEffect(() => {
       labels: ["Technical Assesment", "Technical Interview", "Behavioral Interview", "Team Work Session Simulation"],
       datasets: [
         {
-          label: "Ranking",
+          label: "Percentage of candidates beated",
           data: Positioning,
           backgroundColor: [
-            "rgba(30, 160, 240, 0.2)",
-            "rgba(30, 160, 240, 0.2)",
-            "rgba(30, 160, 240, 0.2)",
-            "rgba(30, 160, 240, 0.2)",
-            "rgba(30, 160, 240, 0.2)",
+            "rgba(20,78,240, 0.2)",
+            "rgba(20,78,240, 0.2)",
+            "rgba(20,78,240, 0.2)",
+            "rgba(20,78,240, 0.2)",
+            "rgba(20,78,240, 0.2)"
           ],
           borderColor: [
-            "rgba(30, 160, 240, 1)",
-            "rgba(30, 160, 240, 1)",
-            "rgba(30, 160, 240, 1)",
-            "rgba(30, 160, 240, 1)",
-            "rgba(30, 160, 240, 1)",
+            "rgba(20,78,240, 1)",
+            "rgba(20,78,240, 1)",
+            "rgba(20,78,240, 1)",
+            "rgba(20,78,240, 1)",
+            "rgba(20,78,240, 1)"
           ],
           borderWidth: 1,
         },
@@ -282,7 +308,12 @@ useEffect(() => {
               <canvas id="PositioningChart2"></canvas>
             </div>
         </div>
-    </div>
+        <div className="flex flex-col w-full pt-0 md:pt-24 -translate-y-80">
+            <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 translate-y-44 md:-translate-y-10 text-blue-500">
+                Possible questions on the next interview
+            </div>
+        </div>
+      </div>
   );
 }
 

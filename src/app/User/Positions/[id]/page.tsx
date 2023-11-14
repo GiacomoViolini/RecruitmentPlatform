@@ -320,7 +320,7 @@ export default function Position({ params: { id } }: PositionParams) {
               <div className="flex justify-start items-center gap-2 flex-wrap">
                 {Position?.technologies?.map((tech) => (
                   <span className="bg-sky-200 h-12 w-40 justify-center text-center items-center flex shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
-                    {tech.toLowerCase().includes("insurance") ? "🏥 " + tech : tech.toLowerCase().includes("schedule") ? "🗓️ " + tech : tech.toLowerCase().includes("remote") ? "🏠 " + tech : tech}
+                    {["java", "python", "r", "javascript", "html", "css", "swift", "kotlin", "typescript", "node.js", "ruby", "sql"].some(lang => tech.toLowerCase().includes(lang)) ? "👨‍💻 " + tech : "🔧 " + tech}
                   </span>
                 ))}
               </div>
@@ -334,7 +334,7 @@ export default function Position({ params: { id } }: PositionParams) {
                         : "bg-sky-200 h-12 text-center w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
                     }`}
                   >
-                    {benefit}
+                    {benefit.toLowerCase().includes("insurance") ? "🏥 " + benefit : benefit.toLowerCase().includes("schedule") ? "🗓️ " + benefit : benefit.toLowerCase().includes("remote") ? "🏠 " + benefit : benefit}
                   </span>
                 ))}
               </div>
@@ -363,8 +363,8 @@ export default function Position({ params: { id } }: PositionParams) {
                       Apply
                     </button>
                   </div>
-                  <div className="flex flex-row justify-evenly items-center pl-8 sm:pt-0 pb-2 sm:pb-0">
-                  <div className="flex flex-col sm:flex-row items-center gap-2">
+                  <div className="flex flex-row justify-evenly items-center pl-8 sm:pt-8 pb-2">
+                  <div className="flex flex-col items-center gap-2">
                     <div className="">
                       <div
                         onClick={handlecv}
@@ -384,11 +384,11 @@ export default function Position({ params: { id } }: PositionParams) {
                         />
                       </div>
                     </div>
-                    <h3 className="text-xs sm:text-xl invisible hover:visible text-center sm:text-start font-bold tracking-tight text-blue-600">
+                    <h3 className="text-xs sm:text-md text-center sm:text-start font-bold tracking-tight text-blue-600">
                       Upload your CV
                     </h3>
                   </div>
-                  <div className=" flex flex-col sm:flex-row items-center pl-4 gap-2">
+                  <div className=" flex flex-col items-center pl-4 gap-2">
                     <div className="">
                       <div
                         onClick={handlecoverletter}
@@ -408,7 +408,7 @@ export default function Position({ params: { id } }: PositionParams) {
                         />
                       </div>
                     </div>
-                    <h3 className="text-xs sm:text-xl hidden lg:visible text-center sm:text-start font-bold tracking-tight text-blue-600">
+                    <h3 className="text-xs sm:text-md text-center sm:text-start font-bold tracking-tight text-blue-600">
                       Upload your Cover Letter
                     </h3>
                   </div>
