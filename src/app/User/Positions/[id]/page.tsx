@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
@@ -140,7 +140,7 @@ export default function Position({ params: { id } }: PositionParams) {
       setLayoutText(
         "text-4xl font-bold text-center text-white -translate-y-20 translate-x-32"
       );
-    } else if (isWindow && isWindow >= 600) {
+    } else if (isWindow && isWindow < 1000) {
       setLogoLayout(
         "items-center w-24 h-24 sm:pb-2 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
       );
@@ -340,7 +340,7 @@ export default function Position({ params: { id } }: PositionParams) {
                   </span>
                 ))}
               </div>
-              <h2 className=" text-2xl font-bold tracking-tight">Events</h2>
+              <h2 className=" py-4 text-2xl font-bold tracking-tight">Events</h2>
               <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
                 {Position?.events?.map((event,i) => (
                   <span key={i} className="bg-sky-200 h-12 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
@@ -394,7 +394,7 @@ export default function Position({ params: { id } }: PositionParams) {
                       <div className="">
                         <div
                           onClick={handlecoverletter}
-                          className="cursor-pointer inline-flex items-center  text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                          className="cursor-pointer inline-flex items-center text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
                         >
                           <Image
                             src="/letter.svg"
