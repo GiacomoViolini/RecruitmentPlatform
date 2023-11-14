@@ -321,7 +321,7 @@ export default function User() {
                         {c.date}
                       </div>
                     ) : (
-                      <div className="  lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
+                      <div className=" lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
                         {c.date}
                       </div>
                     )}
