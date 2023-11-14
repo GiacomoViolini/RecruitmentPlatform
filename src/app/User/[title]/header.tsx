@@ -47,7 +47,7 @@ export default function Header({ steps, points, title }: HeaderProps) {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isWindow]);
 
   useEffect(() => {
     async function fetchDataforGraph(points: number) {
@@ -345,7 +345,7 @@ export default function Header({ steps, points, title }: HeaderProps) {
             </div>
           </div>
         </div>}
-        {isWindow && isWindow <= 1000 && <div className="visible container w-full md:w-6/12 h-96 md:px-8 my-4 flex justify-center rounded-md ">
+        {isWindow && isWindow <= 1000 && <div className="container w-full md:w-6/12 h-96 md:px-8 my-4 flex justify-center rounded-md ">
           <canvas id="PositioningChart2"></canvas>
         </div>}
       </div>

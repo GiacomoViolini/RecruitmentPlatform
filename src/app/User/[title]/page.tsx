@@ -84,39 +84,23 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
   }, []);
 
   useEffect(() => {
-    if (isWindow && isWindow >= 990) {
+    if (isWindow && isWindow > 1000) {
       setLogoLayout(
         "items-center w-44 h-44 rounded-full justify-center -translate-y-24 translate-x-16 bg-slate-50"
       );
       setDimensions(90);
       setLayoutText(
-        "text-4xl font-bold text-center pt-4 px-8 text-white -translate-y-20 translate-x-32"
+        "font-bold text-center text-white -translate-y-20 translate-x-32"
       );
-    } else if (isWindow && isWindow >= 600) {
+    } else if (isWindow && isWindow <= 1000) {
       setLogoLayout(
-        "w-24 h-24 pb-4 sm:pb-2 rounded-full -translate-y-16 translate-x-8 bg-slate-50"
+        "w-24 h-24 rounded-full -translate-y-16 translate-x-8 bg-slate-50 mr-10"
       );
       setDimensions(70);
       setLayoutText(
-        "text-md font-bold text-left pt-4 px-8 text-white -translate-y-32 translate-x-4"
+        " font-bold text-left text-white -translate-y-32 translate-x-4"
       );
-    } else if (isWindow && isWindow >= 500) {
-      setLogoLayout(
-        "w-24 h-24 pb-4 sm:pb-2 rounded-full -translate-y-16 translate-x-8 bg-slate-50"
-      );
-      setDimensions(60);
-      setLayoutText(
-        "font-bold text-left pt-4 px-8 text-white -translate-y-32 translate-x-4"
-      );
-    } else {
-      setLogoLayout(
-        "w-24 pb-8 sm:pb-4 h-24 rounded-full -translate-y-8 translate-x-8 bg-slate-50"
-      );
-      setDimensions(40);
-      setLayoutText(
-        "text-sm font-bold text-left pt-4 px-8 text-white -translate-y-40 translate-x-1"
-      );
-    }
+      }
   }, [isWindow]);
 
   var str = title;
@@ -137,7 +121,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
           <div className="p-4 bg-white h-full border border-gray-200 rounded-lg ">
             <div className="h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
-              <div className={`flex items-center justify-center ${logoLayout}`}>
+              <div className={`flex items-center justify-center text-4xl ${logoLayout}`}>
                 <Image
                   src={feedback}
                   alt="Rounded logo"
