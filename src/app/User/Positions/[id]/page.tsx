@@ -91,7 +91,12 @@ export default function Position({ params: { id } }: PositionParams) {
         .insert({
           email: user,
           applications: [
-            { steps: "1", title: Position?.title, page_id: Position?.id, points: Math.round(Math.random() * 100) },
+            {
+              steps: "1",
+              title: Position?.title,
+              page_id: Position?.id,
+              points: Math.round(Math.random() * 100),
+            },
           ],
         })
         .select();
@@ -104,7 +109,12 @@ export default function Position({ params: { id } }: PositionParams) {
         .update({
           applications: [
             ...existingData.applications,
-            { steps: "1", title: Position?.title, page_id: Position?.id, points: Math.round(Math.random() * 100) },
+            {
+              steps: "1",
+              title: Position?.title,
+              page_id: Position?.id,
+              points: Math.round(Math.random() * 100),
+            },
           ],
         })
         .eq("email", user);
@@ -122,59 +132,23 @@ export default function Position({ params: { id } }: PositionParams) {
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (Position?.ral.length!! > 8) {
-        setRalRange(true);
-      }
-    };
-    handleResize();
-  }, [Position?.ral]);
-
-  
-  useEffect(() => {
-    const handleResize = () => {
-      if (Position?.benefits.length!! > 10) {
-        console.log(Position?.benefits.length!!)
-        setBenefits(true);
-      }
-    };
-    handleResize();
-  }, [Position?.benefits]);
-
-  useEffect(() => {
-    if (isWindow && isWindow >= 1280) {
+    if (isWindow && isWindow >= 1000) {
       setLogoLayout(
         "items-center w-44 h-44  rounded-full justify-center -translate-y-32 translate-x-32 bg-white"
       );
       setDimensions(100);
       setLayoutText(
-        "text-4xl font-bold text-center pt-4 px-8 text-white -translate-y-20 translate-x-32"
-      );
-    } else if (isWindow && isWindow >= 1000) {
-      setLogoLayout(
-        "items-center w-32 h-32  rounded-full justify-center -translate-y-24 translate-x-16 bg-white"
-      );
-      setDimensions(80);
-      setLayoutText(
-        "text-xl font-bold text-center pt-4 px-8 text-white -translate-y-16 translate-x-24"
+        "text-4xl font-bold text-center text-white -translate-y-20 translate-x-32"
       );
     } else if (isWindow && isWindow >= 600) {
       setLogoLayout(
-        "items-center w-24 h-24 pb-4 sm:pb-2 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
+        "items-center w-24 h-24 sm:pb-2 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
       );
       setDimensions(30);
       setLayoutText(
-        "text-md font-bold text-left pt-4 px-8 text-white -translate-y-32 translate-x-4"
+        "text-md font-bold text-left text-white -translate-y-32 translate-x-4"
       );
-    } else {
-      setLogoLayout(
-        "items-center w-24 pb-2 sm:pb-4 h-24 pb-2 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
-      );
-      setDimensions(30);
-      setLayoutText(
-        "text-sm font-bold text-left pt-4 px-8 text-white -translate-y-40 translate-x-1"
-      );
-    }
+      }
   }, [isWindow]);
 
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -191,6 +165,7 @@ export default function Position({ params: { id } }: PositionParams) {
           });
         if (data) {
           console.log(data);
+          setDisabled(false);
         }
         if (error) {
           console.log(error);
@@ -199,8 +174,8 @@ export default function Position({ params: { id } }: PositionParams) {
         console.log(error);
       }
     }
-    setDisabled(false);
   };
+
   const handleUpload2 = async (e1: ChangeEvent<HTMLInputElement>) => {
     let file: File | undefined;
     if (e1.target.files) {
@@ -213,6 +188,12 @@ export default function Position({ params: { id } }: PositionParams) {
           .upload(`coverletter/${file.name}`, file, {
             cacheControl: "3600",
           });
+        if (data) {
+          console.log(data);
+        }
+        if (error) {
+          console.log(error);
+        }
         if (data) {
           console.log(data);
         }
@@ -245,7 +226,7 @@ export default function Position({ params: { id } }: PositionParams) {
           <div className="p-4 bg-white border border-gray-200 rounded-lg ">
             <div className=" h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
-              <div className={"flex items-center justify-center border-t-8 border-sky-800 shadow  " + logoLayout}>
+              <div className={"flex items-center justify-center" + logoLayout}>
                 <Image
                   src={logo}
                   height={dimensions}
@@ -264,7 +245,7 @@ export default function Position({ params: { id } }: PositionParams) {
                 {Position?.title ?? ""}
               </div>
             </div>
-            <div className="relative aspect-video rounded-2xl w-full h-10 py-48 lg:-translate-y-20 ">
+            <div className="relative aspect-video rounded-2xl w-full h-10 py-48  lg:-translate-y-20 ">
               <Image
                 src={Position?.images[counter] ?? ""}
                 alt="photo"
@@ -320,23 +301,50 @@ export default function Position({ params: { id } }: PositionParams) {
               <div className="flex justify-start items-center gap-2 flex-wrap">
                 {Position?.technologies?.map((tech,i) => (
                   <span key={i} className="bg-sky-200 h-12 w-40 justify-center text-center items-center flex shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
-                    {["java", "python", "r", "javascript", "html", "css", "swift", "kotlin", "typescript", "node.js", "ruby", "sql"].some(lang => tech.toLowerCase().includes(lang)) ? "👨‍💻 " + tech : "🔧 " + tech}
+                    {[
+                      "java",
+                      "python",
+                      "r",
+                      "javascript",
+                      "html",
+                      "css",
+                      "swift",
+                      "kotlin",
+                      "typescript",
+                      "node.js",
+                      "ruby",
+                      "sql",
+                    ].some((lang) => tech.toLowerCase().includes(lang))
+                      ? "👨‍💻 " + tech
+                      : "🔧 " + tech}
                   </span>
                 ))}
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Benefits</p>
-              <div className="flex justify-start items-center gap-2 flex-wrap">
+              <div className="flex justify-start w-full items-center gap-2 flex-wrap">
                 {Position?.benefits?.map((benefit,i) => (
-                  <span key={id} className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
-                    {benefit}
+                  <span key={i}
+                    className={`${
+                      benefits
+                        ? "bg-sky-200 h-12 text-center w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
+                        : "bg-sky-200 h-12 text-center w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
+                    }`}
+                  >
+                    {benefit.toLowerCase().includes("insurance")
+                      ? "🏥 " + benefit
+                      : benefit.toLowerCase().includes("schedule")
+                      ? "🗓 " + benefit
+                      : benefit.toLowerCase().includes("remote")
+                      ? "🏠 " + benefit
+                      : benefit}
                   </span>
                 ))}
               </div>
-              <p className="py-4 text-2xl font-bold tracking-tight">Events</p>
+              <h2 className=" text-2xl font-bold tracking-tight">Events</h2>
               <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
                 {Position?.events?.map((event,i) => (
-                  <span key={i} className="bg-sky-200 h-16 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
-                    {event}
+                  <span key={i} className="bg-sky-200 h-12 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
+                    {"🎉 " + event}
                   </span>
                 ))}
               </div>
@@ -357,56 +365,59 @@ export default function Position({ params: { id } }: PositionParams) {
                       Apply
                     </button>
                   </div>
-                  <div className="flex flex-row justify-evenly items-center pl-8 sm:pt-8 pb-2">
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="">
-                      <div
-                        onClick={handlecv}
-                        className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
-                      >
-                        <Image
-                          src="/cv.svg"
-                          alt="cv"
-                          width={20}
-                          height={20}
-                        />
-                        <input
-                          type="file"
-                          className="hidden"
-                          ref={ref}
-                          onChange={(e) => handleUpload(e)}
-                        />
+                  <div className="flex flex-row justify-evenly items-center ml-6">
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="">
+                        <div
+                          onClick={handlecv}
+                          className="cursor-pointer inline-flex items-center px-3 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                        >
+                          <Image
+                            src="/cv.svg"
+                            alt="cv"
+                            width={20}
+                            height={20}
+                          />
+                          <input
+                            type="file"
+                            className="hidden"
+                            ref={ref}
+                            onChange={(e) => handleUpload(e)}
+                          />
+                        </div>
                       </div>
+                      <h3 className="text-xs sm:text-md text-center sm:text-start font-bold tracking-tight text-blue-600">
+                        Upload your CV
+                      </h3>
                     </div>
-                    <h3 className="text-xs sm:text-md text-center sm:text-start font-bold tracking-tight text-blue-600">
-                      Upload your CV
-                    </h3>
-                  </div>
-                  <div className=" flex flex-col items-center pl-4 gap-2">
-                    <div className="">
-                      <div
-                        onClick={handlecoverletter}
-                        className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
-                      >
-                        <Image
-                          src="/letter.svg"
-                          alt="coverletter"
-                          width={20}
-                          height={20}
-                        />
-                        <input
-                          type="file"
-                          className="hidden"
-                          ref={ref1}
-                          onChange={(e1) => handleUpload2(e1)}
-                        />
+                    <div className=" flex flex-col items-center gap-2 ml-4">
+                      <div className="">
+                        <div
+                          onClick={handlecoverletter}
+                          className="cursor-pointer inline-flex items-center  text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                        >
+                          <Image
+                            src="/letter.svg"
+                            alt="coverletter"
+                            width={20}
+                            height={20}
+                          />
+                          <input
+                            type="file"
+                            className="hidden"
+                            ref={ref1}
+                            onChange={(e1) => handleUpload2(e1)}
+                          />
+                        </div>
                       </div>
+                      <h3
+                        className="text-xs sm:text-md text-center sm:text-start font-bold         
+                    tracking-tight text-blue-600"
+                      >
+                        Upload your Cover Letter
+                      </h3>
                     </div>
-                    <h3 className="text-xs sm:text-md text-center sm:text-start font-bold tracking-tight text-blue-600">
-                      Upload your Cover Letter
-                    </h3>
                   </div>
-                </div>
                 </div>
               </div>
             </div>

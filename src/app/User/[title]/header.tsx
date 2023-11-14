@@ -360,11 +360,9 @@ export default function Header({ steps, points, title }: HeaderProps) {
         <div className="grid grid-cols-2 justify-start items-start gap-4 lg:gap-14">
           {questions?.map((q, i) => (
             <div className="flex flex-col gap-6 flex-wrap items-center" key={i}>
-              <div className="bg-sky-100 h-24 w-full lg:w-1/2 flex justify-center items-center shadow-xl rounded-3xl px-3 py-2 text-2xl font-bold text-sky-800 mb-5">
-                <h2 className="text-2xl font-bold text-center md:text-start px-8  text-blue-500">
+              <h2 className="bg-sky-100 h-24 w-full lg:w-1/2 flex justify-center items-center shadow rounded-3xl px-3 py-2 text-2xl font-bold text-sky-800 mb-5">
                   {i === 0 ? "Technical Assessment" : i === 1 ? "Technical Interview" : i === 2 ? "Behavioral Interview" : "Team Work Session Simulation"}
-                </h2>
-              </div>
+              </h2>
               {q.questions.map((question, j) => (
                 <span
                   className="bg-sky-200  h-60 lg:h-20 w-full flex justify-center items-center shadow-md rounded-md  px-2 lg:px-5 py-2 text-base font-semibold text-sky-700"

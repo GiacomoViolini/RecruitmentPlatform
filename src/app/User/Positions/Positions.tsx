@@ -63,7 +63,7 @@ export default function Positions({ searchPosition }: PositionsProps) {
   }, [isWindow]);
 
   return (
-    <div className="flex justify-between lg:pt-32 pt-10  lg:mx-5 mx-3 items-center  cursor:pointer">
+    <div className="flex justify-between lg:pt-32 pt-10 lg:mx-5 mx-3 items-center  cursor:pointer">
       <div className={"grid " + layout + "pb-8"}>
         {positions.map((position) => (
           <div key={position.id}>
