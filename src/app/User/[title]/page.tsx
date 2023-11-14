@@ -86,7 +86,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
   useEffect(() => {
     if (isWindow && isWindow >= 990) {
       setLogoLayout(
-        "items-center w-44 h-44 rounded-full justify-center -translate-y-24 translate-x-16 bg-white"
+        "items-center w-44 h-44 rounded-full justify-center -translate-y-24 translate-x-16"
       );
       setDimensions(90);
       setLayoutText(
@@ -94,7 +94,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
       );
     } else if (isWindow && isWindow >= 600) {
       setLogoLayout(
-        "items-center w-24 h-24 pb-4 sm:pb-2 rounded-full justify-center -translate-y-16 translate-x-8 bg-white"
+        "items-center w-24 h-24 pb-4 sm:pb-2 rounded-full justify-center -translate-y-16 translate-x-8"
       );
       setDimensions(70);
       setLayoutText(
@@ -102,7 +102,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
       );
     } else if (isWindow && isWindow >= 500) {
       setLogoLayout(
-        "items-center w-24 h-24 pb-4 sm:pb-2 rounded-full justify-center -translate-y-16 translate-x-8 bg-white"
+        "items-center w-24 h-24 pb-4 sm:pb-2 rounded-full justify-center -translate-y-16 translate-x-8"
       );
       setDimensions(60);
       setLayoutText(
@@ -110,7 +110,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
       );
     } else {
       setLogoLayout(
-        "items-center w-24 pb-8 sm:pb-4 h-24 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
+        "items-center w-24 pb-8 sm:pb-4 h-24 rounded-full justify-center -translate-y-8 translate-x-8"
       );
       setDimensions(40);
       setLayoutText(
@@ -133,7 +133,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
     <>
       <div className="bg-slate-100 h-full z-0">
         <Navbar />
-        <div className="bg-slate-100 h-full pt-28 pb-8 px-4 rounded-md z-0 ">
+        <div className="bg-slate-200 h-full pt-28 pb-8 px-6 rounded-md z-0 ">
           <div className="p-4 bg-white h-full border border-gray-200 rounded-lg ">
             <div className=" h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
