@@ -40,6 +40,7 @@ export default function Position({ params: { id } }: PositionParams) {
   const [dimensions, setDimensions] = useState(0);
   const [layoutText, setLayoutText] = useState("");
   const [ralRange, setRalRange] = useState(false);
+  const [benefits, setBenefits] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [buttonSwitch, setButtonSwitch] = useState(true);
 
@@ -128,6 +129,17 @@ export default function Position({ params: { id } }: PositionParams) {
     };
     handleResize();
   }, [Position?.ral]);
+
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (Position?.benefits.length!! > 10) {
+        console.log(Position?.benefits.length!!)
+        setBenefits(true);
+      }
+    };
+    handleResize();
+  }, [Position?.benefits]);
 
   useEffect(() => {
     if (isWindow && isWindow >= 1280) {
@@ -272,24 +284,24 @@ export default function Position({ params: { id } }: PositionParams) {
               </p>
               <p className="py-4 text-2xl font-bold tracking-tight">BS</p>
               {ralRange ? (
-                <span className="bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                <span className="bg-sky-200 h-12 w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                   {"💸 " + Position?.ral}
                 </span>
               ) : (
-                <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                <span className="bg-sky-200 h-12 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                   {"💸 " + Position?.ral}
                 </span>
               )}
               <p className="py-4 text-2xl font-bold tracking-tight">
                 Experience
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+              <span className=" bg-sky-200 flex justify-center items-center h-12 w-56 shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                 {"👨🏽‍💻 " + Position?.experience} years of experience
               </span>
               <p className="py-4 text-2xl font-bold tracking-tight">
                 Type of contract
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+              <span className=" bg-sky-200 flex justify-center items-center sm:20 md:h-12 sm:80 md:w-96 shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                 {Position?.type.includes("hybrid" && "Hybrid")
                   ? "🏠" + "🏬" + Position?.type
                   : Position?.type === "Full remote"
@@ -299,23 +311,29 @@ export default function Position({ params: { id } }: PositionParams) {
               <p className="py-4 text-2xl font-bold tracking-tight">
                 Average living cost per person for this location
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+              <span className=" bg-sky-200 flex justify-center items-center h-12 w-56 shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                 {"💸 " + Position?.livingcost}
               </span>
               <p className="py-4 text-2xl font-bold tracking-tight">
-                Tools
+                Tools/Skill required
               </p>
               <div className="flex justify-start items-center gap-2 flex-wrap">
                 {Position?.technologies?.map((tech) => (
-                  <span className="bg-sky-200 h-10 w-40 justify-center items-center flex shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
-                    {tech}
+                  <span className="bg-sky-200 h-12 w-40 justify-center text-center items-center flex shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
+                    {tech.toLowerCase().includes("insurance") ? "🏥 " + tech : tech.toLowerCase().includes("schedule") ? "🗓️ " + tech : tech.toLowerCase().includes("remote") ? "🏠 " + tech : tech}
                   </span>
                 ))}
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Benefits</p>
-              <div className="flex justify-start items-center gap-2 flex-wrap">
-                {Position?.benefits?.map((benefit) => (
-                  <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+              <div className="flex justify-start w-full items-center gap-2 flex-wrap">
+              {Position?.benefits?.map((benefit) => (
+                  <span
+                    className={`${
+                      benefits
+                        ? "bg-sky-200 h-12 text-center w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
+                        : "bg-sky-200 h-12 text-center w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
+                    }`}
+                  >
                     {benefit}
                   </span>
                 ))}
@@ -323,8 +341,8 @@ export default function Position({ params: { id } }: PositionParams) {
               <p className="py-4 text-2xl font-bold tracking-tight">Events</p>
               <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
                 {Position?.events?.map((event) => (
-                  <span className="bg-sky-200 h-10 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
-                    {event}
+                  <span className="bg-sky-200 h-12 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
+                    {"🎉 "+ event}
                   </span>
                 ))}
               </div>
@@ -366,7 +384,7 @@ export default function Position({ params: { id } }: PositionParams) {
                         />
                       </div>
                     </div>
-                    <h3 className="text-xs sm:text-xl hidden lg:visible text-center sm:text-start font-bold tracking-tight text-blue-600">
+                    <h3 className="text-xs sm:text-xl invisible hover:visible text-center sm:text-start font-bold tracking-tight text-blue-600">
                       Upload your CV
                     </h3>
                   </div>

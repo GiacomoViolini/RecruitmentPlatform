@@ -209,18 +209,18 @@ useEffect(() => {
           label: "Ranking",
           data: Positioning,
           backgroundColor: [
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
+            "rgba(30, 160, 240, 0.2)",
+            "rgba(30, 160, 240, 0.2)",
+            "rgba(30, 160, 240, 0.2)",
+            "rgba(30, 160, 240, 0.2)",
+            "rgba(30, 160, 240, 0.2)",
           ],
           borderColor: [
-            "rgba(54, 162, 235, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(54, 162, 235, 1)",
+            "rgba(30, 160, 240, 1)",
+            "rgba(30, 160, 240, 1)",
+            "rgba(30, 160, 240, 1)",
+            "rgba(30, 160, 240, 1)",
+            "rgba(30, 160, 240, 1)",
           ],
           borderWidth: 1,
         },
@@ -250,11 +250,11 @@ useEffect(() => {
           <canvas id="myChart"></canvas>
         </div>
       </div>
-        <div className="flex flex-col w-full pt-2 md:pt-24 -translate-y-32 md:-translate-y-0">
-            <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 translate-y-40 md:-translate-y-10 text-blue-500">
+        <div className="flex flex-col w-full pt-0 md:pt-24 -translate-y-32 md:-translate-y-0">
+            <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 translate-y-44 md:-translate-y-10 text-blue-500">
                 Your positioning relative to the other candidates
             </div>
-            <div className="flex w-full lg:flex-row flex-col items-center -translate-y-10 sm:pt-16 justify-between">
+            <div className="flex w-full lg:flex-row flex-col items-center -translate-y-30 sm:pt-16 justify-between">
               <div className="container w-full lg:w-6/12 md:visible invisible md:h-80 pt-12 md:pt-8 lg:pt-0 px-8 rounded-md py-2">
                   <canvas id="PositioningChart"></canvas>
               </div>
@@ -278,7 +278,7 @@ useEffect(() => {
                   </div>
               </div>
             </div>
-            <div className=" visible md:invisible container w-full md:w-6/12 h-96 md:px-8 pr-8 pt-4 -translate-y-80 rounded-md ">
+            <div className=" visible md:invisible container w-full md:w-6/12 h-96 md:px-8 pr-8 -translate-y-80 rounded-md ">
               <canvas id="PositioningChart2"></canvas>
             </div>
         </div>

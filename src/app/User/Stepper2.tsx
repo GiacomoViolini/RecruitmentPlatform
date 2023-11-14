@@ -10,7 +10,7 @@ function Stepper2(step: StepperProps) {
   const currentStep = step;
   return (
     <div className="stepper-container">
-      <div className="stepper w-40">
+      <div className="stepper w-60 px-12">
         {steps.map((step, index) => (
           <div
             key={step}

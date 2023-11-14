@@ -6,7 +6,6 @@ import supabase from "../../../utils/supabase";
 import Stepper from "./Stepper";
 import Stepper2 from "./Stepper2";
 import Link from "next/link";
-import Image from "next/image";
 
 const gradientText = {
   background: "linear-gradient(45deg,  #0074E4, #00A3E1, #00C9FF)",
@@ -20,6 +19,7 @@ interface Info {
   title: string;
   steps: number;
   page_id: number;
+  date: string;
 }
 
 interface Info2 {
@@ -107,7 +107,7 @@ export default function User() {
       >
         Welcome!
       </h1>
-      <div className="bg-white flex justify-center mt-20 lg:ml-32 ml-10 w-10/12 rounded-xl shadow-xl">
+      <div className="bg-white flex justify-center mt-20 lg:ml-32 sm:ml-10 sm:px-0 mx-4 sm:w-10/12 w-11/12 rounded-xl shadow-xl">
         <div className="flex flex-col sm:items-start lg:p-7 p-4">
           <h2 className="lg:text-4xl text-2xl mb-10 font-bold text-sky-800">
             My Applications
@@ -120,16 +120,16 @@ export default function User() {
             <>
               {isWindow!! >= 1500 ? (
                 <div className="grid grid-cols-4 w-full rounded-t-md bg-sky-500 divide-white items-center">
-                  <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
+                  <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
                     Positions
                   </div>
-                  <div className="items-center justify-center px-8 flex text-3xl h-20 font-semibold text-white">
+                  <div className="items-center justify-center px-8 flex text-3xl h-20 font-bold text-white">
                     Steps Completed
                   </div>
-                  <div className="items-center justify-center px-8 flex text-3xl h-20 font-semibold text-white">
+                  <div className="items-center justify-center px-8 flex text-3xl h-20 font-bold text-white">
                     Progress
                   </div>
-                  <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
+                  <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
                     Feedback
                   </div>
                 </div>
@@ -218,7 +218,7 @@ export default function User() {
               ))}
         </div>
       </div>
-        <div className="bg-white justify-center flex mt-20 lg:ml-32 ml-10 w-10/12 rounded-xl shadow-xl">
+        <div className="bg-white justify-center flex mt-20 lg:ml-32 sm:ml-10 sm:px-0 mx-4 sm:w-10/12 w-11/12 rounded-xl shadow-xl">
           <div className="flex flex-col sm:items-start lg:p-7 p-4">
             <h2 className="lg:text-4xl text-2xl mb-10 font-bold text-sky-800">
               My Challenges
@@ -231,29 +231,29 @@ export default function User() {
               <>
                 {isWindow!! >= 1500 ? (
                   <div className="grid grid-cols-4 w-full rounded-t-md bg-sky-500 divide-white items-center">
-                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
+                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
                       Challenges
                     </div>
-                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
+                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
                       Steps Completed
                     </div>
-                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
+                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
                       Progress
                     </div>
-                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-semibold text-white">
-                      Feedback
+                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
+                      Starting Date
                     </div>
                   </div>
                 ) : (
                   <div className="grid grid-cols-3 w-full rounded-tl-md rounded-tr-md bg-sky-500 divide-white items-center">
-                    <div className="items-center sm:px-16 flex justify-center rounded-tl-md h-20 lg:text-2xl text-sm font-bold text-white">
+                    <div className="items-center sm:px-16 md:px-20 px-8 flex justify-center rounded-tl-md h-20 lg:text-2xl text-sm font-bold text-white">
                       Challenges
                     </div>
-                    <div className="items-center sm:px-16 flex justify-center lg:text-2xl text-sm font-bold text-white">
+                    <div className="items-center sm:px-16 md:px-24 px-8 flex justify-center lg:text-2xl text-sm font-bold text-white">
                       Progress
                     </div>
-                    <div className="items-center sm:px-16 flex justify-center lg:text-2xl rounded-tr-md h-20 text-sm font-bold text-white">
-                      Feedback
+                    <div className="items-center sm:px-16 md:px-20 px-8 flex justify-center lg:text-2xl rounded-tr-md h-20 text-sm font-bold text-white">
+                      Starting Date
                     </div>
                   </div>
                 )}
@@ -286,11 +286,11 @@ export default function User() {
                     </div>
                     {challenges.indexOf(c) === challengesNumber - 1 ? (
                       <div className=" lg:text-xl rounded-br-md font-bold hover:text-sky-400 border-b border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
-                        <Link href={`/User/${c.title}`}>View Feedback</Link>
+                        {c.date}
                       </div>
                     ) : (
                       <div className="  lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
-                        <Link href={`/User/${c.title}`}>View Feedback</Link>
+                        {c.date}
                       </div>
                     )}
                   </div>
@@ -318,11 +318,11 @@ export default function User() {
                     </div>
                     {challenges.indexOf(c) === challengesNumber - 1 ? (
                       <div className=" lg:text-xl rounded-br-md font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
-                        <Link href={`/User/${c.title}`}>View Feedback</Link>
+                        {c.date}
                       </div>
                     ) : (
                       <div className="  lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
-                        <Link href={`/User/${c.title}`}>View Feedback</Link>
+                        {c.date}
                       </div>
                     )}
                   </div>

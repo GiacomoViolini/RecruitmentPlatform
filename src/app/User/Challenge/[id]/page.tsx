@@ -12,6 +12,7 @@ interface ChallengeProps {
   img: string;
   desc: string;
   prize: string;
+  date: string;
 }
 
 interface ChallengeParams {
@@ -63,7 +64,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         .insert({
           email: user,
           challenges: [
-            { steps: "1", title: challenge?.title, page_id: challenge?.id },
+            { steps: "1", title: challenge?.title, page_id: challenge?.id, date: challenge?.date },
           ],
         })
         .select();
@@ -79,7 +80,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         .update({
           challenges: [
             ...existingData.challenges,
-            { steps: "1", title: challenge?.title, page_id: challenge?.id },
+            { steps: "1", title: challenge?.title, page_id: challenge?.id, date: challenge?.date },
           ],
         })
         .eq("email", user);
