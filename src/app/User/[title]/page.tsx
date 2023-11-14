@@ -86,7 +86,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
   useEffect(() => {
     if (isWindow && isWindow >= 990) {
       setLogoLayout(
-        "items-center w-44 h-44 rounded-full justify-center -translate-y-24 translate-x-16 bg-white"
+        "items-center w-44 h-44 rounded-full justify-center -translate-y-24 translate-x-16 bg-slate-50"
       );
       setDimensions(90);
       setLayoutText(
@@ -94,7 +94,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
       );
     } else if (isWindow && isWindow >= 600) {
       setLogoLayout(
-        "items-center w-24 h-24 pb-4 sm:pb-2 rounded-full justify-center -translate-y-16 translate-x-8 bg-white"
+        "w-24 h-24 pb-4 sm:pb-2 rounded-full -translate-y-16 translate-x-8 bg-slate-50"
       );
       setDimensions(70);
       setLayoutText(
@@ -102,15 +102,15 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
       );
     } else if (isWindow && isWindow >= 500) {
       setLogoLayout(
-        "items-center w-24 h-24 pb-4 sm:pb-2 rounded-full justify-center -translate-y-16 translate-x-8 bg-white"
+        "w-24 h-24 pb-4 sm:pb-2 rounded-full -translate-y-16 translate-x-8 bg-slate-50"
       );
       setDimensions(60);
       setLayoutText(
-        "text-md font-bold text-left pt-4 px-8 text-white -translate-y-32 translate-x-4"
+        "font-bold text-left pt-4 px-8 text-white -translate-y-32 translate-x-4"
       );
     } else {
       setLogoLayout(
-        "items-center w-24 pb-8 sm:pb-4 h-24 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
+        "w-24 pb-8 sm:pb-4 h-24 rounded-full -translate-y-8 translate-x-8 bg-slate-50"
       );
       setDimensions(40);
       setLayoutText(
@@ -133,11 +133,11 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
     <>
       <div className="bg-slate-100 h-full z-0">
         <Navbar />
-        <div className="bg-slate-100 h-full pt-28 pb-8 px-4 rounded-md z-0 ">
+        <div className="bg-slate-200 h-full pt-28 pb-8 px-3 lg:px-6 rounded-md z-0 ">
           <div className="p-4 bg-white h-full border border-gray-200 rounded-lg ">
-            <div className=" h-48 rounded-lg bg-blue-500"></div>
+            <div className="h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
-              <div className={"flex items-center justify-center" + logoLayout}>
+              <div className={`flex items-center justify-center ${logoLayout}`}>
                 <Image
                   src={feedback}
                   alt="Rounded logo"
@@ -149,7 +149,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
               </div>
               <div
                 className={
-                  "text-4xl font-bold text-center pt-8 px-8 text-white -translate-y-20 translate-x-32" +
+                  "text-4xl font-bold text-center text-white " +
                   layoutText
                 }
               >
@@ -157,12 +157,10 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
               </div>
             </div>
               <div className="flex flex-col justify-center md:justify-start w-full">
-                <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 -translate-y-10 text-blue-500">
+                <div className="text-3xl font-bold text-center md:text-start px-8 text-blue-500">
                   Feedback review on your {stepProcess[steps ?? 0]}
                 </div>
                 <Header steps={steps ?? 0} points={points ?? 0} title={replacedTitle}/>
-                <div className="flex flex-row h-80 justify-center items-center gap-4">
-                </div>
               </div>
             </div>
           </div>
