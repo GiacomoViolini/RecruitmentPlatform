@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "../navbar";
+import Navbar from "../../components/Navigation/navbar";
 import supabase from "../../../../utils/supabase";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -40,39 +40,39 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
   }, []);
 
   useEffect(() => {
-      async function fetchPositions() {
-        const { data, error } = await supabase
-          .from("Home_Positions")
-          .select("*")
-          .eq("email", user)
-          .maybeSingle();
-        if (data) {
-          setApplications(data.applications);
-        }
-        if (error) {
-          console.log(error);
-        }
+    async function fetchPositions() {
+      const { data, error } = await supabase
+        .from("Home_Positions")
+        .select("*")
+        .eq("email", user)
+        .maybeSingle();
+      if (data) {
+        setApplications(data.applications);
       }
-      fetchPositions();
-    }, [user]);
+      if (error) {
+        console.log(error);
+      }
+    }
+    fetchPositions();
+  }, [user]);
 
-    useEffect(() => {
-      async function fetchSteps() {
-        const stringa = title;
-        const deleteSpace = stringa.replace("%20", " ");
-        console.log(deleteSpace);
-        for (let i = 0; i < 5; i++) {
-          if (applications[i] && applications[i].title === deleteSpace) {
-            console.log(applications[i].steps);
-            setSteps(applications[i].steps);
-            setPoints(applications[i].points);
-            console.log(applications[i].title);
-          }
+  useEffect(() => {
+    async function fetchSteps() {
+      const stringa = title;
+      const deleteSpace = stringa.replace("%20", " ");
+      console.log(deleteSpace);
+      for (let i = 0; i < 5; i++) {
+        if (applications[i] && applications[i].title === deleteSpace) {
+          console.log(applications[i].steps);
+          setSteps(applications[i].steps);
+          setPoints(applications[i].points);
+          console.log(applications[i].title);
         }
       }
-      fetchSteps();
-      console.log(points);
-    }, [applications]);
+    }
+    fetchSteps();
+    console.log(points);
+  }, [applications]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -100,18 +100,18 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
       setLayoutText(
         " font-bold text-left text-white -translate-y-32 translate-x-4"
       );
-      }
+    }
   }, [isWindow]);
 
   var str = title;
   var replacedTitle = str.replace("%20", " ");
 
-  const stepProcess: {[key: number]: string} = {
+  const stepProcess: { [key: number]: string } = {
     1: "Technical Assessment",
     2: "Technical Interview",
     3: "Behavioral Interview",
-    4: "Team Work Session Simulation"
-  }
+    4: "Team Work Session Simulation",
+  };
 
   return (
     <>
@@ -121,7 +121,9 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
           <div className="p-4 bg-white h-full border border-gray-200 rounded-lg ">
             <div className="h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
-              <div className={`flex items-center justify-center text-4xl bg-white border-t-8 shadow border-sky-800 ${logoLayout}`}>
+              <div
+                className={`flex items-center justify-center text-4xl bg-white border-t-8 shadow border-sky-800 ${logoLayout}`}
+              >
                 <Image
                   src={feedback}
                   alt="Rounded logo"
@@ -133,22 +135,25 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
               </div>
               <div
                 className={
-                  "text-4xl font-bold text-center text-white " +
-                  layoutText
+                  "text-4xl font-bold text-center text-white " + layoutText
                 }
               >
                 {replacedTitle ?? ""}
               </div>
             </div>
-              <div className="flex flex-col justify-center md:justify-start w-full">
-                <div className="text-3xl font-bold text-center md:text-start px-8 text-blue-500">
-                  Feedback review on your {stepProcess[steps ?? 0]}
-                </div>
-                <Header steps={steps ?? 0} points={points ?? 0} title={replacedTitle}/>
+            <div className="flex flex-col justify-center md:justify-start w-full">
+              <div className="text-3xl font-bold text-center md:text-start px-8 text-blue-500">
+                Feedback review on your {stepProcess[steps ?? 0]}
               </div>
+              <Header
+                steps={steps ?? 0}
+                points={points ?? 0}
+                title={replacedTitle}
+              />
             </div>
           </div>
         </div>
+      </div>
     </>
   );
 }

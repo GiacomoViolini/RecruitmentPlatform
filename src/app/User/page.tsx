@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "./navbar";
+import Navbar from "../components/Navigation/navbar";
 import supabase from "../../../utils/supabase";
-import Stepper from "./Stepper";
-import Stepper2 from "./Stepper2";
+import Stepper from "../components/HomeSection/Stepper";
+import Stepper2 from "../components/HomeSection/Stepper2";
 import Link from "next/link";
 
 const gradientText = {
@@ -15,14 +15,14 @@ const gradientText = {
   display: "inline-block",
 };
 
-interface Info {
+interface Challenge {
   title: string;
   steps: number;
   page_id: number;
   date: string;
 }
 
-interface Info2 {
+interface Position {
   title: string;
   steps: number;
   page_id: number;
@@ -30,8 +30,8 @@ interface Info2 {
 }
 
 export default function User() {
-  const [applications, setApplications] = useState<Info2[]>([]);
-  const [challenges, setChallenges] = useState<Info[]>([]);
+  const [applications, setApplications] = useState<Position[]>([]);
+  const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [user, setUser] = useState<string>();
   const [isWindow, setIsWindow] = useState<number | undefined>();
   const [applicationsNumber, setApplicationsNumber] = useState<number>(0);
@@ -117,218 +117,132 @@ export default function User() {
               No applications yet
             </h1>
           ) : (
-            <>
-              {isWindow!! >= 1500 ? (
-                <div className="grid grid-cols-4 w-full rounded-t-md bg-sky-500 divide-white items-center">
-                  <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
-                    Positions
-                  </div>
-                  <div className="items-center justify-center px-8 flex text-3xl h-20 font-bold text-white">
-                    Steps Completed
-                  </div>
-                  <div className="items-center justify-center px-8 flex text-3xl h-20 font-bold text-white">
-                    Progress
-                  </div>
-                  <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
-                    Feedback
-                  </div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-3 w-full rounded-t-md bg-sky-500 divide-white items-center">
-                  <div className="items-center sm:px-16 flex justify-center rounded-tl-md h-20 lg:text-2xl text-sm font-bold text-white">
-                    Positions
-                  </div>
-                  <div className="items-center sm:px-16 flex justify-center h-20 lg:text-2xl text-sm font-bold text-white">
-                    Progress
-                  </div>
-                  <div className="items-center sm:px-16 flex justify-center rounded-tr-md h-20 lg:text-2xl text-sm font-bold text-white">
-                    Feedback
-                  </div>
+            <div
+              className={`grid ${
+                isWindow && isWindow >= 1000 ? "grid-cols-4" : "grid-cols-3"
+              } w-full rounded-t-md bg-sky-500 divide-white items-center justify-between`}
+            >
+              <div className="items-center justify-center flex h-20 lg:text-3xl text-xl font-bold text-white">
+                Positions
+              </div>
+              {isWindow && isWindow >= 1000 && (
+                <div className="items-center justify-center  flex lg:text-3xl text-xl h-20 font-bold text-white">
+                  Steps Completed
                 </div>
               )}
-            </>
+              <div className="items-center justify-center flex lg:text-3xl text-xl h-20 font-bold text-white">
+                Progress
+              </div>
+              <div className="items-center justify-center  flex h-20 lg:text-3xl text-xl font-bold text-white">
+                Feedback
+              </div>
+            </div>
           )}
-          {isWindow!! >= 1500
-            ? applications.map((c: Info2) => (
-                <div
-                  key={c.title}
-                  className="grid grid-cols-4 w-full hover:bg-sky-50 bg-white items-center"
-                >
-                  {applications.indexOf(c) === applicationsNumber - 1 ? (
-                    <div className="lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-8 flex justify-start font-bold text-sky-700">
-                      <Link href={`/User/Positions/${c.page_id}`}>
-                        {c.title}
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s border-sky-500 h-20 sm:px-8 flex justify-start font-bold text-sky-700">
-                      <Link href={`/User/Positions/${c.page_id}`}>
-                        {c.title}
-                      </Link>
-                    </div>
-                  )}
-                  <div className="px-12 flex justify-center h-20 border-b  border-sky-500">
-                    <Stepper steps={c.steps} />
-                  </div>
-                  <div className="lg:text-xl text-xs font-bold h-20 border-b border-sky-500 text-sky-700 text-md items-center sm:px-12 flex justify-center">
-                    {c.steps}/5
-                  </div>
-                  {applications.indexOf(c) === applicationsNumber - 1 ? (
-                    <div className=" lg:text-xl rounded-br-md font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
-                      <Link href={`/User/${c.title}`}>View Feedback</Link>
-                    </div>
-                  ) : (
-                    <div className=" lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
-                      <Link href={`/User/${c.title}`}>View Feedback</Link>
-                    </div>
-                  )}
+          {applications.map((c: Position) => (
+            <div
+              key={c.title}
+              className={`grid ${
+                isWindow && isWindow >= 1000 ? "grid-cols-4" : "grid-cols-3"
+              } w-full hover:bg-sky-50 bg-white items-center`}
+            >
+              <div
+                className={`lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s ${
+                  applications.indexOf(c) === applicationsNumber - 1
+                    ? "rounded-bl-md"
+                    : ""
+                } border-sky-500 h-20 justify-center flex font-bold text-sky-700 pl-2`}
+              >
+                <Link href={`/User/Positions/${c.page_id}`}>{c.title}</Link>
+              </div>
+              {isWindow && isWindow >= 1000 && (
+                <div className="px-12 flex justify-center h-20 border-b  border-sky-500">
+                  <Stepper steps={c.steps} />
                 </div>
-              ))
-            : applications.map((c: Info2) => (
-                <div
-                  key={c.title}
-                  className="grid grid-cols-3 w-full hover:bg-sky-50 bg-white items-center"
-                >
-                  {applications.indexOf(c) === applicationsNumber - 1 ? (
-                    <div className="lg:text-xl underline decoration-sky-600 hover:decoration-sky-300 text-sm items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-16 px-4 flex justify-start font-bold text-sky-700">
-                      <Link href={`/User/Positions/${c.page_id}`}>
-                        {c.title}
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="lg:text-xl text-sm underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s border-sky-500 h-20 sm:px-16 px-4 flex justify-start font-bold text-sky-700">
-                      <Link href={`/User/Positions/${c.page_id}`}>
-                        {c.title}
-                      </Link>
-                    </div>
-                  )}
-                  <div className="lg:text-xl text-xs font-bold h-20 border-b border-sky-500 text-sky-700 text-md items-center sm:px-16 px-4 flex justify-center">
-                    {c.steps}/5
-                  </div>
-                  {applications.indexOf(c) === applicationsNumber - 1 ? (
-                    <div className=" lg:text-xl rounded-br-md font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
-                      <Link href={`/User/${c.title}`}>View Feedback</Link>
-                    </div>
-                  ) : (
-                    <div className=" lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
-                      <Link href={`/User/${c.title}`}>View Feedback</Link>
-                    </div>
-                  )}
-                </div>
-              ))}
+              )}
+              <div className="lg:text-xl text-xs font-bold h-20 border-b border-sky-500 text-sky-700 text-md items-center flex justify-center">
+                {c.steps}/5
+              </div>
+              <div
+                className={`lg:text-xl ${
+                  applications.indexOf(c) === applicationsNumber - 1
+                    ? "rounded-br-md"
+                    : ""
+                } font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-sm h-20 items-center  flex justify-center`}
+              >
+                <Link href={`/User/${c.title}`}>View Feedback</Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-        <div className="bg-white justify-center flex mt-20 lg:ml-32 sm:ml-10 sm:px-0 mx-4 sm:w-10/12 w-11/12 rounded-xl shadow-xl">
-          <div className="flex flex-col sm:items-start lg:p-7 p-4">
-            <h2 className="lg:text-4xl text-2xl mb-10 font-bold text-sky-800">
-              My Challenges
-            </h2>
-            {challenges.length === 0 ? (
-              <h1 className="text-lg font-semibold text-gray-800 mb-4">
-                No Challenge yet
-              </h1>
-            ) : (
-              <>
-                {isWindow!! >= 1500 ? (
-                  <div className="grid grid-cols-4 w-full rounded-t-md bg-sky-500 divide-white items-center">
-                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
-                      Challenges
-                    </div>
-                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
-                      Steps Completed
-                    </div>
-                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
-                      Progress
-                    </div>
-                    <div className="items-center justify-center px-8 flex h-20 text-3xl font-bold text-white">
-                      Starting Date
-                    </div>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-3 w-full rounded-tl-md rounded-tr-md bg-sky-500 divide-white items-center">
-                    <div className="items-center sm:px-16 md:px-20 px-8 flex justify-center rounded-tl-md h-20 lg:text-2xl text-sm font-bold text-white">
-                      Challenges
-                    </div>
-                    <div className="items-center sm:px-16 md:px-24 px-8 flex justify-center lg:text-2xl text-sm font-bold text-white">
-                      Progress
-                    </div>
-                    <div className="items-center sm:px-16 md:px-20 px-8 flex justify-center lg:text-2xl rounded-tr-md h-20 text-sm font-bold text-white">
-                      Starting Date
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
-            {isWindow!! >= 1500
-              ? challenges.map((c: Info) => (
-                  <div
-                    key={c.title}
-                    className="grid grid-cols-4 w-full hover:bg-sky-50 bg-white items-center"
-                  >
-                    {challenges.indexOf(c) === challengesNumber - 1 ? (
-                      <div className="lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-8 flex justify-start font-bold text-sky-700">
-                        <Link href={`/User/Challenge/${c.page_id}`}>
-                          {c.title}
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s border-sky-500 h-20 sm:px-8 flex justify-start font-bold text-sky-700">
-                        <Link href={`/User/Challenge/${c.page_id}`}>
-                          {c.title}
-                        </Link>
-                      </div>
-                    )}
-                    <div className="px-12 flex justify-center h-20 border-b  border-sky-500">
-                      <Stepper2 steps={c.steps} />
-                    </div>
-                    <div className="lg:text-xl text-xs font-bold h-20 border-b border-sky-500 text-sky-700 text-md items-center sm:px-12 flex justify-center">
-                      {c.steps}/3
-                    </div>
-                    {challenges.indexOf(c) === challengesNumber - 1 ? (
-                      <div className=" lg:text-xl rounded-br-md font-bold hover:text-sky-400 border-b border-e border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
-                        {c.date}
-                      </div>
-                    ) : (
-                      <div className="  lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-md h-20 items-center sm:px-12 flex justify-center">
-                        {c.date}
-                      </div>
-                    )}
-                  </div>
-                ))
-              : challenges.map((c: Info) => (
-                  <div
-                    key={c.title}
-                    className="grid grid-cols-3 w-full hover:bg-sky-50 bg-white items-center"
-                  >
-                    {challenges.indexOf(c) === challengesNumber - 1 ? (
-                      <div className="lg:text-xl underline decoration-sky-600 hover:decoration-sky-300 text-sm items-center border-b border-s rounded-bl-md border-sky-500 h-20 sm:px-16 px-4 flex justify-start font-bold text-sky-700">
-                        <Link href={`/User/Challenge/${c.page_id}`}>
-                          {c.title}
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="lg:text-xl text-sm underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s border-sky-500 h-20 sm:px-16 px-4 flex justify-start font-bold text-sky-700">
-                        <Link href={`/User/Challenge/${c.page_id}`}>
-                          {c.title}
-                        </Link>
-                      </div>
-                    )}
-                    <div className="lg:text-xl text-xs font-bold h-20 border-b border-sky-500 text-sky-700 text-md items-center sm:px-16 px-4 flex justify-center">
-                      {c.steps}/3
-                    </div>
-                    {challenges.indexOf(c) === challengesNumber - 1 ? (
-                      <div className=" lg:text-xl rounded-br-md font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
-                        {c.date}
-                      </div>
-                    ) : (
-                      <div className=" lg:text-xl font-bold border-b border-e hover:text-sky-400 border-sky-500 text-sky-700 text-sm h-20 items-center sm:px-16 px-4 flex justify-center">
-                        {c.date}
-                      </div>
-                    )}
-                  </div>
-                ))}
-          </div>
+      <div className="bg-white justify-center flex mt-20 lg:ml-32 sm:ml-10 sm:px-0 mx-4 sm:w-10/12 w-11/12 rounded-xl shadow-xl">
+        <div className="flex flex-col sm:items-start lg:p-7 p-4">
+          <h2 className="lg:text-4xl text-2xl mb-10 font-bold text-sky-800">
+            My Challenges
+          </h2>
+          {challenges.length === 0 ? (
+            <h1 className="text-lg font-semibold text-gray-800 mb-4">
+              No Challenge yet
+            </h1>
+          ) : (
+            <div
+              className={`grid ${
+                isWindow && isWindow >= 1000 ? "grid-cols-4" : "grid-cols-3"
+              } w-full rounded-t-md bg-sky-500 divide-white items-center justify-between`}
+            >
+              <div className="items-center justify-center px-4 lg:px-8 flex h-20 text-lg lg:text-3xl font-bold text-white">
+                Challenges
+              </div>
+              {isWindow && isWindow >= 1000 && (
+                <div className="items-center justify-center px-8 flex h-20 text-lg lg:text-3xl font-bold text-white">
+                  Steps Completed
+                </div>
+              )}
+              <div className="items-center justify-center px-4 lg:px-8 flex h-20 text-lg lg:text-3xl font-bold text-white">
+                Progress
+              </div>
+              <div className="items-center justify-center px-4 lg:px-8 flex h-20 text-lg lg:text-3xl font-bold text-white">
+                Starting Date
+              </div>
+            </div>
+          )}
+          {challenges.map((c: Challenge) => (
+            <div
+              key={c.title}
+              className={`grid ${
+                isWindow && isWindow >= 1000 ? "grid-cols-4" : "grid-cols-3"
+              } w-full hover:bg-sky-50 bg-white items-center`}
+            >
+              <div
+                className={`lg:text-2xl text-md underline decoration-sky-600 hover:decoration-sky-300 items-center border-b border-s ${
+                  challenges.indexOf(c) === challengesNumber - 1
+                    ? "rounded-bl-md"
+                    : ""
+                } border-sky-500 h-20 justify-center flex font-bold text-sky-700`}
+              >
+                <Link href={`/User/Challenge/${c.page_id}`}>{c.title}</Link>
+              </div>
+              {isWindow && isWindow >= 1000 && (
+                <div className="px-12 flex justify-center h-20 border-b  border-sky-500">
+                  <Stepper2 steps={c.steps} />
+                </div>
+              )}
+              <div className="lg:text-xl text-xs font-bold h-20 border-b border-sky-500 text-sky-700 text-md items-center sm:px-12 flex justify-center">
+                {c.steps}/3
+              </div>
+              <div
+                className={`lg:text-xl ${
+                  challenges.indexOf(c) === challengesNumber - 1
+                    ? "rounded-br-md"
+                    : ""
+                } font-bold border-b hover:text-sky-400 border-e border-sky-500 text-sky-700 text-sm h-20 items-center  flex justify-center`}
+              >
+                {c.date}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+    </div>
   );
 }

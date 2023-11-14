@@ -1,6 +1,6 @@
-import Navbar from "../navbar";
-import Heading from "./heading";
-import PositionsFromSupabase from "./Positions";
+import Navbar from "../../components/Navigation/navbar";
+import Heading from "../../components/PositionSection/Header";
+
 
 export default function Positions() {
   return (

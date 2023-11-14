@@ -1,4 +1,4 @@
-import Navbar from "../navbar";
+import Navbar from "../../components/Navigation/navbar";
 import ChallengesList from "../../components/ChallengeSection/ChallengesList";
 
 const gradientText = {

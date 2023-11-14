@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "../../navbar";
+import Navbar from "../../../components/Navigation/navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
 import { MouseEvent } from "react";
@@ -27,7 +27,6 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
   const [applied, setApplied] = useState<boolean>(false);
   const [alreadyApplied, setAlreadyApplied] = useState<boolean>(false);
 
-  console.log(id);
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase
@@ -64,13 +63,18 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         .insert({
           email: user,
           challenges: [
-            { steps: "1", title: challenge?.title, page_id: challenge?.id, date: challenge?.date },
+            {
+              steps: "1",
+              title: challenge?.title,
+              page_id: challenge?.id,
+              date: challenge?.date,
+            },
           ],
         })
         .select();
     } else {
-      for(let i = 0; i < existingData.challenges.length; i++) {
-        if(existingData.challenges[i].title === challenge?.title) {
+      for (let i = 0; i < existingData.challenges.length; i++) {
+        if (existingData.challenges[i].title === challenge?.title) {
           setAlreadyApplied(true);
           return;
         }
@@ -80,7 +84,12 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         .update({
           challenges: [
             ...existingData.challenges,
-            { steps: "1", title: challenge?.title, page_id: challenge?.id , date: challenge?.date },
+            {
+              steps: "1",
+              title: challenge?.title,
+              page_id: challenge?.id,
+              date: challenge?.date,
+            },
           ],
         })
         .eq("email", user);
@@ -121,7 +130,10 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
               {challenge?.title}
             </h2>
             <h3 className="text-lg text-gray-500">{challenge?.desc}</h3>
-            <h3 className="text-2xl font-semibold text-center text-sky-700 mt-8"> Prize: {challenge?.prize}</h3>
+            <h3 className="text-2xl font-semibold text-center text-sky-700 mt-8">
+              {" "}
+              Prize: {challenge?.prize}
+            </h3>
           </div>
           {applied ? (
             <button

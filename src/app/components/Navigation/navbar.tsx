@@ -23,7 +23,10 @@ export default function Navbar() {
       {isWindow && isWindow >= 800 ? (
         <div
           className="fixed flex w-full h-24 justify-evenly items-center"
-          style={{ background: "linear-gradient(#1E90FF,#00A3E1)", zIndex: 1000 }}
+          style={{
+            background: "linear-gradient(#1E90FF,#00A3E1)",
+            zIndex: 1000,
+          }}
         >
           <div className=" font-bold w-30 h-max">
             <Link
@@ -32,7 +35,8 @@ export default function Navbar() {
                 pathname == "/User"
                   ? "2xl:text-3xl text-2xl bold text-white underline decoration-white divide-opacity-100"
                   : "2xl:text-3xl text-2xl bold text-white"
-              }>
+              }
+            >
               Home
             </Link>
           </div>
@@ -62,7 +66,7 @@ export default function Navbar() {
           </div>
         </div>
       ) : (
-        <Drawer/>
+        <Drawer />
       )}
     </>
   );

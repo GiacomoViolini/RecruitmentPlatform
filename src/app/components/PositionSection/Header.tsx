@@ -1,6 +1,6 @@
 "use client";
 import { FormEvent, useState } from "react";
-import PositionsFromSupabase from "./Positions";
+import Positions from "./Positions";
 
 const gradientText = {
   background: "linear-gradient(45deg,  #0074E4, #00A3E1, #00C9FF)",
@@ -18,7 +18,10 @@ export default function Header() {
 
   return (
     <div className="flex flex-col justify-center items-center py-48 gap-4">
-      <h1 className="2xl:text-6xl lg:text-5xl text-4xl  font-bold" style={gradientText}>
+      <h1
+        className="2xl:text-6xl lg:text-5xl text-4xl  font-bold"
+        style={gradientText}
+      >
         Our Free Positions
       </h1>
       <h1 className="2xl:text-xl text-lg   extrabold text-black-500 py-1">
@@ -34,11 +37,11 @@ export default function Header() {
           value={search}
           onChange={handleSeachChange}
         />
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg">
-            Search
-          </button>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg">
+          Search
+        </button>
       </div>
-      <PositionsFromSupabase searchPosition={search}/>
+      <Positions searchPosition={search} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "../../navbar";
+import Navbar from "../../../components/Navigation/navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
 import logo from "/public/logo.png";
@@ -142,13 +142,13 @@ export default function Position({ params: { id } }: PositionParams) {
       );
     } else if (isWindow && isWindow < 1000) {
       setLogoLayout(
-        "items-center w-24 h-24 sm:pb-2 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
+        "items-center w-20 h-20 rounded-full justify-center -translate-y-8 translate-x-8 bg-white"
       );
       setDimensions(30);
       setLayoutText(
         "text-md font-bold text-left text-white -translate-y-32 translate-x-4"
       );
-      }
+    }
   }, [isWindow]);
 
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -299,8 +299,11 @@ export default function Position({ params: { id } }: PositionParams) {
                 Tools/Skill required
               </p>
               <div className="flex justify-start items-center gap-2 flex-wrap">
-                {Position?.technologies?.map((tech,i) => (
-                  <span key={i} className="bg-sky-200 h-12 w-40 justify-center text-center items-center flex shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
+                {Position?.technologies?.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="bg-sky-200 h-12 w-40 justify-center text-center items-center flex shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
+                  >
                     {[
                       "java",
                       "python",
@@ -322,8 +325,9 @@ export default function Position({ params: { id } }: PositionParams) {
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Benefits</p>
               <div className="flex justify-start w-full items-center gap-2 flex-wrap">
-                {Position?.benefits?.map((benefit,i) => (
-                  <span key={i}
+                {Position?.benefits?.map((benefit, i) => (
+                  <span
+                    key={i}
                     className={`${
                       benefits
                         ? "bg-sky-200 h-12 text-center w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
@@ -340,10 +344,15 @@ export default function Position({ params: { id } }: PositionParams) {
                   </span>
                 ))}
               </div>
-              <h2 className=" py-4 text-2xl font-bold tracking-tight">Events</h2>
+              <h2 className=" py-4 text-2xl font-bold tracking-tight">
+                Events
+              </h2>
               <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
-                {Position?.events?.map((event,i) => (
-                  <span key={i} className="bg-sky-200 h-12 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
+                {Position?.events?.map((event, i) => (
+                  <span
+                    key={i}
+                    className="bg-sky-200 h-12 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700"
+                  >
                     {"🎉 " + event}
                   </span>
                 ))}
@@ -410,10 +419,7 @@ export default function Position({ params: { id } }: PositionParams) {
                           />
                         </div>
                       </div>
-                      <h3
-                        className="text-xs sm:text-md text-center sm:text-start font-bold         
-                    tracking-tight text-blue-600"
-                      >
+                      <h3 className="text-xs sm:text-md text-center sm:text-start font-bold tracking-tight text-blue-600">
                         Upload your Cover Letter
                       </h3>
                     </div>

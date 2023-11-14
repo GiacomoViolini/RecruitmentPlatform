@@ -14,7 +14,7 @@ export default function Drawer() {
                 className="flex w-full h-24 justify-between items-center fixed"
                 style={{ background: "linear-gradient(to bottom, #1E90FF,#00A3E1)", zIndex: 1000 }}
             >
-                <div className="w-30 h-30 pr-10 ml-auto">
+                <div className="mr-10 ml-auto">
                     <Image
                         src="/drawer.svg"
                         alt="drawer menù"
