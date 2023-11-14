@@ -160,7 +160,7 @@ export default function FeedbackPage({ params: { title } }: PositionParams) {
                 <div className="text-2xl font-bold text-center md:text-start pt-2 px-8 -translate-y-10 text-blue-500">
                   Feedback review on your {stepProcess[steps ?? 0]}
                 </div>
-                <Header steps={steps ?? 0} points={points ?? 0} title={title}/>
+                <Header steps={steps ?? 0} points={points ?? 0} title={replacedTitle}/>
                 <div className="flex flex-row h-80 justify-center items-center gap-4">
                 </div>
               </div>

@@ -36,7 +36,7 @@ export default function Header({ steps, points, title }: HeaderProps) {
         console.error(error);
       }
       console.log(data);
-      setQuestions(data);
+      setQuestions(data.questions);
     }
     fetchQuestions(title);
   }, [title]);  

@@ -12,7 +12,6 @@ interface ChallengeProps {
   img: string;
   desc: string;
   prize: string;
-  date: string;
 }
 
 interface ChallengeParams {
@@ -64,7 +63,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         .insert({
           email: user,
           challenges: [
-            { steps: "1", title: challenge?.title, page_id: challenge?.id, date: challenge?.date },
+            { steps: "1", title: challenge?.title, page_id: challenge?.id },
           ],
         })
         .select();
@@ -80,7 +79,7 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         .update({
           challenges: [
             ...existingData.challenges,
-            { steps: "1", title: challenge?.title, page_id: challenge?.id, date: challenge?.date },
+            { steps: "1", title: challenge?.title, page_id: challenge?.id },
           ],
         })
         .eq("email", user);
@@ -88,11 +87,11 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
   };
 
   return (
-    <div className="bg-gray-100 h-full flex flex-col">
+    <div className="bg-gray-100 flex flex-col h-screen">
       <Navbar />
       <div
         key={challenge?.title}
-        className="bg-white flex lg:flex-row flex-col lg:mt-56 mt-28 mb-16  mx-auto h-10/12 w-10/12 rounded-md overflow-hidden shadow"
+        className="bg-white flex lg:mt-56 mt-28 lg:mb-28  mx-auto w-11/12 rounded-md overflow-hidden shadow"
       >
         <div className="hidden w-full h-full sm:block">
           <img
@@ -106,12 +105,13 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
         </div>
         <div className="flex flex-col items-center">
           <div className="sm:hidden w-full">
-            <img
+            <Image
               src={challenge?.img || ""}
               alt={`${id}`}
               className="object-fill border-l-4 border-sky-600 w-full h-full "
               width={550}
               height={96}
+              quality={100}
               loading="lazy"
             />
           </div>
@@ -139,10 +139,6 @@ export default function Challenge({ params: { id } }: ChallengeParams) {
             </button>
           )}
         </div>
-      </div>
-      <div className="flex flex-col items-center lg:h-80 2xl:h-96 h-0 bg-slate-100">
-      </div>
-      <div className="flex flex-col items-center 2xl:h-80 h-0 bg-slate-100">
       </div>
     </div>
   );
