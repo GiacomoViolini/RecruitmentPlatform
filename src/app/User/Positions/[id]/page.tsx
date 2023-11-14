@@ -4,8 +4,7 @@ import { use, useCallback, useEffect, useState } from "react";
 import Navbar from "../../navbar";
 import Image from "next/image";
 import supabase from "../../../../../utils/supabase";
-import logo from "/public/logo.svg";
-import Link from "next/link";
+import logo from "/public/logo.png";
 import { ChangeEvent } from "react";
 import React from "react";
 import { useRouter } from "next/navigation";
@@ -41,6 +40,7 @@ export default function Position({ params: { id } }: PositionParams) {
   const [dimensions, setDimensions] = useState(0);
   const [layoutText, setLayoutText] = useState("");
   const [ralRange, setRalRange] = useState(false);
+  const [benefits, setBenefits] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [buttonSwitch, setButtonSwitch] = useState(true);
 
@@ -130,6 +130,17 @@ export default function Position({ params: { id } }: PositionParams) {
     handleResize();
   }, [Position?.ral]);
 
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (Position?.benefits.length!! > 10) {
+        console.log(Position?.benefits.length!!)
+        setBenefits(true);
+      }
+    };
+    handleResize();
+  }, [Position?.benefits]);
+
   useEffect(() => {
     if (isWindow && isWindow >= 1280) {
       setLogoLayout(
@@ -190,8 +201,35 @@ export default function Position({ params: { id } }: PositionParams) {
     }
     setDisabled(false);
   };
+  const handleUpload2 = async (e1: ChangeEvent<HTMLInputElement>) => {
+    let file: File | undefined;
+    if (e1.target.files) {
+      file = e1.target.files[0];
+    }
+    if (file) {
+      try {
+        const { data, error } = await supabase.storage
+          .from("coverletter")
+          .upload(`coverletter/${file.name}`, file, {
+            cacheControl: "3600",
+          });
+        if (data) {
+          console.log(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
+  const ref1 = React.createRef<HTMLInputElement>();
   const ref = React.createRef<HTMLInputElement>();
+
+  const handlecoverletter = () => {
+    if (ref1.current) {
+      ref1.current.click();
+    }
+  };
 
   const handlecv = () => {
     if (ref.current) {
@@ -207,7 +245,7 @@ export default function Position({ params: { id } }: PositionParams) {
           <div className="p-4 bg-white border border-gray-200 rounded-lg ">
             <div className=" h-48 rounded-lg bg-blue-500"></div>
             <div className="flex flex-row z-0">
-              <div className={"flex items-center justify-center" + logoLayout}>
+              <div className={"flex items-center justify-center border-t-8 border-sky-800 shadow  " + logoLayout}>
                 <Image
                   src={logo}
                   height={dimensions}
@@ -226,7 +264,7 @@ export default function Position({ params: { id } }: PositionParams) {
                 {Position?.title ?? ""}
               </div>
             </div>
-            <div className="relative aspect-video rounded-2xl w-full h-10 py-48  lg:-translate-y-20 ">
+            <div className="relative aspect-video rounded-2xl w-full h-10 py-48 lg:-translate-y-20 ">
               <Image
                 src={Position?.images[counter] ?? ""}
                 alt="photo"
@@ -246,24 +284,24 @@ export default function Position({ params: { id } }: PositionParams) {
               </p>
               <p className="py-4 text-2xl font-bold tracking-tight">BS</p>
               {ralRange ? (
-                <span className="bg-sky-200 h-10 w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                <span className="bg-sky-200 h-12 w-60 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                   {"💸 " + Position?.ral}
                 </span>
               ) : (
-                <span className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                <span className="bg-sky-200 h-12 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                   {"💸 " + Position?.ral}
                 </span>
               )}
               <p className="py-4 text-2xl font-bold tracking-tight">
                 Experience
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+              <span className=" bg-sky-200 flex justify-center items-center h-12 w-56 shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                 {"👨🏽‍💻 " + Position?.experience} years of experience
               </span>
               <p className="py-4 text-2xl font-bold tracking-tight">
                 Type of contract
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center sm:20 md:h-10 sm:80 md:w-96 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+              <span className=" bg-sky-200 flex justify-center items-center sm:20 md:h-12 sm:80 md:w-96 shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                 {Position?.type.includes("hybrid" && "Hybrid")
                   ? "🏠" + "🏬" + Position?.type
                   : Position?.type === "Full remote"
@@ -273,74 +311,102 @@ export default function Position({ params: { id } }: PositionParams) {
               <p className="py-4 text-2xl font-bold tracking-tight">
                 Average living cost per person for this location
               </p>
-              <span className=" bg-sky-200 flex justify-center items-center h-10 w-56 shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+              <span className=" bg-sky-200 flex justify-center items-center h-12 w-56 shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
                 {"💸 " + Position?.livingcost}
               </span>
               <p className="py-4 text-2xl font-bold tracking-tight">
-                Tools
+                Tools/Skill required
               </p>
               <div className="flex justify-start items-center gap-2 flex-wrap">
-                {Position?.technologies?.map((tech , key) => (
-                  <span key={key} className="bg-sky-200 h-10 w-40 justify-center items-center flex shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
-                    {tech}
+                {Position?.technologies?.map((tech,i) => (
+                  <span key={i} className="bg-sky-200 h-12 w-40 justify-center text-center items-center flex shadow-md rounded-md px-3 py-1 text-sm font-semibold text-sky-700">
+                    {["java", "python", "r", "javascript", "html", "css", "swift", "kotlin", "typescript", "node.js", "ruby", "sql"].some(lang => tech.toLowerCase().includes(lang)) ? "👨‍💻 " + tech : "🔧 " + tech}
                   </span>
                 ))}
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Benefits</p>
               <div className="flex justify-start items-center gap-2 flex-wrap">
-                {Position?.benefits?.map((benefit, key) => (
-                  <span key={key} className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                {Position?.benefits?.map((benefit,i) => (
+                  <span key={id} className="bg-sky-200 h-10 w-40 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                     {benefit}
                   </span>
                 ))}
               </div>
               <p className="py-4 text-2xl font-bold tracking-tight">Events</p>
               <div className="flex flex-row justify-start items-center gap-2 flex-wrap">
-                {Position?.events?.map((event, key) => (
-                  <span key={key} className="bg-sky-200 h-16 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
+                {Position?.events?.map((event,i) => (
+                  <span key={i} className="bg-sky-200 h-16 w-50 flex justify-center items-center shadow-md rounded-md px-3 py-1 text-md font-semibold text-sky-700">
                     {event}
                   </span>
                 ))}
               </div>
-              <div className="flex flex-row justify-start items-center sm:gap-8 gap-2 pt-16">
-                <div className="flex flex-row justify-start items-center gap-8 ">
-                  <button
-                    onClick={handleClick}
-                    className={`
-                        ${
-                          disabled
-                            ? "opacity-50 cursor-not-allowed"
-                            : "opacity-100 cursor-pointer"
-                        }
-                         bg-blue-700 hover:bg-blue-800 inline-flex items-center px-1 sm:px-3 py-1 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white rounded-lg `}
-                    disabled={disabled}
-                  >
-                    Apply
-                  </button>
-                </div>
-                <div className="sm:pt-0 pt-10 flex flex-col sm:flex-row items-center gap-2">
-                  <div className="">
-                    <div
-                      onClick={handlecv}
-                      className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+              <div className="flex flex-row justify-start items-center pt-16 ">
+                <div className="flex flex-row justify-start items-center">
+                  <div className="flex flex-row justify-start items-center gap-8 pb-2 sm:pb-0 ">
+                    <button
+                      onClick={handleClick}
+                      className={`
+                          ${
+                            disabled
+                              ? "opacity-50 cursor-not-allowed"
+                              : "opacity-100 cursor-pointer"
+                          }
+                          bg-blue-700 hover:bg-blue-800 inline-flex items-center px-1 sm:px-3 py-1 text-xl w-36 sm:w-60 h-10 justify-center shadow-md font-medium text-center text-white rounded-lg `}
+                      disabled={disabled}
                     >
-                      <Image
-                        src="/cv.svg"
-                        alt="linkedin"
-                        width={20}
-                        height={20}
-                      />
-                      <input
-                        type="file"
-                        className="hidden"
-                        ref={ref}
-                        onChange={(e) => handleUpload(e)}
-                      />
-                    </div>
+                      Apply
+                    </button>
                   </div>
-                  <h3 className="text-xs sm:text-xl text-center sm:text-start font-bold tracking-tight text-blue-600">
-                    Upload your CV
-                  </h3>
+                  <div className="flex flex-row justify-evenly items-center pl-8 sm:pt-8 pb-2">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="">
+                      <div
+                        onClick={handlecv}
+                        className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                      >
+                        <Image
+                          src="/cv.svg"
+                          alt="cv"
+                          width={20}
+                          height={20}
+                        />
+                        <input
+                          type="file"
+                          className="hidden"
+                          ref={ref}
+                          onChange={(e) => handleUpload(e)}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-xs sm:text-md text-center sm:text-start font-bold tracking-tight text-blue-600">
+                      Upload your CV
+                    </h3>
+                  </div>
+                  <div className=" flex flex-col items-center pl-4 gap-2">
+                    <div className="">
+                      <div
+                        onClick={handlecoverletter}
+                        className="cursor-pointer inline-flex items-center px-3 py-1 text-xl w-10 sm:w-20 h-10 justify-center shadow-md hover:shadow-blue-200 font-medium text-center text-white bg-none rounded-full border-blue-600 border-2 hover:border-blue-800"
+                      >
+                        <Image
+                          src="/letter.svg"
+                          alt="coverletter"
+                          width={20}
+                          height={20}
+                        />
+                        <input
+                          type="file"
+                          className="hidden"
+                          ref={ref1}
+                          onChange={(e1) => handleUpload2(e1)}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-xs sm:text-md text-center sm:text-start font-bold tracking-tight text-blue-600">
+                      Upload your Cover Letter
+                    </h3>
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
